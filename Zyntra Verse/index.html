@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZYNTRA VERSE — AI Automation Studio · SIN</title>
+  <meta name="description" content="ZYNTRA VERSE builds AI automation systems, intelligent order workflows and next-generation websites for digital businesses in Bangladesh.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700;1,800&family=Cormorant:ital,wght@0,400;0,500;1,300;1,400;1,500;1,600&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="ld-scan"></div>
+    <div class="ld-content">
+      <div class="ld-logo">ZYNTRA VERSE</div>
+      <div class="ld-steps">
+        <div class="ld-step" id="ls1">[ init system        ]</div>
+        <div class="ld-step" id="ls2">[ load ai modules    ]</div>
+        <div class="ld-step" id="ls3">[ render interface   ]</div>
+        <div class="ld-step" id="ls4">[ ready              ] <span class="ld-ok">OK</span></div>
+      </div>
+      <div class="ld-bar-wrap"><div class="ld-bar"></div></div>
+    </div>
+  </div>
+
+  <!-- CURSOR -->
+  <div id="cur"></div>
+
+  <!-- CANVAS -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- SIDE LABELS -->
+  <div class="side-label left-label">
+    <span>ZYNTRA VERSE</span>
+    <span class="sl-dot"></span>
+    <span>SIN · BD</span>
+  </div>
+  <div class="side-label right-label">
+    <span id="scrollPct">00%</span>
+    <span class="sl-dot"></span>
+    <span>SCROLL</span>
+  </div>
+
+  <!-- NAVBAR -->
+  <header id="navbar">
+    <div class="nav-wrap">
+      <a href="index.html" class="nav-logo">
+        <span class="nl-bracket">[</span><span class="nl-z">ZV</span><span class="nl-bracket">]</span>
+        <span class="nl-full">ZYNTRA VERSE</span>
+      </a>
+      <nav class="nav-center">
+        <a href="index.html"    class="n-link active" data-label="01">Home</a>
+       <a href="services.html"  class="n-link" data-label="02">Services</a>
+<a href="showcase.html"  class="n-link" data-label="03">Showcase</a>
+<a href="portfolio.html" class="n-link" data-label="04">Portfolio</a>
+<a href="contact.html"   class="n-link" data-label="05">Contact</a>
+      </nav>
+      <div class="nav-right">
+        <div class="nav-status">
+          <span class="ns-dot"></span>
+          <span class="ns-text">Open for Projects</span>
+        </div>
+        <a href="contact.html" class="nav-btn magnetic">
+          Start Project
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <button id="menuBtn" class="hbg" aria-label="Menu"><span></span><span></span></button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="mob-nav">
+      <a href="index.html"    class="mob-n-link"><span class="mn-num">01</span>Home</a>
+      <a href="services.html"  class="mob-n-link"><span class="mn-num">02</span>Services</a>
+<a href="showcase.html"  class="mob-n-link"><span class="mn-num">03</span>Showcase</a>
+<a href="portfolio.html" class="mob-n-link"><span class="mn-num">04</span>Portfolio</a>
+<a href="contact.html"   class="mob-n-link"><span class="mn-num">05</span>Contact</a>
+      <a href="contact.html"  class="mob-cta">Start a Project →</a>
+    </div>
+  </header>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow stagger-1">
+        <span class="eyebrow-line"></span>
+        <span>AI Automation Studio · Est. 2020</span>
+        <span class="eyebrow-tag">BANGLADESH</span>
+      </div>
+
+      <h1 class="hero-h1 stagger-2">
+        <span class="h1-row">
+          <span class="h1-outline">BUILD</span>
+          <em class="h1-serif">the</em>
+        </span>
+        <span class="h1-row">
+          <span class="h1-lime" id="scrambleText" data-words="FUTURE,EMPIRE,TOMORROW,VISION">FUTURE</span>
+        </span>
+        <span class="h1-row">
+          <span class="h1-outline">WITH</span>
+          <em class="h1-serif-italic"> intelligence</em>
+        </span>
+      </h1>
+
+      <p class="hero-body stagger-3">
+        We engineer AI automation systems, intelligent order workflows,
+        and next-generation web experiences that make digital businesses
+        unstoppable — 24 hours a day, every single day.
+      </p>
+
+      <div class="hero-actions stagger-4">
+        <a href="services.html" class="btn-lime magnetic">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Explore Services
+        </a>
+        <a href="showcase.html" class="btn-ghost-outline magnetic">
+          View Our Work
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="hero-metrics stagger-5">
+        <div class="hm-item">
+          <div class="hm-val"><span class="counter" data-target="120">0</span>+</div>
+          <div class="hm-lbl">Projects</div>
+        </div>
+        <div class="hm-div"></div>
+        <div class="hm-item">
+          <div class="hm-val"><span class="counter" data-target="50">0</span>+</div>
+          <div class="hm-lbl">Clients</div>
+        </div>
+        <div class="hm-div"></div>
+        <div class="hm-item">
+          <div class="hm-val"><span class="counter" data-target="5">0</span>yr</div>
+          <div class="hm-lbl">Experience</div>
+        </div>
+        <div class="hm-div"></div>
+        <div class="hm-item">
+          <div class="hm-val hm-live"><span class="hm-dot"></span>LIVE</div>
+          <div class="hm-lbl">AI Running</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="terminal-wrap" id="terminalWrap">
+        <div class="terminal">
+          <div class="term-top">
+            <div class="term-dots">
+              <span class="td r"></span><span class="td y"></span><span class="td g"></span>
+            </div>
+            <div class="term-title">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              zyntra_ai_core v3.8.1
+            </div>
+            <div class="term-live"><span class="ts-ring"></span>LIVE</div>
+          </div>
+
+          <div class="term-body">
+            <div class="tl dim">$ ./start_ai_engine.sh --mode=production</div>
+            <div class="tl cyan">[ OK ] AI Order Engine............. running</div>
+            <div class="tl cyan">[ OK ] Customer Support Bot......... active</div>
+            <div class="tl cyan">[ OK ] Facebook Pixel Bridge........ connected</div>
+            <div class="tl cyan">[ OK ] Database Sync................ live</div>
+            <div class="tl dim">────────────────────────────────────────────</div>
+
+            <div class="term-stats">
+              <div class="tstat">
+                <div class="tst-lbl">ORDERS TODAY</div>
+                <div class="tst-val lime-t" id="ordersVal">247</div>
+                <svg class="tst-spark" viewBox="0 0 80 24" fill="none">
+                  <polyline points="0,20 10,16 20,18 30,10 40,14 50,8 60,6 70,4 80,2" stroke="#b8ff2e" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <div class="tstat">
+                <div class="tst-lbl">RESPONSE</div>
+                <div class="tst-val cyan-t">1.3ms</div>
+                <div class="tst-bar"><div class="tst-fill" style="--w:92%"></div></div>
+              </div>
+              <div class="tstat">
+                <div class="tst-lbl">UPTIME</div>
+                <div class="tst-val lime-t">99.9%</div>
+                <div class="tst-bar"><div class="tst-fill lime-fill" style="--w:99%"></div></div>
+              </div>
+              <div class="tstat">
+                <div class="tst-lbl">CONVERSIONS</div>
+                <div class="tst-val cyan-t">+38%</div>
+                <svg class="tst-spark" viewBox="0 0 80 24" fill="none">
+                  <polyline points="0,22 10,19 20,21 30,15 40,12 50,10 60,7 70,5 80,2" stroke="#00e8ff" stroke-width="1.5"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="tl dim">────────────────────────────────────────────</div>
+            <div class="tl lime-t">$ <span id="typingLine">monitoring realtime pipeline...</span><span class="term-cursor">█</span></div>
+          </div>
+
+          <div class="term-foot">
+            <span>PID: 3820</span>
+            <span>CPU: <span class="lime-t" id="cpuVal">12%</span></span>
+            <span>MEM: <span class="cyan-t">244MB</span></span>
+            <span class="tf-r">● ALL SYSTEMS NOMINAL</span>
+          </div>
+        </div>
+
+        <div class="float-badge fb1 magnetic">
+          <span>🤖</span>
+          <div><div class="fb-val">300+</div><div class="fb-lbl">Automations</div></div>
+        </div>
+        <div class="float-badge fb2 magnetic">
+          <span>⚡</span>
+          <div><div class="fb-val">24/7</div><div class="fb-lbl">Active</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="hs-mouse"><div class="hs-wheel"></div></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ═══ MARQUEE ═══ -->
+  <div class="marquee-outer">
+    <div class="marquee-strip dark-strip">
+      <div class="mq-inner fwd">
+        <span>AI Order Taking</span><i>✦</i><span>Web Development</span><i>✦</i>
+        <span>Facebook Pixel</span><i>✦</i><span>Landing Pages</span><i>✦</i>
+        <span>Automation</span><i>✦</i><span>CRM Systems</span><i>✦</i>
+        <span>Server-Side Tracking</span><i>✦</i><span>AI Chatbots</span><i>✦</i>
+        <span>AI Order Taking</span><i>✦</i><span>Web Development</span><i>✦</i>
+        <span>Facebook Pixel</span><i>✦</i><span>Landing Pages</span><i>✦</i>
+        <span>Automation</span><i>✦</i><span>CRM Systems</span><i>✦</i>
+        <span>Server-Side Tracking</span><i>✦</i><span>AI Chatbots</span><i>✦</i>
+      </div>
+    </div>
+    <div class="marquee-strip lime-strip">
+      <div class="mq-inner rev">
+        <span>120+ Projects</span><i>★</i><span>50+ Happy Clients</span><i>★</i>
+        <span> Bangladesh</span><i>★</i><span>5 Years Experience</span><i>★</i>
+        <span>300+ Automations</span><i>★</i><span>99.9% Uptime</span><i>★</i>
+        <span>24/7 AI Active</span><i>★</i><span>Built for Growth</span><i>★</i>
+        <span>120+ Projects</span><i>★</i><span>50+ Happy Clients</span><i>★</i>
+        <span> Bangladesh</span><i>★</i><span>5 Years Experience</span><i>★</i>
+        <span>300+ Automations</span><i>★</i><span>99.9% Uptime</span><i>★</i>
+        <span>24/7 AI Active</span><i>★</i><span>Built for Growth</span><i>★</i>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SERVICES ═══ -->
+  <section class="srv-section" id="services">
+    <div class="srv-header reveal">
+      <div class="sec-eyebrow">
+        <span class="se-num">01</span><span class="se-line"></span><span class="se-txt">What We Build</span>
+      </div>
+      <div class="sec-title-row">
+        <h2 class="sec-title">Services Built<br>For <em class="em-lime">Results</em></h2>
+        <p class="sec-sub">From AI pipelines to conversion-optimised<br>web experiences — precision-engineered.</p>
+      </div>
+    </div>
+
+    <div class="srv-grid">
+      <div class="srv-item reveal" data-delay="0">
+        <div class="si-top">
+          <div class="si-num">01</div>
+          <span class="si-hot">Most Requested</span>
+        </div>
+        <div class="si-icon lime-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3 class="si-title">AI Automation Systems</h3>
+        <p class="si-body">End-to-end intelligent pipelines — order taking, customer support bots and full workflow automation for Facebook, WhatsApp and websites. Never miss an order again.</p>
+        <ul class="si-list">
+          <li>AI Order Taking (FB + Website)</li>
+          <li>24/7 Customer Support Agent</li>
+          <li>WhatsApp &amp; Messenger Bot</li>
+          <li>Auto Database Logging</li>
+        </ul>
+        <a href="service-ai.html" class="si-link">Learn More <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <div class="si-glow lime-glow"></div>
+      </div>
+
+      <div class="srv-item reveal" data-delay="120">
+        <div class="si-top"><div class="si-num">02</div></div>
+        <div class="si-icon cyan-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3 class="si-title">Web Development</h3>
+        <p class="si-body">Modern, blazing-fast websites and e-commerce stores engineered for performance and maximum conversions. Mobile-first, SEO-ready, built to scale.</p>
+        <ul class="si-list">
+          <li>E-commerce Websites</li>
+          <li>Business &amp; Portfolio Sites</li>
+          <li>Speed &amp; SEO Optimized</li>
+          <li>Mobile-First Responsive</li>
+        </ul>
+        <a href="service-web.html" class="si-link">Learn More <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <div class="si-glow cyan-glow"></div>
+      </div>
+
+      <div class="srv-item reveal" data-delay="240">
+        <div class="si-top"><div class="si-num">03</div></div>
+        <div class="si-icon rose-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <h3 class="si-title">Landing Pages</h3>
+        <p class="si-body">Conversion-optimised pages for ad campaigns and product launches. Built with persuasion triggers to maximise your return on every ad taka spent.</p>
+        <ul class="si-list">
+          <li>Product Sales Pages</li>
+          <li>Ad Campaign Pages</li>
+          <li>High-CTR Copy Layout</li>
+          <li>A/B Test Ready</li>
+        </ul>
+        <a href="service-landing.html" class="si-link">Learn More <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <div class="si-glow rose-glow"></div>
+      </div>
+
+      <div class="srv-item reveal" data-delay="360">
+        <div class="si-top"><div class="si-num">04</div></div>
+        <div class="si-icon cyan-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3 class="si-title">Facebook Marketing</h3>
+        <p class="si-body">Pixel + Conversions API setup, server-side tracking and event optimisation to get every sale attributed. Maximum ROAS, zero wasted budget.</p>
+        <ul class="si-list">
+          <li>Facebook Pixel Setup</li>
+          <li>Server-Side CAPI</li>
+          <li>Retargeting Audiences</li>
+          <li>Ad Account Audit</li>
+        </ul>
+        <a href="service-marketing.html" class="si-link">Learn More <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <div class="si-glow cyan-glow"></div>
+      </div>
+    </div>
+    <div class="srv-cta reveal">
+      <a href="services.html" class="btn-outline-lime magnetic">View All Services →</a>
+    </div>
+  </section>
+
+  <!-- ═══ PROCESS ═══ -->
+  <section class="proc-section" id="process">
+    <div class="proc-inner">
+      <div class="proc-header reveal">
+        <div class="sec-eyebrow">
+          <span class="se-num">02</span><span class="se-line"></span><span class="se-txt">How It Works</span>
+        </div>
+        <h2 class="sec-title">From Idea to<br><em class="em-lime">Live System</em></h2>
+      </div>
+      <div class="proc-steps">
+        <div class="proc-step reveal" data-delay="0">
+          <div class="pst-left">
+            <div class="pst-num">01</div>
+            <div class="pst-line"></div>
+          </div>
+          <div class="pst-right">
+            <div class="pst-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" width="22" height="22"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <h3 class="pst-title">Discovery Call</h3>
+            <p class="pst-body">Free consultation to understand your business, goals and requirements. Every solution is custom-built — no templates.</p>
+            <span class="pst-tag">30 min · Free</span>
+          </div>
+        </div>
+        <div class="proc-step reveal" data-delay="150">
+          <div class="pst-left">
+            <div class="pst-num">02</div>
+            <div class="pst-line"></div>
+          </div>
+          <div class="pst-right">
+            <div class="pst-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" width="22" height="22"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+            <h3 class="pst-title">Proposal &amp; Plan</h3>
+            <p class="pst-body">A clear quote with timeline, deliverables and tech stack within 24 hours. No hidden charges — ever.</p>
+            <span class="pst-tag">Within 24 hours</span>
+          </div>
+        </div>
+        <div class="proc-step reveal" data-delay="300">
+          <div class="pst-left">
+            <div class="pst-num">03</div>
+            <div class="pst-line"></div>
+          </div>
+          <div class="pst-right">
+            <div class="pst-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" width="22" height="22"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+            <h3 class="pst-title">Build &amp; Integrate</h3>
+            <p class="pst-body">Your system is built with regular progress updates and milestone previews. No surprises at delivery.</p>
+            <span class="pst-tag">3–7 days typical</span>
+          </div>
+        </div>
+        <div class="proc-step reveal" data-delay="450">
+          <div class="pst-left">
+            <div class="pst-num">04</div>
+          </div>
+          <div class="pst-right">
+            <div class="pst-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" width="22" height="22"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+            <h3 class="pst-title">Launch &amp; Support</h3>
+            <p class="pst-body">Deployed live, fully tested, handed over. Post-launch support ensures your system runs flawlessly from day one.</p>
+            <span class="pst-tag pst-lime">Live &amp; Running</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STATS ═══ -->
+  <section class="stats-section" id="stats">
+    <div class="stats-wrap">
+      <div class="stats-left reveal">
+        <div class="sec-eyebrow">
+          <span class="se-num">03</span><span class="se-line"></span><span class="se-txt">By The Numbers</span>
+        </div>
+        <h2 class="sec-title">Results That<br><em class="em-lime">Speak</em></h2>
+        <p class="sec-sub">Since 2020, powering businesses across Bangladesh to automate, grow and dominate their digital space.</p>
+        <a href="showcase.html" class="btn-lime magnetic">See Our Work →</a>
+      </div>
+      <div class="stats-grid">
+        <div class="big-stat reveal" data-delay="0">
+          <div class="bs-ring">
+            <svg viewBox="0 0 120 120" width="120" height="120">
+              <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="5"/>
+              <circle cx="60" cy="60" r="52" fill="none" stroke="#b8ff2e" stroke-width="5" stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="327" class="ring-arc" data-target="280" transform="rotate(-90 60 60)"/>
+            </svg>
+          </div>
+          <div class="bs-data">
+            <div class="bs-num"><span class="counter" data-target="120">0</span>+</div>
+            <div class="bs-lbl">Projects Delivered</div>
+            <div class="bs-sub">Across 6 industries</div>
+          </div>
+        </div>
+        <div class="big-stat reveal" data-delay="150">
+          <div class="bs-ring">
+            <svg viewBox="0 0 120 120" width="120" height="120">
+              <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="5"/>
+              <circle cx="60" cy="60" r="52" fill="none" stroke="#00e8ff" stroke-width="5" stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="327" class="ring-arc" data-target="228" transform="rotate(-90 60 60)"/>
+            </svg>
+          </div>
+          <div class="bs-data">
+            <div class="bs-num cyan-t"><span class="counter" data-target="50">0</span>+</div>
+            <div class="bs-lbl">Happy Clients</div>
+            <div class="bs-sub">98% retention rate</div>
+          </div>
+        </div>
+        <div class="big-stat reveal" data-delay="300">
+          <div class="bs-ring">
+            <svg viewBox="0 0 120 120" width="120" height="120">
+              <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="5"/>
+              <circle cx="60" cy="60" r="52" fill="none" stroke="#b8ff2e" stroke-width="5" stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="327" class="ring-arc" data-target="310" transform="rotate(-90 60 60)"/>
+            </svg>
+          </div>
+          <div class="bs-data">
+            <div class="bs-num"><span class="counter" data-target="300">0</span>+</div>
+            <div class="bs-lbl">Automations Built</div>
+            <div class="bs-sub">Processing 24/7</div>
+          </div>
+        </div>
+        <div class="big-stat reveal" data-delay="450">
+          <div class="bs-ring">
+            <svg viewBox="0 0 120 120" width="120" height="120">
+              <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="5"/>
+              <circle cx="60" cy="60" r="52" fill="none" stroke="#00e8ff" stroke-width="5" stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="327" class="ring-arc" data-target="163" transform="rotate(-90 60 60)"/>
+            </svg>
+          </div>
+          <div class="bs-data">
+            <div class="bs-num cyan-t"><span class="counter" data-target="5">0</span>yr</div>
+            <div class="bs-lbl">In The Game</div>
+            <div class="bs-sub">Since 2020</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TECH STRIP ═══ -->
+  <section class="tech-strip reveal">
+    <div class="tech-inner">
+      <div class="tech-lbl">// Tools &amp; Tech We Use</div>
+      <div class="tech-pills">
+        <span class="tp">Make.com</span><span class="tp active">n8n</span>
+        <span class="tp">ManyChat</span><span class="tp active">Facebook CAPI</span>
+        <span class="tp">Google Apps Script</span><span class="tp active">OpenAI API</span>
+        <span class="tp">Airtable</span><span class="tp active">WhatsApp Business API</span>
+        <span class="tp">Vercel</span><span class="tp">Cloudflare</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SHOWCASE PREVIEW ═══ -->
+  <section class="showcase-prev" id="showcase">
+    <div class="sp-header reveal">
+      <div class="sec-eyebrow">
+        <span class="se-num">04</span><span class="se-line"></span><span class="se-txt">Recent Work</span>
+      </div>
+      <div class="sp-head-row">
+        <h2 class="sec-title">Projects We're<br><em class="em-lime">Proud Of</em></h2>
+        <a href="showcase.html" class="btn-ghost-outline magnetic">View All →</a>
+      </div>
+    </div>
+    <div class="sp-cards reveal">
+      <div class="sp-card tilt-card">
+        <div class="sp-card-top">
+          <span class="sp-badge landing">Landing Page</span><span class="sp-yr">2024</span>
+        </div>
+        <h3 class="sp-title">Quran Combo<br>Gift Store</h3>
+        <p class="sp-body">Facebook Pixel + server-side CAPI optimised product page built for maximum ad ROI.</p>
+        <div class="sp-stats">
+          <div class="sps"><div class="sps-v">+42%</div><div class="sps-l">Conv. Rate</div></div>
+          <div class="sps"><div class="sps-v">9.2</div><div class="sps-l">Event Match</div></div>
+        </div>
+        <a href="https://qurancombo.puspaloygiftzone.shop/" target="_blank" class="sp-link magnetic">Live Site <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        <div class="sp-num">01</div>
+        <div class="si-glow lime-glow"></div>
+      </div>
+
+      <div class="sp-card tilt-card">
+        <div class="sp-card-top">
+          <span class="sp-badge ai">AI System</span><span class="sp-yr">2024</span>
+        </div>
+        <h3 class="sp-title">Facebook AI<br>Order Bot</h3>
+        <p class="sp-body">Automated Messenger bot — collects orders, confirms addresses and logs to Google Sheets 24/7.</p>
+        <div class="sp-stats">
+          <div class="sps"><div class="sps-v">247</div><div class="sps-l">Daily Orders</div></div>
+          <div class="sps"><div class="sps-v">1.3s</div><div class="sps-l">Avg Reply</div></div>
+        </div>
+        <a href="service-ai.html" class="sp-link magnetic">Learn More <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <div class="sp-num">02</div>
+        <div class="si-glow cyan-glow"></div>
+      </div>
+
+      <div class="sp-card tilt-card">
+        <div class="sp-card-top">
+          <span class="sp-badge marketing">Marketing</span><span class="sp-yr">2024</span>
+        </div>
+        <h3 class="sp-title">FB Pixel &amp;<br>CAPI Setup</h3>
+        <p class="sp-body">End-to-end Conversions API implementation boosting purchase attribution by 40%.</p>
+        <div class="sp-stats">
+          <div class="sps"><div class="sps-v">9.4</div><div class="sps-l">Match Score</div></div>
+          <div class="sps"><div class="sps-v">+38%</div><div class="sps-l">ROAS</div></div>
+        </div>
+        <a href="service-marketing.html" class="sp-link magnetic">Details <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <div class="sp-num">03</div>
+        <div class="si-glow lime-glow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ LIVE ANALYTICS (NEW SECTION) ═══ -->
+  <section class="analytics-section" id="analytics">
+    <div class="analytics-inner">
+      <div class="analytics-header reveal">
+        <div class="sec-eyebrow">
+          <span class="se-num">05</span><span class="se-line"></span><span class="se-txt">Live Performance</span>
+        </div>
+        <div class="sec-title-row">
+          <h2 class="sec-title">Data-Driven<br><em class="em-lime">Growth</em></h2>
+          <p class="sec-sub">Real-time metrics from our client automation systems — numbers that prove the impact.</p>
+        </div>
+      </div>
+
+      <div class="pulse-row reveal" data-delay="0" style="margin-bottom:24px;">
+        <div class="pulse-item">
+          <div class="pulse-val" id="liveOrders">247</div>
+          <div class="pulse-lbl">Orders Today</div>
+        </div>
+        <div class="pulse-item">
+          <div class="pulse-val c" id="liveConv">38.4%</div>
+          <div class="pulse-lbl">Conv. Rate</div>
+        </div>
+        <div class="pulse-item">
+          <div class="pulse-val r">99.9%</div>
+          <div class="pulse-lbl">Uptime</div>
+        </div>
+      </div>
+
+      <div class="analytics-grid">
+        <!-- Revenue Bar Chart -->
+        <div class="chart-card reveal" data-delay="0">
+          <div class="cc-header">
+            <div class="cc-title">Monthly Order Volume</div>
+            <span class="cc-badge">↑ 38% vs last year</span>
+          </div>
+          <div class="chart-area">
+            <canvas id="revenueChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Donut Chart -->
+        <div class="chart-card-sm reveal" data-delay="120">
+          <div class="cc-header">
+            <div class="cc-title">Traffic Sources</div>
+            <span class="cc-badge cyan">Live</span>
+          </div>
+          <div class="pie-wrap">
+            <div class="pie-area">
+              <canvas id="pieChart"></canvas>
+              <div class="pie-center">
+                <div class="pie-pct">73%</div>
+                <div class="pie-lbl">Facebook</div>
+              </div>
+            </div>
+            <div class="pie-legend">
+              <div class="pie-leg-item">
+                <div class="pie-leg-dot" style="background:#b8ff2e;"></div>
+                <div class="pie-leg-label">Facebook Ads</div>
+                <div class="pie-leg-val">73%</div>
+              </div>
+              <div class="pie-leg-item">
+                <div class="pie-leg-dot" style="background:#00e8ff;"></div>
+                <div class="pie-leg-label">Organic</div>
+                <div class="pie-leg-val">15%</div>
+              </div>
+              <div class="pie-leg-item">
+                <div class="pie-leg-dot" style="background:#ff3b6b;"></div>
+                <div class="pie-leg-label">WhatsApp</div>
+                <div class="pie-leg-val">12%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Line Chart spanning full width -->
+        <div class="chart-card reveal" data-delay="200" style="grid-column:span 2;">
+          <div class="cc-header">
+            <div class="cc-title">Response Time &amp; Conversion Rate — Last 7 Days</div>
+            <span class="cc-badge cyan">Realtime</span>
+          </div>
+          <div class="chart-area">
+            <canvas id="lineChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Funnel -->
+        <div class="chart-card-sm reveal" data-delay="300">
+          <div class="cc-header">
+            <div class="cc-title">Sales Funnel</div>
+            <span class="cc-badge">This Month</span>
+          </div>
+          <div class="funnel-wrap" id="funnelWrap">
+            <div class="funnel-row">
+              <div class="funnel-label">
+                <span class="funnel-name">Impressions</span>
+                <span class="funnel-pct">100%</span>
+              </div>
+              <div class="funnel-bar-bg">
+                <div class="funnel-bar-fill" style="width:0%;background:#b8ff2e;" data-w="100"></div>
+              </div>
+            </div>
+            <div class="funnel-row">
+              <div class="funnel-label">
+                <span class="funnel-name">Link Clicks</span>
+                <span class="funnel-pct">62%</span>
+              </div>
+              <div class="funnel-bar-bg">
+                <div class="funnel-bar-fill" style="width:0%;background:#b8ff2e;" data-w="62"></div>
+              </div>
+            </div>
+            <div class="funnel-row">
+              <div class="funnel-label">
+                <span class="funnel-name">Initiated Chat</span>
+                <span class="funnel-pct">44%</span>
+              </div>
+              <div class="funnel-bar-bg">
+                <div class="funnel-bar-fill" style="width:0%;background:#00e8ff;" data-w="44"></div>
+              </div>
+            </div>
+            <div class="funnel-row">
+              <div class="funnel-label">
+                <span class="funnel-name">Order Placed</span>
+                <span class="funnel-pct">38%</span>
+              </div>
+              <div class="funnel-bar-bg">
+                <div class="funnel-bar-fill" style="width:0%;background:#00e8ff;" data-w="38"></div>
+              </div>
+            </div>
+            <div class="funnel-row">
+              <div class="funnel-label">
+                <span class="funnel-name">Delivered</span>
+                <span class="funnel-pct">31%</span>
+              </div>
+              <div class="funnel-bar-bg">
+                <div class="funnel-bar-fill" style="width:0%;background:#ff3b6b;" data-w="31"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="cta-section reveal">
+    <div class="cta-bg-text" aria-hidden="true">LET'S GO</div>
+    <div class="cta-grid"></div>
+    <div class="cta-inner">
+      <div class="sec-eyebrow" style="justify-content:center">
+        <span class="se-num">06</span><span class="se-line"></span><span class="se-txt">Get Started</span>
+      </div>
+      <h2 class="cta-big">
+        Ready to<br>
+        <span class="em-lime">Automate</span><br>
+        Everything?
+      </h2>
+      <p class="cta-desc">We respond within 2–6 hours and deliver results that move the needle. No fluff — just systems that work, day and night.</p>
+      <a href="contact.html" class="btn-lime cta-main-btn magnetic">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Start Your Project
+      </a>
+      <div class="cta-meta">
+        <span><span class="rb-dot"></span>Responding in 2–6 hours</span>
+        <span>·</span><span>Free consultation</span>
+        <span>·</span><span>Bangladesh</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="ft-col ft-brand">
+        <div class="ft-logo"><span class="fl-b">[</span>ZYNTRA<span class="fl-lime">VERSE</span><span class="fl-b">]</span></div>
+        <p class="ft-tag">AI Automation Studio<br>Bangladesh · Est. 2020</p>
+        <div class="ft-online"><span class="rb-dot"></span>Open for new projects</div>
+      </div>
+      <div class="ft-col">
+        <div class="ft-col-h">Navigation</div>
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="showcase.html">Showcase</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="ft-col">
+        <div class="ft-col-h">Services</div>
+        <a href="service-ai.html">AI Automation</a>
+        <a href="service-web.html">Web Development</a>
+        <a href="service-landing.html">Landing Pages</a>
+        <a href="service-marketing.html">FB Marketing</a>
+        <a href="service-database.html">Database &amp; CRM</a>
+      </div>
+      <div class="ft-col">
+        <div class="ft-col-h">Contact</div>
+        <a href="https://wa.me/8801577164596" target="_blank">WhatsApp</a>
+        <a href="mailto:hello@zyntraverse.com">Email Us</a>
+        <a href="contact.html">Send a Message</a>
+        <div class="ft-time" id="bdTime">--:-- BDT</div>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <span>© 2026 ZYNTRA VERSE. All rights reserved.</span>
+      <span>Bangladesh · Built with precision</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

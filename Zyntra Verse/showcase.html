@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Showcase | ZYNTRA VERSE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="showcase.css">
+</head>
+<body>
+
+  <!-- CURSOR -->
+  <div id="cursor"></div>
+  <div id="cursor-follower"></div>
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- NAVBAR -->
+  <header id="navbar">
+    <div class="nav-wrap">
+      <a href="index.html" class="nav-logo">
+        <span class="nl-bracket">[</span><span class="nl-z">ZV</span><span class="nl-bracket">]</span>
+        <span class="nl-full">ZYNTRA VERSE</span>
+      </a>
+      <nav class="nav-center">
+        <a href="index.html"    class="n-link"        data-label="01">Home</a>
+        <a href="services.html" class="n-link"        data-label="02">Services</a>
+        <a href="showcase.html" class="n-link active" data-label="03">Showcase</a>
+        <a href="contact.html"  class="n-link"        data-label="04">Contact</a>
+      </nav>
+      <div class="nav-right">
+        <div class="nav-status">
+          <span class="ns-dot"></span>
+          <span class="ns-text">Open for Projects</span>
+        </div>
+        <a href="contact.html" class="nav-btn magnetic">
+          Start Project
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <button id="menuBtn" class="hbg" aria-label="Menu"><span></span><span></span></button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="mob-nav">
+      <a href="index.html"    class="mob-n-link"><span class="mn-num">01</span>Home</a>
+      <a href="services.html" class="mob-n-link"><span class="mn-num">02</span>Services</a>
+      <a href="showcase.html" class="mob-n-link"><span class="mn-num">03</span>Showcase</a>
+      <a href="contact.html"  class="mob-n-link"><span class="mn-num">04</span>Contact</a>
+      <a href="contact.html" class="mob-cta">Start a Project →</a>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-hero-tag reveal">// Our Work</div>
+      <h1 class="page-hero-title reveal">
+        Projects We're<br>
+        <span class="accent-text">Proud Of</span>
+      </h1>
+      <p class="page-hero-desc reveal">
+        Real projects, real results. Browse live previews and explore the systems we've built for businesses across Bangladesh.
+      </p>
+    </div>
+    <div class="page-hero-grid"></div>
+  </section>
+
+  <!-- FILTER TABS -->
+  <div class="sc-filters-wrap reveal">
+    <div class="sc-filters" id="filterTabs">
+      <button class="sc-filter active" data-filter="all">All Projects</button>
+      <button class="sc-filter" data-filter="website">Websites</button>
+      <button class="sc-filter" data-filter="landing">Landing Pages</button>
+      <button class="sc-filter" data-filter="ai">AI Systems</button>
+      <button class="sc-filter" data-filter="marketing">Marketing</button>
+    </div>
+  </div>
+
+  <!-- FEATURED LIVE PREVIEW SECTION (Websites & Landing Pages) -->
+  <section class="sc-featured-section" id="liveSection">
+    <div class="sc-section-tag reveal">
+      <span class="feat-badge">
+        <span class="live-dot"></span>
+        Live Previews
+      </span>
+      <span class="feat-label">// Scroll inside the frames to explore</span>
+    </div>
+
+    <div class="sc-live-grid" id="projectGrid">
+
+      <!-- ── PROJECT 1 ── -->
+      <div class="sc-project-card" data-category="landing">
+        <div class="sc-project-meta">
+          <div class="sc-project-info">
+            <span class="sc-cat-badge landing">Landing Page</span>
+            <h3 class="sc-project-title">Quran Combo — Gift Store</h3>
+            <p class="sc-project-desc">High-converting product landing page for Quran combo gift sets. Built for Facebook ad traffic with pixel-optimized CTA flow.</p>
+          </div>
+          <div class="sc-project-links">
+            <a href="https://qurancombo.puspaloygiftzone.shop/" target="_blank" rel="noopener" class="sc-live-btn magnetic">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span>Open Live Site</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- BROWSER MOCKUP -->
+        <div class="browser-mockup">
+          <div class="browser-bar">
+            <div class="browser-dots">
+              <span class="bd red"></span>
+              <span class="bd yellow"></span>
+              <span class="bd green"></span>
+            </div>
+            <div class="browser-url">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span>qurancombo.puspaloygiftzone.shop</span>
+            </div>
+            <a href="https://qurancombo.puspaloygiftzone.shop/" target="_blank" class="browser-ext" title="Open full site">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+          <div class="browser-body">
+            <div class="iframe-overlay" data-src="https://qurancombo.puspaloygiftzone.shop/" data-loaded="false">
+              <div class="iframe-placeholder">
+                <div class="ip-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                </div>
+                <div class="ip-text">Click to load live preview</div>
+                <button class="ip-load-btn load-iframe magnetic">Load Preview</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sc-card-tags">
+          <span>HTML/CSS</span>
+          <span>Facebook Pixel</span>
+          <span>Conversion Optimized</span>
+        </div>
+      </div>
+
+      <!-- ── PROJECT 2 ── -->
+      <div class="sc-project-card" data-category="landing">
+        <div class="sc-project-meta">
+          <div class="sc-project-info">
+            <span class="sc-cat-badge landing">Landing Page</span>
+            <h3 class="sc-project-title">Product Sales Page</h3>
+            <p class="sc-project-desc">Persuasive product landing page built for maximum conversion rate. Social proof sections, urgency elements and a streamlined order flow.</p>
+          </div>
+          <div class="sc-project-links">
+            <a href="https://puspaloygadgetfan.netlify.app/" target="_blank" rel="noopener" class="sc-live-btn magnetic">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span>Open Live Site</span>
+            </a>
+          </div>
+        </div>
+        <div class="browser-mockup">
+          <div class="browser-bar">
+            <div class="browser-dots">
+              <span class="bd red"></span><span class="bd yellow"></span><span class="bd green"></span>
+            </div>
+            <div class="browser-url">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span>https://puspaloygadgetfan.netlify.app/</span>
+            </div>
+          </div>
+          <div class="browser-body">
+            <div class="iframe-overlay demo-placeholder">
+              <div class="ip-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              <div class="ip-text">Demo coming soon</div>
+              <div class="ip-sub">Replace with your project URL</div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-card-tags">
+          <span>Landing Page</span>
+          <span>Server-Side Pixel</span>
+          <span>High CTR</span>
+        </div>
+      </div>
+
+      <!-- ── PROJECT 3: WEBSITE ── -->
+      <div class="sc-project-card" data-category="website">
+        <div class="sc-project-meta">
+          <div class="sc-project-info">
+            <span class="sc-cat-badge website">Website</span>
+            <h3 class="sc-project-title">Business / E-commerce Site</h3>
+            <p class="sc-project-desc">Full multi-page e-commerce website with product catalog, dynamic cart and integrated order management system.</p>
+          </div>
+          <div class="sc-project-links">
+            <a href="#" target="_blank" rel="noopener" class="sc-live-btn magnetic">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span>Open Live Site</span>
+            </a>
+          </div>
+        </div>
+        <div class="browser-mockup">
+          <div class="browser-bar">
+            <div class="browser-dots">
+              <span class="bd red"></span><span class="bd yellow"></span><span class="bd green"></span>
+            </div>
+            <div class="browser-url">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span>client-website.com</span>
+            </div>
+          </div>
+          <div class="browser-body">
+            <div class="iframe-overlay demo-placeholder">
+              <div class="ip-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+              </div>
+              <div class="ip-text">Demo coming soon</div>
+              <div class="ip-sub">Replace with your project URL</div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-card-tags">
+          <span>E-commerce</span>
+          <span>Responsive</span>
+          <span>SEO Optimized</span>
+        </div>
+      </div>
+
+      <!-- ── AI PROJECT 1 ── -->
+      <div class="sc-project-card ai-card" data-category="ai">
+        <div class="sc-project-meta">
+          <div class="sc-project-info">
+            <span class="sc-cat-badge ai">AI System</span>
+            <h3 class="sc-project-title">Facebook AI Order Bot</h3>
+            <p class="sc-project-desc">Fully automated Facebook Messenger order collection system. Greets customers, collects order details, confirms delivery address and saves everything to Google Sheets — zero human intervention.</p>
+          </div>
+        </div>
+
+        <!-- AI DEMO VISUAL -->
+        <div class="ai-demo-wrap">
+          <div class="ai-demo-header">
+            <div class="ai-demo-dots"><span></span><span></span><span></span></div>
+            <span class="ai-demo-title">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              zyntra_order_bot.ai — Live Session
+            </span>
+            <span class="ai-live-badge">
+              <span></span>Running
+            </span>
+          </div>
+          <div class="ai-chat-box" id="chatDemo1">
+            <div class="chat-msg bot">
+              <span class="chat-avatar">🤖</span>
+              <div class="chat-bubble">স্বাগতম! আমি আপনার অর্ডার নিতে প্রস্তুত। কোন পণ্যটি নিতে চান?</div>
+            </div>
+            <div class="chat-msg user delayed-1">
+              <div class="chat-bubble">Quran Combo Gift Set চাই</div>
+              <span class="chat-avatar">👤</span>
+            </div>
+            <div class="chat-msg bot delayed-2">
+              <span class="chat-avatar">🤖</span>
+              <div class="chat-bubble">দারুণ! আপনার delivery address টা দিন।</div>
+            </div>
+            <div class="chat-msg user delayed-3">
+              <div class="chat-bubble">Dhaka, Mirpur-10</div>
+              <span class="chat-avatar">👤</span>
+            </div>
+            <div class="chat-msg bot delayed-4">
+              <span class="chat-avatar">🤖</span>
+              <div class="chat-bubble">✅ অর্ডার নিশ্চিত! আপনার অর্ডার ID: #ZV2024. ধন্যবাদ!</div>
+            </div>
+          </div>
+          <div class="ai-demo-footer">
+            <div class="ai-stat-row">
+              <div class="ai-stat"><span>247</span> Orders Today</div>
+              <div class="ai-stat"><span>1.2s</span> Avg Response</div>
+              <div class="ai-stat"><span>100%</span> Uptime</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sc-card-tags">
+          <span>Facebook Messenger</span>
+          <span>Google Sheets</span>
+          <span>AI Automation</span>
+          <span>24/7 Active</span>
+        </div>
+        <div class="ai-cta-row">
+          <a href="service-ai.html" class="srv-learn-btn magnetic"><span>View AI Services</span> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <a href="contact.html" class="srv-cta-btn">Get This For My Business</a>
+        </div>
+      </div>
+
+      <!-- ── AI PROJECT 2 ── -->
+      <div class="sc-project-card ai-card" data-category="ai">
+        <div class="sc-project-meta">
+          <div class="sc-project-info">
+            <span class="sc-cat-badge ai">AI System</span>
+            <h3 class="sc-project-title">AI Customer Support Agent</h3>
+            <p class="sc-project-desc">Intelligent support agent that answers product questions, handles complaints and routes complex issues to humans — dramatically reducing response time.</p>
+          </div>
+        </div>
+        <div class="ai-demo-wrap">
+          <div class="ai-demo-header">
+            <div class="ai-demo-dots"><span></span><span></span><span></span></div>
+            <span class="ai-demo-title">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              zyntra_support_agent.ai
+            </span>
+            <span class="ai-live-badge"><span></span>Running</span>
+          </div>
+          <div class="ai-chat-box">
+            <div class="chat-msg bot">
+              <span class="chat-avatar">🤖</span>
+              <div class="chat-bubble">Hello! How can I help you today?</div>
+            </div>
+            <div class="chat-msg user delayed-1">
+              <div class="chat-bubble">My order hasn't arrived yet</div>
+              <span class="chat-avatar">👤</span>
+            </div>
+            <div class="chat-msg bot delayed-2">
+              <span class="chat-avatar">🤖</span>
+              <div class="chat-bubble">I'm sorry to hear that! Please share your Order ID and I'll check the status right now.</div>
+            </div>
+            <div class="chat-msg user delayed-3">
+              <div class="chat-bubble">#ZV2024</div>
+              <span class="chat-avatar">👤</span>
+            </div>
+            <div class="chat-msg bot delayed-4">
+              <span class="chat-avatar">🤖</span>
+              <div class="chat-bubble">✅ Found it! Your order is out for delivery today. Expected by 6 PM. Apologies for the delay!</div>
+            </div>
+          </div>
+          <div class="ai-demo-footer">
+            <div class="ai-stat-row">
+              <div class="ai-stat"><span>94%</span> Resolved by AI</div>
+              <div class="ai-stat"><span>~800ms</span> Response</div>
+              <div class="ai-stat"><span>24/7</span> Active</div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-card-tags">
+          <span>WhatsApp & Messenger</span>
+          <span>Auto-Reply</span>
+          <span>Human Handoff</span>
+        </div>
+        <div class="ai-cta-row">
+          <a href="service-ai.html" class="srv-learn-btn magnetic"><span>View AI Services</span> <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <a href="contact.html" class="srv-cta-btn">Get This For My Business</a>
+        </div>
+      </div>
+
+      <!-- ── MARKETING PROJECT ── -->
+      <div class="sc-project-card" data-category="marketing">
+        <div class="sc-project-meta">
+          <div class="sc-project-info">
+            <span class="sc-cat-badge marketing">Marketing</span>
+            <h3 class="sc-project-title">Facebook Pixel & Server-Side Tracking</h3>
+            <p class="sc-project-desc">Complete Facebook pixel + Conversions API setup for an e-commerce client. Reduced pixel mismatch to under 5% and improved purchase event accuracy by 40%.</p>
+          </div>
+        </div>
+
+        <!-- TRACKING DASHBOARD VISUAL -->
+        <div class="tracking-demo">
+          <div class="td-header">
+            <span class="td-title">Events Manager — Live Data</span>
+            <span class="td-status">
+              <span class="td-dot"></span>
+              Connected
+            </span>
+          </div>
+          <div class="td-events">
+            <div class="td-event">
+              <div class="td-event-left">
+                <span class="td-event-icon purchase">🛒</span>
+                <div>
+                  <div class="td-event-name">Purchase</div>
+                  <div class="td-event-type">Server-Side</div>
+                </div>
+              </div>
+              <div class="td-event-right">
+                <div class="td-event-count">2,847</div>
+                <div class="td-bar"><div style="--w:92%" class="td-bar-fill green"></div></div>
+              </div>
+            </div>
+            <div class="td-event">
+              <div class="td-event-left">
+                <span class="td-event-icon">👁️</span>
+                <div>
+                  <div class="td-event-name">ViewContent</div>
+                  <div class="td-event-type">Browser + Server</div>
+                </div>
+              </div>
+              <div class="td-event-right">
+                <div class="td-event-count">18,330</div>
+                <div class="td-bar"><div style="--w:78%" class="td-bar-fill cyan"></div></div>
+              </div>
+            </div>
+            <div class="td-event">
+              <div class="td-event-left">
+                <span class="td-event-icon">➕</span>
+                <div>
+                  <div class="td-event-name">AddToCart</div>
+                  <div class="td-event-type">Browser + Server</div>
+                </div>
+              </div>
+              <div class="td-event-right">
+                <div class="td-event-count">5,192</div>
+                <div class="td-bar"><div style="--w:60%" class="td-bar-fill violet"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="td-score">
+            <span class="ts-label">Event Match Quality</span>
+            <span class="ts-value">9.4 / 10</span>
+          </div>
+        </div>
+
+        <div class="sc-card-tags">
+          <span>Facebook Pixel</span>
+          <span>CAPI Setup</span>
+          <span>98% Match Rate</span>
+        </div>
+      </div>
+
+    </div><!-- /projectGrid -->
+  </section>
+
+  <!-- STATS ROW -->
+  <section class="sc-stats-strip reveal">
+    <div class="sc-stats-inner">
+      <div class="sc-stat-pill">
+        <span class="counter" data-target="120">0</span>+
+        <span>Projects Delivered</span>
+      </div>
+      <div class="sc-stat-pill">
+        <span class="counter" data-target="50">0</span>+
+        <span>Happy Clients</span>
+      </div>
+      <div class="sc-stat-pill">
+        <span class="counter" data-target="300">0</span>+
+        <span>Automations Running</span>
+      </div>
+      <div class="sc-stat-pill">
+        <span class="counter" data-target="98">0</span>%
+        <span>Client Satisfaction</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section reveal">
+    <div class="cta-grid-bg"></div>
+    <div class="cta-inner">
+      <div class="cta-tag">// Want results like these?</div>
+      <h2 class="cta-title">Let's Build Your<br><span class="accent-text">Next Project</span></h2>
+      <p class="cta-sub">Join 50+ businesses that have trusted ZYNTRA VERSE to power their digital growth.</p>
+      <a href="contact.html" class="btn-glow large magnetic"><span>Start Now →</span></a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <span class="logo-bracket">[</span>ZYNTRA<span class="logo-accent">VERSE</span><span class="logo-bracket">]</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="showcase.html">Showcase</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-copy">© 2026 ZYNTRA VERSE — Dhaka, Bangladesh.</div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script src="showcase.js"></script>
+</body>
+</html>

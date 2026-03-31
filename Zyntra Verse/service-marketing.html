@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Facebook Sales Marketing | ZYNTRA VERSE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800&family=Cormorant:ital,wght@1,400;1,500&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="service-detail.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    /* ── Page accent: orange/amber for marketing ── */
+    :root { --amber: #f59e0b; --amber-dim: rgba(245,158,11,0.1); --amber-glow: rgba(245,158,11,0.2); --amber-bdr: rgba(245,158,11,0.22); }
+
+    /* ── Pixel Event Live Feed ── */
+    .pixel-feed {
+      background: rgba(7,9,18,.98);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,.7), 0 0 50px rgba(245,158,11,0.05);
+    }
+    .pf-header {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 18px;
+      background: rgba(245,158,11,0.04);
+      border-bottom: 1px solid rgba(245,158,11,0.12);
+    }
+    .pf-dot { width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px var(--amber);animation:nsPulse 2.5s ease-in-out infinite; }
+    .pf-title { font-family:var(--f-mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber);flex:1; }
+    .pf-badge { font-family:var(--f-mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#22c55e;background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.2);padding:3px 9px;border-radius:4px; }
+    .pf-body { padding:14px;max-height:320px;overflow-y:auto;display:flex;flex-direction:column;gap:6px; }
+    .pf-body::-webkit-scrollbar { width:3px; }
+    .pf-body::-webkit-scrollbar-thumb { background:rgba(245,158,11,0.2); }
+    .pf-event {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid var(--bdr);
+      border-radius: 8px;
+      animation: evtIn .35s var(--ease) both;
+    }
+    @keyframes evtIn { from{opacity:0;transform:translateX(-8px)} to{opacity:1;transform:none} }
+    .pf-event.purchase  { border-color:rgba(34,197,94,0.25);background:rgba(34,197,94,0.04); }
+    .pf-event.addcart   { border-color:rgba(245,158,11,0.2);background:rgba(245,158,11,0.03); }
+    .pf-event.view      { border-color:var(--bdr2); }
+    .pf-event-icon { font-size:16px;flex-shrink:0; }
+    .pf-event-name { font-family:var(--f-display);font-size:13px;font-weight:700;flex:1; }
+    .pf-event-value { font-family:var(--f-mono);font-size:11px; }
+    .pf-event.purchase .pf-event-value { color:#22c55e; }
+    .pf-event.addcart .pf-event-value   { color:var(--amber); }
+    .pf-event-time { font-family:var(--f-mono);font-size:9px;letter-spacing:.5px;color:var(--muted);white-space:nowrap; }
+    .pf-event-src  { font-family:var(--f-mono);font-size:9px;padding:2px 7px;border-radius:4px;flex-shrink:0; }
+    .pf-event-src.server { color:var(--lime);background:var(--lime-dim);border:1px solid var(--bdr-lime); }
+    .pf-event-src.browser{ color:var(--cyan);background:var(--cyan-dim);border:1px solid var(--bdr-cyan); }
+    .pf-footer {
+      display:flex;gap:20px;padding:10px 16px;border-top:1px solid rgba(245,158,11,0.1);
+      background:rgba(245,158,11,0.02);font-family:var(--f-mono);font-size:9px;
+      letter-spacing:.5px;color:var(--muted);
+    }
+    .pf-footer-stat span { color:var(--amber);font-weight:600; }
+
+    /* ── Event Match Quality Gauge ── */
+    .emq-wrap { text-align:center;position:relative; }
+    .emq-arc-wrap { width:220px;height:120px;margin:0 auto 12px;position:relative; }
+    .emq-arc-fill { stroke-linecap:round;stroke-dasharray:345;stroke-dashoffset:345;transition:stroke-dashoffset 2.2s cubic-bezier(0.16,1,0.3,1) .4s; }
+    .emq-arc-fill.animated { stroke-dashoffset: 38; }
+    .emq-val { position:absolute;bottom:0;left:50%;transform:translateX(-50%);font-family:var(--f-display);font-size:42px;font-weight:900; }
+    .emq-max { font-size:20px;color:var(--muted); }
+    .emq-lbl { font-family:var(--f-mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px; }
+    .emq-scale { display:flex;justify-content:space-between;max-width:200px;margin:0 auto; }
+    .emq-scale-item { text-align:center; }
+    .emq-scale-dot { width:8px;height:8px;border-radius:50%;margin:0 auto 4px; }
+    .emq-scale-lbl { font-family:var(--f-mono);font-size:8px;letter-spacing:.5px;color:var(--muted); }
+
+    /* ── Tracking Architecture Diagram ── */
+    .arch-diagram { position:relative; }
+    .arch-row { display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:10px; }
+    .arch-node {
+      display:flex;flex-direction:column;align-items:center;gap:6px;
+      padding:14px 16px;min-width:100px;
+      background:rgba(255,255,255,0.025);border:1px solid var(--bdr);border-radius:12px;
+      cursor:pointer;transition:border-color .35s,transform .3s var(--ease),box-shadow .35s;
+    }
+    .arch-node:hover { border-color:var(--amber-bdr);transform:translateY(-3px);box-shadow:0 10px 32px rgba(0,0,0,.4); }
+    .arch-node-icon { font-size:22px; }
+    .arch-node-name { font-family:var(--f-mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);text-align:center; }
+    .arch-node.server { border-color:var(--amber-bdr);background:rgba(245,158,11,0.04); }
+    .arch-node.browser { border-color:var(--bdr-cyan);background:var(--cyan-dim); }
+    .arch-node.fb { border-color:var(--bdr-lime);background:var(--lime-dim); }
+    .arch-arrow { display:flex;align-items:center;color:var(--muted); }
+    .arch-arrow-v { display:flex;flex-direction:column;align-items:center;justify-content:center;height:28px;width:100%;position:relative; }
+    .arch-arrow-v::before { content:'';display:block;width:1px;height:100%;background:linear-gradient(to bottom,var(--amber-bdr),transparent); }
+    .arch-label { font-family:var(--f-mono);font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:4px;white-space:nowrap; }
+    .arch-label.lime  { color:var(--lime);background:var(--lime-dim);border:1px solid var(--bdr-lime); }
+    .arch-label.amber { color:var(--amber);background:var(--amber-dim);border:1px solid var(--amber-bdr); }
+    .arch-label.cyan  { color:var(--cyan);background:var(--cyan-dim);border:1px solid var(--bdr-cyan); }
+
+    /* ── Audience Builder Visual ── */
+    .audience-layers {
+      position:relative;display:flex;flex-direction:column;gap:14px;
+    }
+    .aud-layer {
+      display:flex;align-items:center;gap:20px;padding:16px 20px;
+      border-radius:12px;border:1px solid var(--bdr);
+      background:rgba(255,255,255,0.022);
+      cursor:pointer;
+      transition:border-color .35s,transform .3s var(--ease);
+    }
+    .aud-layer:hover { border-color:var(--amber-bdr);transform:translateX(6px); }
+    .aud-layer.active { border-color:var(--amber-bdr);background:rgba(245,158,11,0.04); }
+    .aud-icon { font-size:22px;flex-shrink:0; }
+    .aud-info { flex:1; }
+    .aud-title { font-family:var(--f-display);font-size:15px;font-weight:800;margin-bottom:3px; }
+    .aud-sub   { font-family:var(--f-mono);font-size:9px;letter-spacing:.5px;color:var(--dim); }
+    .aud-size  { font-family:var(--f-display);font-size:18px;font-weight:900;color:var(--amber); }
+    .aud-size-lbl { font-family:var(--f-mono);font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--muted); }
+    .aud-bar { margin-top:12px; }
+    .aud-bar-inner { height:4px;background:var(--bdr);border-radius:99px;overflow:hidden; }
+    .aud-bar-fill  { height:100%;background:linear-gradient(90deg,var(--amber),var(--lime));border-radius:99px;width:0%;transition:width 1.8s cubic-bezier(0.16,1,0.3,1) .3s; }
+    .aud-layer.counted .aud-bar-fill { width:var(--pct); }
+
+    /* ── Pixel vs CAPI compare ── */
+    .pvc-grid { display:grid;grid-template-columns:1fr 1fr;gap:24px; }
+    .pvc-panel { border-radius:16px;padding:28px;border:1px solid var(--bdr); }
+    .pvc-panel.old  { background:rgba(255,59,107,0.04);border-color:rgba(255,59,107,0.15); }
+    .pvc-panel.new  { background:rgba(184,255,46,0.03);border-color:var(--bdr-lime); }
+    .pvc-label { font-family:var(--f-mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:4px;width:fit-content;margin-bottom:18px; }
+    .pvc-panel.old .pvc-label { color:var(--rose);background:rgba(255,59,107,0.08);border:1px solid rgba(255,59,107,0.2); }
+    .pvc-panel.new .pvc-label { color:var(--lime);background:var(--lime-dim);border:1px solid var(--bdr-lime); }
+    .pvc-title { font-family:var(--f-display);font-size:20px;font-weight:900;margin-bottom:14px; }
+    .pvc-row { display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;font-size:13.5px;color:var(--dim); }
+    .pvc-row svg { flex-shrink:0;margin-top:2px; }
+    .pvc-stat-row { display:flex;gap:16px;margin-top:20px;padding-top:16px;border-top:1px solid var(--bdr); }
+    .pvc-stat { text-align:center; }
+    .pvc-stat-val { font-family:var(--f-display);font-size:22px;font-weight:900; }
+    .pvc-panel.old .pvc-stat-val { color:var(--rose); }
+    .pvc-panel.new .pvc-stat-val { color:var(--lime); }
+    .pvc-stat-lbl { font-family:var(--f-mono);font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--muted); }
+
+    /* ── Audit checklist ── */
+    .audit-grid { display:grid;grid-template-columns:1fr 1fr;gap:12px; }
+    .audit-item {
+      display:flex;align-items:center;gap:14px;padding:14px 18px;
+      border-radius:10px;border:1px solid var(--bdr);background:rgba(255,255,255,0.02);
+      transition:border-color .35s;
+    }
+    .audit-item.pass  { border-color:rgba(34,197,94,0.2);background:rgba(34,197,94,0.03); }
+    .audit-item.fail  { border-color:rgba(255,59,107,0.2);background:rgba(255,59,107,0.03); }
+    .audit-item.warn  { border-color:rgba(245,158,11,0.2);background:rgba(245,158,11,0.03); }
+    .audit-icon { font-size:17px;flex-shrink:0; }
+    .audit-text { font-family:var(--f-mono);font-size:11px;letter-spacing:.3px;color:var(--dim); }
+    .audit-badge { margin-left:auto;font-family:var(--f-mono);font-size:8px;letter-spacing:1.5px;text-transform:uppercase;padding:2px 8px;border-radius:4px;flex-shrink:0; }
+    .audit-item.pass .audit-badge  { color:#22c55e;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2); }
+    .audit-item.fail .audit-badge  { color:var(--rose);background:rgba(255,59,107,0.08);border:1px solid rgba(255,59,107,0.2); }
+    .audit-item.warn .audit-badge  { color:var(--amber);background:var(--amber-dim);border:1px solid var(--amber-bdr); }
+
+    @media(max-width:768px){ .pvc-grid{grid-template-columns:1fr;} .audit-grid{grid-template-columns:1fr;} .arch-row{flex-wrap:wrap;} }
+  </style>
+</head>
+<body>
+  <div id="cur"></div><div id="cur-ring"></div>
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- NAVBAR -->
+  <header id="navbar">
+    <div class="nav-wrap">
+      <a href="index.html" class="nav-logo"><span class="nl-bracket">[</span><span class="nl-z">ZV</span><span class="nl-bracket">]</span><span class="nl-full">ZYNTRA VERSE</span></a>
+      <nav class="nav-center">
+        <a href="index.html"    class="n-link">Home</a>
+        <a href="services.html" class="n-link active">Services</a>
+        <a href="showcase.html" class="n-link">Showcase</a>
+        <a href="contact.html"  class="n-link">Contact</a>
+      </nav>
+      <div class="nav-right">
+        <div class="nav-status"><span class="ns-dot"></span><span class="ns-text">Open for Projects</span></div>
+        <a href="contact.html" class="nav-btn magnetic">Start Project <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <button id="menuBtn" class="hbg"><span></span><span></span></button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="mob-nav">
+      <a href="index.html"    class="mob-n-link"><span class="mn-num">01</span>Home</a>
+      <a href="services.html" class="mob-n-link"><span class="mn-num">02</span>Services</a>
+      <a href="showcase.html" class="mob-n-link"><span class="mn-num">03</span>Showcase</a>
+      <a href="contact.html"  class="mob-n-link"><span class="mn-num">04</span>Contact</a>
+      <a href="contact.html"  class="mob-cta">Start a Project →</a>
+    </div>
+  </header>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="sd-hero">
+    <div class="sd-hero-grid"></div>
+    <div class="sd-hero-inner">
+      <!-- LEFT -->
+      <div>
+        <div class="sd-breadcrumb">
+          <a href="services.html">Services</a>
+          <span class="sd-breadcrumb-sep">→</span>
+          <span>Facebook Marketing</span>
+        </div>
+        <div class="sd-hero-tag" style="background:var(--amber-dim);border-color:var(--amber-bdr);color:var(--amber)">
+          <span class="sd-hero-tag-dot" style="background:var(--amber);box-shadow:0 0 8px var(--amber)"></span>
+          Service 04 of 05
+        </div>
+        <h1 class="sd-hero-title">Facebook Sales<br><em style="color:var(--amber);font-family:var(--f-serif);font-style:italic;">Marketing</em></h1>
+        <p class="sd-hero-desc">Pixel setup, server-side tracking and conversion event optimisation to maximise your ad spend ROI and reach the right audience consistently — without losing data to iOS or browser restrictions.</p>
+        <div class="sd-hero-actions">
+          <a href="contact.html" class="btn-lime magnetic">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Get Started
+          </a>
+          <a href="services.html" class="btn-ghost-outline magnetic">← All Services</a>
+        </div>
+        <div class="sd-hero-stats">
+          <div class="sd-hs-item"><div class="sd-hs-val" style="color:var(--amber)"><span class="counter" data-target="9" data-float="true" data-suffix=".4">0</span></div><div class="sd-hs-lbl">Avg. Event Match Score</div></div>
+          <div class="sd-hs-item"><div class="sd-hs-val" style="color:var(--amber)"><span class="counter" data-target="38">0</span>%</div><div class="sd-hs-lbl">Avg. ROAS Gain</div></div>
+          <div class="sd-hs-item"><div class="sd-hs-val" style="color:var(--amber)"><span class="counter" data-target="95">0</span>%</div><div class="sd-hs-lbl">Pixel Match Rate</div></div>
+          <div class="sd-hs-item"><div class="sd-hs-val" style="color:var(--amber)">< 5%</div><div class="sd-hs-lbl">Event Mismatch Rate</div></div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Live Pixel Event Feed -->
+      <div class="reveal" data-delay="200">
+        <div class="pixel-feed">
+          <div class="pf-header">
+            <span class="pf-dot"></span>
+            <span class="pf-title">Events Manager — Live Stream</span>
+            <span class="pf-badge">● RECEIVING</span>
+          </div>
+          <div class="pf-body" id="pixelFeed"></div>
+          <div class="pf-footer">
+            <div class="pf-footer-stat">Events/hr: <span id="evtRate">847</span></div>
+            <div class="pf-footer-stat">Match Score: <span>9.4 / 10</span></div>
+            <div class="pf-footer-stat">Dedup Rate: <span>99.1%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PIXEL vs CAPI ═══ -->
+  <section class="sd-section-full" style="border-top:1px solid var(--bdr);">
+    <div class="sd-inner">
+      <div class="sd-sec-head reveal">
+        <div class="sd-sec-tag" style="color:var(--amber)">The Problem & Solution</div>
+        <h2 class="sd-sec-title">Browser Pixel Alone<br><em style="color:var(--amber);font-family:var(--f-serif);font-style:italic;">Is Not Enough</em></h2>
+        <p class="sd-sec-sub">iOS 14.5+, ad blockers and browser privacy settings block up to 40% of pixel events. Server-side CAPI fills the gap — permanently.</p>
+      </div>
+      <div class="pvc-grid reveal">
+        <div class="pvc-panel old">
+          <div class="pvc-label">❌ Browser Pixel Only</div>
+          <div class="pvc-title">What You're Missing</div>
+          <div class="pvc-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff3b6b" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>iOS 14+ blocks 30–40% of purchase events</div>
+          <div class="pvc-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff3b6b" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>Safari ITP removes cookies in 24 hours</div>
+          <div class="pvc-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff3b6b" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>Ad blockers intercept pixel JS calls</div>
+          <div class="pvc-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff3b6b" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>Facebook sees far fewer conversions than actually happened</div>
+          <div class="pvc-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff3b6b" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>Lookalike & retargeting audiences starved of data</div>
+          <div class="pvc-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff3b6b" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>CBO optimisation cannot learn properly</div>
+          <div class="pvc-stat-row">
+            <div class="pvc-stat"><div class="pvc-stat-val">60%</div><div class="pvc-stat-lbl">Events Captured</div></div>
+            <div class="pvc-stat"><div class="pvc-stat-val">3–5</div><div class="pvc-stat-lbl">Event Match Score</div></div>
+            <div class="pvc-stat"><div class="pvc-stat-val">High</div><div class="pvc-stat-lbl">CPR (Wasted Spend)</div></div>
+          </div>
+        </div>
+        <div class="pvc-panel new">
+          <div class="pvc-label">✅ Pixel + CAPI (Our Setup)</div>
+          <div class="pvc-title">What You Gain</div>
+          <div class="pvc-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8ff2e" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Server sends events directly to Facebook — no browser needed</div>
+          <div class="pvc-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8ff2e" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>iOS-proof — every purchase captured regardless of device</div>
+          <div class="pvc-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8ff2e" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Event deduplication prevents double-counting</div>
+          <div class="pvc-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8ff2e" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Facebook algorithm sees full conversion data — optimises better</div>
+          <div class="pvc-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8ff2e" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Lookalike audiences built on real, high-quality purchase data</div>
+          <div class="pvc-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b8ff2e" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Event Match Quality Score jumps from 3 → 9+</div>
+          <div class="pvc-stat-row">
+            <div class="pvc-stat"><div class="pvc-stat-val">98%</div><div class="pvc-stat-lbl">Events Captured</div></div>
+            <div class="pvc-stat"><div class="pvc-stat-val">9.4</div><div class="pvc-stat-lbl">Match Score</div></div>
+            <div class="pvc-stat"><div class="pvc-stat-val">+38%</div><div class="pvc-stat-lbl">ROAS Gain</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TRACKING ARCHITECTURE ═══ -->
+  <section class="sd-section">
+    <div class="sd-sec-head reveal">
+      <div class="sd-sec-tag" style="color:var(--amber)">Technical Setup</div>
+      <h2 class="sd-sec-title">How the Full Tracking<br><em style="color:var(--amber);font-family:var(--f-serif);font-style:italic;">Architecture Works</em></h2>
+      <p class="sd-sec-sub">Two data streams hitting Facebook simultaneously — browser events for speed, server events for reliability. Best of both worlds.</p>
+    </div>
+    <div class="sd-infograph-grid reveal">
+      <div class="sd-chart-panel" style="border-color:var(--amber-bdr);">
+        <div class="sd-chart-title">Dual-Signal Architecture</div>
+        <div class="sd-chart-sub" style="color:var(--amber);opacity:.7">// How browser + server events flow to Facebook</div>
+        <div class="arch-diagram" style="margin-top:20px;">
+          <!-- Row 1: Customer -->
+          <div class="arch-row">
+            <div class="arch-node">
+              <div class="arch-node-icon">👤</div>
+              <div class="arch-node-name">Customer</div>
+            </div>
+          </div>
+          <!-- Arrow down + split label -->
+          <div class="arch-row" style="gap:60px;">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <div style="font-family:var(--f-mono);font-size:8px;color:var(--cyan);letter-spacing:1px;">BROWSER</div>
+              <svg width="1" height="22"><line x1="0" y1="0" x2="0" y2="22" stroke="rgba(0,232,255,.4)" stroke-width="1" stroke-dasharray="4,3"/></svg>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <div style="font-family:var(--f-mono);font-size:8px;color:var(--amber);letter-spacing:1px;">SERVER</div>
+              <svg width="1" height="22"><line x1="0" y1="0" x2="0" y2="22" stroke="rgba(245,158,11,.4)" stroke-width="1" stroke-dasharray="4,3"/></svg>
+            </div>
+          </div>
+          <!-- Row 2: Browser + Server -->
+          <div class="arch-row">
+            <div class="arch-node browser">
+              <div class="arch-node-icon">🌐</div>
+              <div class="arch-node-name">Facebook Pixel<br>(Browser JS)</div>
+            </div>
+            <div class="arch-arrow"><svg width="28" height="14" viewBox="0 0 28 14"><polyline points="0,7 20,7" stroke="rgba(255,255,255,0.2)" stroke-width="1" fill="none"/><polygon points="28,7 18,2 18,12" fill="rgba(255,255,255,0.15)"/></svg></div>
+            <div class="arch-node server">
+              <div class="arch-node-icon">🖥️</div>
+              <div class="arch-node-name">Your Server<br>(CAPI Gateway)</div>
+            </div>
+          </div>
+          <!-- Arrow down -->
+          <div class="arch-row">
+            <svg width="2" height="18"><line x1="1" y1="0" x2="1" y2="18" stroke="rgba(0,232,255,.3)" stroke-width="1" stroke-dasharray="4,3"/></svg>
+            <div style="width:60px;"></div>
+            <svg width="2" height="18"><line x1="1" y1="0" x2="1" y2="18" stroke="rgba(245,158,11,.3)" stroke-width="1" stroke-dasharray="4,3"/></svg>
+          </div>
+          <!-- Row 3: Facebook + Dedup -->
+          <div class="arch-row">
+            <div class="arch-node fb">
+              <div class="arch-node-icon">📘</div>
+              <div class="arch-node-name">Facebook API<br>(Both Signals)</div>
+            </div>
+          </div>
+          <!-- Arrow down -->
+          <div style="display:flex;flex-direction:column;align-items:center;margin:6px 0;">
+            <svg width="2" height="18"><line x1="1" y1="0" x2="1" y2="18" stroke="rgba(184,255,46,.4)" stroke-width="1" stroke-dasharray="4,3"/></svg>
+            <div class="arch-label lime">Deduplication Engine</div>
+            <svg width="2" height="12"><line x1="1" y1="0" x2="1" y2="12" stroke="rgba(184,255,46,.4)" stroke-width="1" stroke-dasharray="4,3"/></svg>
+          </div>
+          <!-- Row 4: Facebook Ads System -->
+          <div class="arch-row">
+            <div class="arch-node" style="background:rgba(245,158,11,0.06);border-color:var(--amber-bdr);width:100%;max-width:260px;">
+              <div class="arch-node-icon">⚡</div>
+              <div class="arch-node-name">Facebook Ads Algorithm<br>Match Score: 9.4 / 10</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event Match Quality Gauge -->
+      <div class="sd-chart-panel" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;">
+        <div class="sd-chart-title" style="text-align:center;">Event Match Quality Score</div>
+        <div class="sd-chart-sub" style="text-align:center;margin-bottom:24px;">// Facebook rates signal quality 0–10</div>
+        <div class="emq-wrap" id="emqWrap">
+          <div class="emq-arc-wrap">
+            <svg viewBox="0 0 220 120" width="220" height="120" style="overflow:visible">
+              <path d="M 20,110 A 90,90 0 0 1 200,110" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="14" stroke-linecap="round"/>
+              <!-- Zones: red, amber, green -->
+              <path d="M 20,110 A 90,90 0 0 1 62,34"  fill="none" stroke="rgba(255,59,107,0.35)"  stroke-width="14" stroke-linecap="round"/>
+              <path d="M 62,34 A 90,90 0 0 1 140,21"  fill="none" stroke="rgba(245,158,11,0.35)" stroke-width="14" stroke-linecap="round"/>
+              <path d="M 140,21 A 90,90 0 0 1 200,110" fill="none" stroke="rgba(184,255,46,0.35)" stroke-width="14" stroke-linecap="round"/>
+              <!-- Needle path -->
+              <path d="M 20,110 A 90,90 0 0 1 200,110" fill="none" stroke="var(--amber)" stroke-width="14" stroke-linecap="round" stroke-dasharray="345" class="emq-arc-fill" id="emqArc"/>
+            </svg>
+            <div class="emq-val" style="color:var(--amber);font-size:38px;bottom:0;">
+              <span class="counter" data-target="9" data-float="true" data-suffix=".4">0</span><span class="emq-max">/10</span>
+            </div>
+          </div>
+          <div class="emq-lbl">Your Event Match Quality</div>
+          <div class="emq-scale">
+            <div class="emq-scale-item"><div class="emq-scale-dot" style="background:var(--rose)"></div><div class="emq-scale-lbl">Poor<br>0–3</div></div>
+            <div class="emq-scale-item"><div class="emq-scale-dot" style="background:var(--amber)"></div><div class="emq-scale-lbl">Average<br>4–6</div></div>
+            <div class="emq-scale-item"><div class="emq-scale-dot" style="background:var(--lime)"></div><div class="emq-scale-lbl">Excellent<br>7–10</div></div>
+          </div>
+        </div>
+        <div style="margin-top:28px;width:100%;display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(255,59,107,0.05);border:1px solid rgba(255,59,107,0.15);border-radius:8px;">
+            <span style="font-family:var(--f-mono);font-size:11px;color:var(--dim)">Before ZYNTRA setup</span>
+            <span style="font-family:var(--f-display);font-size:16px;font-weight:900;color:var(--rose)">3.2 / 10</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(184,255,46,0.04);border:1px solid var(--bdr-lime);border-radius:8px;">
+            <span style="font-family:var(--f-mono);font-size:11px;color:var(--dim)">After ZYNTRA setup</span>
+            <span style="font-family:var(--f-display);font-size:16px;font-weight:900;color:var(--lime)">9.4 / 10</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PERFORMANCE CHARTS ═══ -->
+  <section class="sd-section-full" style="background:rgba(245,158,11,0.012);border-top:1px solid var(--bdr);">
+    <div class="sd-inner">
+      <div class="sd-sec-head reveal">
+        <div class="sd-sec-tag" style="color:var(--amber)">Performance Data</div>
+        <h2 class="sd-sec-title">Numbers From<br><em style="color:var(--amber);font-family:var(--f-serif);font-style:italic;">Real Clients</em></h2>
+      </div>
+
+      <div class="sd-results-grid reveal" style="margin-bottom:48px;">
+        <div class="sd-result-card tilt-card"><div class="sd-result-val" style="color:var(--amber)"><span class="counter" data-target="9" data-float="true" data-suffix=".4">0</span></div><div class="sd-result-lbl">Avg. Match Score</div><div class="sd-result-sub">Up from 3.2 before setup</div><div class="sd-result-bg-num">1</div></div>
+        <div class="sd-result-card tilt-card"><div class="sd-result-val"><span class="counter" data-target="38">0</span>%</div><div class="sd-result-lbl">ROAS Improvement</div><div class="sd-result-sub">Average across clients</div><div class="sd-result-bg-num">2</div></div>
+        <div class="sd-result-card tilt-card"><div class="sd-result-val" style="color:var(--amber)"><span class="counter" data-target="95">0</span>%</div><div class="sd-result-lbl">Events Matched</div><div class="sd-result-sub">Up from ~60% browser only</div><div class="sd-result-bg-num">3</div></div>
+        <div class="sd-result-card tilt-card"><div class="sd-result-val"><span class="counter" data-target="28">0</span>%</div><div class="sd-result-lbl">Lower CPA</div><div class="sd-result-sub">Cost per acquisition drop</div><div class="sd-result-bg-num">4</div></div>
+      </div>
+
+      <div class="sd-infograph-grid">
+        <div class="sd-chart-panel">
+          <div class="sd-chart-title">ROAS Before vs After CAPI</div>
+          <div class="sd-chart-sub">// Return on ad spend across 5 clients (x)</div>
+          <canvas id="roasChart" height="190"></canvas>
+        </div>
+        <div class="sd-chart-panel">
+          <div class="sd-chart-title">Events Captured Over Time</div>
+          <div class="sd-chart-sub">// Browser pixel vs Pixel + CAPI (%)</div>
+          <canvas id="eventsChart" height="190"></canvas>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:28px;">
+        <div class="sd-chart-panel">
+          <div class="sd-chart-title">Purchase Attribution Breakdown</div>
+          <div class="sd-chart-sub">// Where conversions are tracked from</div>
+          <canvas id="attrChart" height="180"></canvas>
+        </div>
+        <div class="sd-chart-panel">
+          <div class="sd-chart-title">Signal Quality Improvements</div>
+          <div class="sd-chart-sub">// Per metric: before vs target</div>
+          <div class="sd-metric-list" style="margin-top:8px;">
+            <div class="sd-metric-item" style="--target:94%">
+              <div class="sd-metric-head"><span class="sd-metric-lbl">Event Match Quality Score</span><span class="sd-metric-val" style="color:var(--amber)">9.4/10</span></div>
+              <div class="sd-metric-bar"><div class="sd-metric-fill" style="background:linear-gradient(90deg,var(--amber),var(--lime));--target:94%"></div></div>
+            </div>
+            <div class="sd-metric-item" style="--target:98%">
+              <div class="sd-metric-head"><span class="sd-metric-lbl">Purchase Events Captured</span><span class="sd-metric-val">98%</span></div>
+              <div class="sd-metric-bar"><div class="sd-metric-fill" style="--target:98%"></div></div>
+            </div>
+            <div class="sd-metric-item" style="--target:99%">
+              <div class="sd-metric-head"><span class="sd-metric-lbl">Deduplication Accuracy</span><span class="sd-metric-val" style="color:var(--amber)">99.1%</span></div>
+              <div class="sd-metric-bar"><div class="sd-metric-fill" style="background:linear-gradient(90deg,var(--amber),var(--lime));--target:99%"></div></div>
+            </div>
+            <div class="sd-metric-item" style="--target:88%">
+              <div class="sd-metric-head"><span class="sd-metric-lbl">iOS Conversion Recovery</span><span class="sd-metric-val">+88%</span></div>
+              <div class="sd-metric-bar"><div class="sd-metric-fill" style="--target:88%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ RETARGETING AUDIENCES ═══ -->
+  <section class="sd-section">
+    <div class="sd-sec-head reveal">
+      <div class="sd-sec-tag" style="color:var(--amber)">Audience Strategy</div>
+      <h2 class="sd-sec-title">Retargeting Audiences<br><em style="color:var(--amber);font-family:var(--f-serif);font-style:italic;">We Build For You</em></h2>
+      <p class="sd-sec-sub">With quality pixel data, we build precision audiences that Facebook uses to find your highest-value customers automatically.</p>
+    </div>
+    <div class="audience-layers reveal" id="audLayers">
+      <div class="aud-layer active" data-pct="100">
+        <div class="aud-icon">👁️</div>
+        <div class="aud-info">
+          <div class="aud-title">Website Visitors (All)</div>
+          <div class="aud-sub">Everyone who visited any page in last 180 days — top of funnel</div>
+          <div class="aud-bar"><div class="aud-bar-inner"><div class="aud-bar-fill" style="--pct:100%"></div></div></div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;">
+          <div class="aud-size"><span class="counter" data-target="15">0</span>K+</div>
+          <div class="aud-size-lbl">Audience Size</div>
+        </div>
+      </div>
+      <div class="aud-layer" data-pct="72">
+        <div class="aud-icon">📦</div>
+        <div class="aud-info">
+          <div class="aud-title">View Content (Product Pages)</div>
+          <div class="aud-sub">People who viewed specific products — warm audience with intent</div>
+          <div class="aud-bar"><div class="aud-bar-inner"><div class="aud-bar-fill" style="--pct:72%"></div></div></div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;">
+          <div class="aud-size"><span class="counter" data-target="8">0</span>K+</div>
+          <div class="aud-size-lbl">Audience Size</div>
+        </div>
+      </div>
+      <div class="aud-layer" data-pct="50">
+        <div class="aud-icon">🛒</div>
+        <div class="aud-info">
+          <div class="aud-title">Add to Cart — Not Purchased</div>
+          <div class="aud-sub">Highest intent — abandon cart, show retargeting ads with urgency</div>
+          <div class="aud-bar"><div class="aud-bar-inner"><div class="aud-bar-fill" style="--pct:50%"></div></div></div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;">
+          <div class="aud-size"><span class="counter" data-target="3">0</span>.2K</div>
+          <div class="aud-size-lbl">Audience Size</div>
+        </div>
+      </div>
+      <div class="aud-layer" data-pct="30">
+        <div class="aud-icon">✅</div>
+        <div class="aud-info">
+          <div class="aud-title">Past Purchasers (Custom)</div>
+          <div class="aud-sub">Existing buyers — exclude from acquisition, upsell with new offers</div>
+          <div class="aud-bar"><div class="aud-bar-inner"><div class="aud-bar-fill" style="--pct:30%"></div></div></div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;">
+          <div class="aud-size"><span class="counter" data-target="1">0</span>.8K</div>
+          <div class="aud-size-lbl">Audience Size</div>
+        </div>
+      </div>
+      <div class="aud-layer" data-pct="85">
+        <div class="aud-icon">🎯</div>
+        <div class="aud-info">
+          <div class="aud-title">Lookalike — 1% (Purchase)</div>
+          <div class="aud-sub">Facebook finds people most similar to your buyers — highest-quality cold audience</div>
+          <div class="aud-bar"><div class="aud-bar-inner"><div class="aud-bar-fill" style="--pct:85%"></div></div></div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;">
+          <div class="aud-size"><span class="counter" data-target="2">0</span>M+</div>
+          <div class="aud-size-lbl">Audience Size (BD)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FEATURES ═══ -->
+  <section class="sd-section-full" style="border-top:1px solid var(--bdr);">
+    <div class="sd-inner">
+      <div class="sd-sec-head reveal">
+        <div class="sd-sec-tag" style="color:var(--amber)">What We Do</div>
+        <h2 class="sd-sec-title">Everything in<br><em style="color:var(--amber);font-family:var(--f-serif);font-style:italic;">One Setup</em></h2>
+      </div>
+      <div class="sd-features-grid">
+        <div class="sd-feat-card tilt-card reveal" data-delay="0" style="border-color:var(--amber-bdr);">
+          <div class="sd-fc-glow" style="background:radial-gradient(ellipse at top left,rgba(245,158,11,0.08),transparent 65%)"></div>
+          <div class="sd-feat-icon" style="background:var(--amber-dim);border-color:var(--amber-bdr);color:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <h3 class="sd-feat-title">Facebook Pixel Setup</h3>
+          <p class="sd-feat-body">Full pixel installation via GTM or direct code. All standard events configured — PageView, ViewContent, AddToCart, InitiateCheckout, Purchase — plus custom events for your funnel.</p>
+        </div>
+        <div class="sd-feat-card tilt-card reveal" data-delay="100">
+          <div class="sd-fc-glow"></div>
+          <div class="sd-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+          <h3 class="sd-feat-title">Server-Side Event Tracking</h3>
+          <p class="sd-feat-body">Conversions API implemented via Google Tag Manager Server-Side or direct API integration. Events fired from your server to Facebook — browser-independent and iOS-proof.</p>
+        </div>
+        <div class="sd-feat-card tilt-card reveal" data-delay="200" style="border-color:var(--amber-bdr);">
+          <div class="sd-fc-glow" style="background:radial-gradient(ellipse at top left,rgba(245,158,11,0.08),transparent 65%)"></div>
+          <div class="sd-feat-icon" style="background:var(--amber-dim);border-color:var(--amber-bdr);color:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <h3 class="sd-feat-title">Conversion API Integration</h3>
+          <p class="sd-feat-body">CAPI with event deduplication using event_id matching — so the same purchase doesn't get counted twice from browser and server. Clean, accurate attribution data every time.</p>
+        </div>
+        <div class="sd-feat-card tilt-card reveal" data-delay="0">
+          <div class="sd-fc-glow"></div>
+          <div class="sd-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+          <h3 class="sd-feat-title">Ad Account Audit & Fixing</h3>
+          <p class="sd-feat-body">Full diagnostic review of your existing ad account — pixel health, event quality, campaign structure, audience overlap, budget allocation and creative performance. Actionable fix list provided.</p>
+        </div>
+        <div class="sd-feat-card tilt-card reveal" data-delay="100" style="border-color:var(--amber-bdr);">
+          <div class="sd-fc-glow" style="background:radial-gradient(ellipse at top left,rgba(245,158,11,0.08),transparent 65%)"></div>
+          <div class="sd-feat-icon" style="background:var(--amber-dim);border-color:var(--amber-bdr);color:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3 class="sd-feat-title">Retargeting Audience Setup</h3>
+          <p class="sd-feat-body">Build and configure all retargeting custom audiences — website visitors, product viewers, cart abandoners, purchasers — plus 1%, 2% and 3% lookalike audiences based on purchase data.</p>
+        </div>
+        <div class="sd-feat-card tilt-card reveal" data-delay="200">
+          <div class="sd-fc-glow"></div>
+          <div class="sd-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <h3 class="sd-feat-title">Audit Report Delivered</h3>
+          <p class="sd-feat-body">After setup, you receive a full audit report with before/after screenshots, event quality scores, ROAS comparison and recommendations for ongoing campaign optimisation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ AUDIT CHECKLIST ═══ -->
+  <section class="sd-section">
+    <div class="sd-sec-head reveal">
+      <div class="sd-sec-tag" style="color:var(--amber)">Audit Sample</div>
+      <h2 class="sd-sec-title">What a Typical Account<br><em style="color:var(--amber);font-family:var(--f-serif);font-style:italic;">Audit Finds</em></h2>
+      <p class="sd-sec-sub">These are the most common issues we find and fix. Is your account suffering from any of these?</p>
+    </div>
+    <div class="audit-grid reveal">
+      <div class="audit-item fail"><span class="audit-icon">⚠️</span><span class="audit-text">Pixel firing on wrong page — purchase event on cart page</span><span class="audit-badge">Critical</span></div>
+      <div class="audit-item fail"><span class="audit-icon">🚫</span><span class="audit-text">No server-side CAPI — losing 30%+ of iOS conversions</span><span class="audit-badge">Critical</span></div>
+      <div class="audit-item warn"><span class="audit-icon">🔄</span><span class="audit-text">Duplicate pixel events — same purchase counted 2–3x</span><span class="audit-badge">Warning</span></div>
+      <div class="audit-item warn"><span class="audit-icon">📊</span><span class="audit-text">Event Match Score below 5 — algorithm starved of data</span><span class="audit-badge">Warning</span></div>
+      <div class="audit-item fail"><span class="audit-icon">👥</span><span class="audit-text">No retargeting audiences configured — leaving money on table</span><span class="audit-badge">Critical</span></div>
+      <div class="audit-item warn"><span class="audit-icon">🎯</span><span class="audit-text">Lookalike audiences based on email list, not purchase events</span><span class="audit-badge">Warning</span></div>
+      <div class="audit-item pass"><span class="audit-icon">✅</span><span class="audit-text">ViewContent event firing correctly on product pages</span><span class="audit-badge">Pass</span></div>
+      <div class="audit-item fail"><span class="audit-icon">🏪</span><span class="audit-text">Pixel not connected to product catalog — DPA ads impossible</span><span class="audit-badge">Critical</span></div>
+      <div class="audit-item pass"><span class="audit-icon">✅</span><span class="audit-text">PageView event firing on all pages</span><span class="audit-badge">Pass</span></div>
+      <div class="audit-item warn"><span class="audit-icon">💰</span><span class="audit-text">No value parameter in Purchase event — ROAS uncalculable</span><span class="audit-badge">Warning</span></div>
+      <div class="audit-item fail"><span class="audit-icon">📵</span><span class="audit-text">No AddToCart event — cart abandonment retargeting impossible</span><span class="audit-badge">Critical</span></div>
+      <div class="audit-item pass"><span class="audit-icon">✅</span><span class="audit-text">Domain verified in Business Manager</span><span class="audit-badge">Pass</span></div>
+    </div>
+  </section>
+
+  <!-- ═══ PROCESS ═══ -->
+  <section class="sd-section-full" style="border-top:1px solid var(--bdr);background:rgba(245,158,11,0.01);">
+    <div class="sd-inner">
+      <div class="sd-sec-head reveal">
+        <div class="sd-sec-tag" style="color:var(--amber)">Setup Process</div>
+        <h2 class="sd-sec-title">Full Setup in<br><em style="color:var(--amber);font-family:var(--f-serif);font-style:italic;">3–5 Days</em></h2>
+      </div>
+      <div class="sd-process-wrap reveal">
+        <div class="sd-proc-step">
+          <div class="sd-proc-circle" style="border-color:var(--amber-bdr);color:var(--amber)">01</div>
+          <h4 class="sd-proc-title">Account Audit</h4>
+          <p class="sd-proc-body">Full diagnostic of your existing pixel, events, ad account and Business Manager setup. Issue list documented with priority ranking.</p>
+        </div>
+        <div class="sd-proc-step">
+          <div class="sd-proc-circle" style="border-color:var(--amber-bdr);color:var(--amber)">02</div>
+          <h4 class="sd-proc-title">Pixel Installation</h4>
+          <p class="sd-proc-body">Clean pixel setup via GTM or direct code. All standard events implemented with correct parameters including value and currency.</p>
+        </div>
+        <div class="sd-proc-step">
+          <div class="sd-proc-circle" style="border-color:var(--amber-bdr);color:var(--amber)">03</div>
+          <h4 class="sd-proc-title">CAPI Integration</h4>
+          <p class="sd-proc-body">Server-side Conversions API configured. Event deduplication with event_id implemented. Test events verified in Events Manager.</p>
+        </div>
+        <div class="sd-proc-step">
+          <div class="sd-proc-circle" style="border-color:var(--amber-bdr);color:var(--amber)">04</div>
+          <h4 class="sd-proc-title">Audiences Built</h4>
+          <p class="sd-proc-body">All custom retargeting audiences and lookalike audiences created and configured. Exclusions set up to prevent wasted spend.</p>
+        </div>
+        <div class="sd-proc-step">
+          <div class="sd-proc-circle" style="border-color:var(--amber-bdr);color:var(--amber)">05</div>
+          <h4 class="sd-proc-title">Report & Handover</h4>
+          <p class="sd-proc-body">Full audit report with before/after scores. Video walkthrough of what was done. 2-week monitoring support included.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAQ ═══ -->
+  <section class="sd-section">
+    <div class="sd-sec-head reveal">
+      <div class="sd-sec-tag" style="color:var(--amber)">FAQ</div>
+      <h2 class="sd-sec-title">Common <em style="color:var(--amber);font-family:var(--f-serif);font-style:italic;">Questions</em></h2>
+    </div>
+    <div class="sd-faq-list" style="max-width:800px;margin:0 auto;">
+      <div class="sd-faq-item reveal"><div class="sd-faq-q"><span class="sd-faq-q-text">Do I need technical access to my website?</span><div class="sd-faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="sd-faq-a"><div class="sd-faq-a-inner">Yes, we need access to your website (Google Tag Manager, WordPress admin or server access depending on the setup method), your Facebook Business Manager and your Ads account. We handle everything from there and do not need ongoing access after setup.</div></div></div>
+      <div class="sd-faq-item reveal"><div class="sd-faq-q"><span class="sd-faq-q-text">What's the difference between Pixel and CAPI?</span><div class="sd-faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="sd-faq-a"><div class="sd-faq-a-inner">The Facebook Pixel is a JavaScript snippet in the browser — it fires when a page loads but can be blocked by iOS, ad blockers and browser privacy settings. The Conversions API (CAPI) sends events directly from your server to Facebook — it cannot be blocked by anything on the customer's device. Together, they capture virtually 100% of conversion events.</div></div></div>
+      <div class="sd-faq-item reveal"><div class="sd-faq-q"><span class="sd-faq-q-text">Will this improve my ad performance immediately?</span><div class="sd-faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="sd-faq-a"><div class="sd-faq-a-inner">You'll see Event Match Quality scores improve within 24–48 hours of setup. ROAS improvement is gradual — as Facebook's algorithm relearns with the better data, campaign performance improves over 2–4 weeks. Most clients see meaningful ROAS gains within the first week.</div></div></div>
+      <div class="sd-faq-item reveal"><div class="sd-faq-q"><span class="sd-faq-q-text">My ad account got restricted — can you fix it?</span><div class="sd-faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="sd-faq-a"><div class="sd-faq-a-inner">We can audit your account and identify why it was restricted, and guide you through the appeal process. However, we cannot guarantee Facebook will reinstate accounts — that decision is Facebook's alone. For restricted accounts, we often recommend setting up a fresh Business Manager with a clean structure.</div></div></div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="sd-cta-strip">
+    <div class="cta-grid-bg"></div>
+    <div class="sd-cta-inner reveal">
+      <div class="sd-sec-tag" style="color:var(--amber)">Ready to Fix Your Tracking?</div>
+      <h2 class="sd-cta-title">Stop Losing<br><em style="color:var(--amber);font-family:var(--f-serif);font-style:italic;">Conversion Data</em></h2>
+      <p class="sd-cta-sub">Every day without CAPI is conversions Facebook can't see, and ad spend being wasted. Let's fix it this week.</p>
+      <div class="sd-cta-btns">
+        <a href="contact.html" class="btn-lime magnetic">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Get a Free Audit
+        </a>
+        <a href="services.html" class="btn-ghost-outline magnetic">← All Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="ft-col ft-brand"><div class="ft-logo"><span class="fl-b">[</span>ZYNTRA<span class="fl-lime">VERSE</span><span class="fl-b">]</span></div><p class="ft-tag">AI Automation Studio<br>Dhaka, Bangladesh</p><div class="ft-online"><span class="rb-dot"></span>Open for new projects</div></div>
+      <div class="ft-col"><div class="ft-col-h">Services</div><a href="service-ai.html">AI Automation</a><a href="service-web.html">Web Development</a><a href="service-landing.html">Landing Pages</a><a href="service-marketing.html">FB Marketing</a></div>
+      <div class="ft-col"><div class="ft-col-h">Company</div><a href="index.html">Home</a><a href="showcase.html">Showcase</a><a href="contact.html">Contact</a></div>
+      <div class="ft-col"><div class="ft-col-h">Contact</div><a href="https://wa.me/8801XXXXXXXXX" target="_blank">WhatsApp</a><a href="mailto:hello@zyntraverse.com">Email</a><div class="ft-time" id="bdTime">--:-- BDT</div></div>
+    </div>
+    <div class="footer-bot"><span>© 2026 ZYNTRA VERSE. All rights reserved.</span><span>Dhaka, Bangladesh</span></div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script src="service-detail.js"></script>
+  <script>
+  /* ── EMQ Arc Animation ── */
+  const emqWrap = document.getElementById('emqWrap');
+  const emqArc  = document.getElementById('emqArc');
+  if (emqWrap && emqArc) {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        emqArc.style.transition = 'stroke-dashoffset 2.2s cubic-bezier(0.16,1,0.3,1) .4s';
+        emqArc.classList.add('animated');
+        obs.unobserve(emqWrap);
+      });
+    }, { threshold: 0.5 });
+    obs.observe(emqWrap);
+  }
+
+  /* ── Audience layer bar animation ── */
+  const audObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      document.querySelectorAll('.aud-layer').forEach(l => l.classList.add('counted'));
+      audObs.unobserve(e.target);
+    });
+  }, { threshold: 0.3 });
+  const audLayers = document.getElementById('audLayers');
+  if (audLayers) audObs.observe(audLayers);
+
+  /* ── Audience layer click ── */
+  document.querySelectorAll('.aud-layer').forEach(layer => {
+    layer.addEventListener('click', () => {
+      document.querySelectorAll('.aud-layer').forEach(l => l.classList.remove('active'));
+      layer.classList.add('active');
+    });
+  });
+
+  /* ── Live Pixel Event Feed ── */
+  (function initPixelFeed() {
+    const feed = document.getElementById('pixelFeed');
+    if (!feed) return;
+
+    const events = [
+      { type:'purchase', icon:'💰', name:'Purchase', value:'৳1,200', src:'server', time:null },
+      { type:'view',     icon:'👁️', name:'ViewContent', value:'Product #A4', src:'browser', time:null },
+      { type:'addcart',  icon:'🛒', name:'AddToCart', value:'৳850', src:'browser', time:null },
+      { type:'purchase', icon:'💰', name:'Purchase', value:'৳2,400', src:'server', time:null },
+      { type:'view',     icon:'👁️', name:'PageView', value:'Landing Page', src:'browser', time:null },
+      { type:'addcart',  icon:'🛒', name:'InitiateCheckout', value:'৳1,650', src:'server', time:null },
+      { type:'purchase', icon:'💰', name:'Purchase', value:'৳980', src:'server', time:null },
+      { type:'view',     icon:'👁️', name:'ViewContent', value:'Product #B7', src:'browser', time:null },
+    ];
+
+    let idx = 0;
+
+    function addEvent() {
+      const ev = events[idx % events.length];
+      idx++;
+      const now = new Date();
+      const time = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0') + ':' + now.getSeconds().toString().padStart(2,'0');
+      const div = document.createElement('div');
+      div.className = `pf-event ${ev.type}`;
+      div.innerHTML = `
+        <span class="pf-event-icon">${ev.icon}</span>
+        <span class="pf-event-name">${ev.name}</span>
+        <span class="pf-event-value">${ev.value}</span>
+        <span class="pf-event-src ${ev.src}">${ev.src === 'server' ? 'SERVER' : 'BROWSER'}</span>
+        <span class="pf-event-time">${time}</span>
+      `;
+      feed.insertBefore(div, feed.firstChild);
+      if (feed.children.length > 10) feed.removeChild(feed.lastChild);
+
+      const rateEl = document.getElementById('evtRate');
+      if (rateEl) rateEl.textContent = (840 + Math.floor(Math.random()*20));
+    }
+
+    // Initial events
+    for (let i = 0; i < 6; i++) setTimeout(addEvent, i * 350);
+    // Live updates
+    setInterval(addEvent, 2800);
+  })();
+
+  /* ── Charts ── */
+  // Chart defaults
+  const chartDefaults = {
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: 'rgba(7,9,18,0.95)',
+        borderColor: 'rgba(184,255,46,0.25)',
+        borderWidth: 1,
+        titleFont: { family: "'JetBrains Mono'", size: 10 },
+        bodyFont:  { family: "'JetBrains Mono'", size: 12 },
+        titleColor: '#7b7f98',
+        bodyColor: '#b8ff2e',
+        padding: 12,
+        cornerRadius: 8,
+      }
+    },
+    scales: {
+      x: {
+        grid:  { color: 'rgba(255,255,255,0.04)', borderColor: 'transparent' },
+        ticks: { color: '#3a3d52', font: { family: "'JetBrains Mono'", size: 9 } },
+      },
+      y: {
+        grid:  { color: 'rgba(255,255,255,0.04)', borderColor: 'transparent' },
+        ticks: { color: '#3a3d52', font: { family: "'JetBrains Mono'", size: 9 } },
+        beginAtZero: true,
+      }
+    },
+    animation: { duration: 1600, easing: 'easeOutQuart' },
+    responsive: true,
+    maintainAspectRatio: true,
+  };
+
+  // ROAS Chart
+  const roasCanvas = document.getElementById('roasChart');
+  if (roasCanvas) {
+    new Chart(roasCanvas, {
+      type: 'bar',
+      data: {
+        labels: ['Client A','Client B','Client C','Client D','Client E'],
+        datasets: [
+          { label: 'Before CAPI', data: [2.1,1.8,3.2,2.6,1.9], backgroundColor:'rgba(255,59,107,0.45)', borderRadius:5, borderSkipped:false },
+          { label: 'After CAPI',  data: [3.4,2.9,4.8,3.9,2.7], backgroundColor:'rgba(245,158,11,0.7)', borderRadius:5, borderSkipped:false }
+        ]
+      },
+      options: { ...chartDefaults, plugins: { ...chartDefaults.plugins, legend: { display:true, labels:{ color:'#7b7f98', font:{ family:"'JetBrains Mono'", size:9 }, boxWidth:10, padding:16 } } } }
+    });
+  }
+
+  // Events Chart
+  const eventsCanvas = document.getElementById('eventsChart');
+  if (eventsCanvas) {
+    new Chart(eventsCanvas, {
+      type: 'line',
+      data: {
+        labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'],
+        datasets: [
+          {
+            label: 'Pixel Only',
+            data: [62,59,58,61,57,60,58,61],
+            borderColor: 'rgba(255,59,107,0.8)', borderWidth: 2, pointRadius: 3,
+            pointBackgroundColor: '#ff3b6b', tension: 0.35, fill: false
+          },
+          {
+            label: 'Pixel + CAPI',
+            data: [62,71,82,88,92,95,97,98],
+            borderColor: '#f59e0b', borderWidth: 2.5, pointRadius: 4,
+            pointBackgroundColor: '#f59e0b', tension: 0.35,
+            fill: true,
+            backgroundColor: function(ctx) {
+              if (!ctx.chart.chartArea) return 'rgba(245,158,11,0)';
+              const g = ctx.chart.ctx.createLinearGradient(0, ctx.chart.chartArea.bottom, 0, ctx.chart.chartArea.top);
+              g.addColorStop(0,'rgba(245,158,11,0)'); g.addColorStop(1,'rgba(245,158,11,0.3)');
+              return g;
+            }
+          }
+        ]
+      },
+      options: { ...chartDefaults, plugins: { ...chartDefaults.plugins, legend: { display:true, labels:{ color:'#7b7f98', font:{ family:"'JetBrains Mono'", size:9 }, boxWidth:10, padding:16 } } } }
+    });
+  }
+
+  // Attribution Chart
+  const attrCanvas = document.getElementById('attrChart');
+  if (attrCanvas) {
+    new Chart(attrCanvas, {
+      type: 'doughnut',
+      data: {
+        labels: ['Server-Side CAPI','Browser Pixel','FB In-App','Unattributed'],
+        datasets: [{
+          data: [48, 34, 12, 6],
+          backgroundColor: ['#f59e0b','#00e8ff','rgba(184,255,46,0.7)','rgba(255,255,255,0.12)'],
+          borderWidth: 0, hoverOffset: 6
+        }]
+      },
+      options: {
+        plugins: {
+          legend: { display:true, position:'bottom', labels:{ color:'#7b7f98', font:{ family:"'JetBrains Mono'", size:9 }, boxWidth:10, padding:14 }},
+          tooltip: chartDefaults.plugins.tooltip
+        },
+        cutout: '68%',
+        animation: { duration:1600, easing:'easeOutQuart' },
+        responsive: true
+      }
+    });
+  }
+  </script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services | ZYNTRA VERSE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="services.css">
+</head>
+<body>
+
+  <!-- CURSOR -->
+  <div id="cursor"></div>
+  <div id="cursor-follower"></div>
+
+  <!-- CANVAS BG -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- NAVBAR -->
+  <header id="navbar">
+    <div class="nav-wrap">
+      <a href="index.html" class="nav-logo">
+        <span class="nl-bracket">[</span><span class="nl-z">ZV</span><span class="nl-bracket">]</span>
+        <span class="nl-full">ZYNTRA VERSE</span>
+      </a>
+      <nav class="nav-center">
+        <a href="index.html"    class="n-link"        data-label="01">Home</a>
+        <a href="services.html" class="n-link active" data-label="02">Services</a>
+        <a href="showcase.html" class="n-link"        data-label="03">Showcase</a>
+        <a href="contact.html"  class="n-link"        data-label="04">Contact</a>
+      </nav>
+      <div class="nav-right">
+        <div class="nav-status">
+          <span class="ns-dot"></span>
+          <span class="ns-text">Open for Projects</span>
+        </div>
+        <a href="contact.html" class="nav-btn magnetic">
+          Start Project
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <button id="menuBtn" class="hbg" aria-label="Menu"><span></span><span></span></button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="mob-nav">
+      <a href="index.html"    class="mob-n-link"><span class="mn-num">01</span>Home</a>
+      <a href="services.html" class="mob-n-link"><span class="mn-num">02</span>Services</a>
+      <a href="showcase.html" class="mob-n-link"><span class="mn-num">03</span>Showcase</a>
+      <a href="contact.html"  class="mob-n-link"><span class="mn-num">04</span>Contact</a>
+      <a href="contact.html" class="mob-cta">Start a Project →</a>
+    </div>
+  </header>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-hero-tag reveal">// What We Build</div>
+      <h1 class="page-hero-title reveal">
+        Services Built<br>
+        For <span class="accent-text">Results</span>
+      </h1>
+      <p class="page-hero-desc reveal">
+        From AI-powered automation to high-converting web experiences — every service is engineered with one goal: growing your business.
+      </p>
+    </div>
+    <div class="page-hero-grid"></div>
+  </section>
+
+  <!-- SERVICES MAIN -->
+  <main class="services-main">
+
+    <!-- ───── CATEGORY 1: AI AUTOMATION ───── -->
+    <div class="srv-category reveal">
+      <div class="srv-cat-label">
+        <span class="cat-num">01</span>
+        <span class="cat-name">AI Automation</span>
+      </div>
+
+      <div class="srv-cards-row">
+
+        <!-- MERGED: AI Order Taking + AI Customer Support -->
+        <div class="srv-card featured tilt-card">
+          <div class="srv-card-top">
+            <div class="srv-icon-wrap cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <span class="srv-tag">Most Popular</span>
+          </div>
+          <h3 class="srv-title">AI Automation Systems</h3>
+          <p class="srv-desc">
+            End-to-end intelligent automation covering order collection, customer messaging and workflow management. Handles Facebook, WhatsApp and website chat — 24 hours a day, zero human effort required.
+          </p>
+          <ul class="srv-features">
+            <li><span class="feat-dot"></span>AI Order Taking — Facebook & Website</li>
+            <li><span class="feat-dot"></span>AI Customer Support Agents</li>
+            <li><span class="feat-dot"></span>WhatsApp & Messenger Integration</li>
+            <li><span class="feat-dot"></span>24/7 Automated Responses</li>
+            <li><span class="feat-dot"></span>Order Tracking & Notifications</li>
+          </ul>
+          <div class="srv-footer">
+            <a href="service-ai.html" class="srv-learn-btn magnetic">
+              <span>Learn More</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="contact.html" class="srv-cta-btn">Get Started →</a>
+          </div>
+          <div class="srv-glow cyan-glow"></div>
+        </div>
+
+        <!-- Database Management -->
+        <div class="srv-card tilt-card">
+          <div class="srv-card-top">
+            <div class="srv-icon-wrap violet">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            </div>
+          </div>
+          <h3 class="srv-title">Database & CRM Systems</h3>
+          <p class="srv-desc">
+            Secure, structured order and customer database systems built for growing e-commerce and service businesses. Track everything — orders, clients, history.
+          </p>
+          <ul class="srv-features">
+            <li><span class="feat-dot violet"></span>Custom Order Databases</li>
+            <li><span class="feat-dot violet"></span>Customer CRM Dashboards</li>
+            <li><span class="feat-dot violet"></span>Google Sheets Integration</li>
+            <li><span class="feat-dot violet"></span>Sales Report Automation</li>
+          </ul>
+          <div class="srv-footer">
+            <a href="service-database.html" class="srv-learn-btn violet magnetic">
+              <span>Learn More</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="contact.html" class="srv-cta-btn">Get Started →</a>
+          </div>
+          <div class="srv-glow violet-glow"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ───── CATEGORY 2: WEB DEVELOPMENT ───── -->
+    <div class="srv-category reveal">
+      <div class="srv-cat-label">
+        <span class="cat-num">02</span>
+        <span class="cat-name">Web Development</span>
+      </div>
+
+      <div class="srv-cards-row three-col">
+
+        <!-- Full Website -->
+        <div class="srv-card tilt-card">
+          <div class="srv-card-top">
+            <div class="srv-icon-wrap cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </div>
+          </div>
+          <h3 class="srv-title">Full Website Development</h3>
+          <p class="srv-desc">
+            Modern, responsive, blazing-fast websites engineered for performance and conversions. E-commerce stores, business sites and web apps.
+          </p>
+          <ul class="srv-features">
+            <li><span class="feat-dot"></span>E-commerce Websites</li>
+            <li><span class="feat-dot"></span>Business / Portfolio Sites</li>
+            <li><span class="feat-dot"></span>Mobile-First Responsive</li>
+            <li><span class="feat-dot"></span>SEO Optimized Structure</li>
+            <li><span class="feat-dot"></span>Speed & Performance Tuned</li>
+          </ul>
+          <div class="srv-footer">
+            <a href="service-web.html" class="srv-learn-btn magnetic">
+              <span>Learn More</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="contact.html" class="srv-cta-btn">Get Started →</a>
+          </div>
+          <div class="srv-glow cyan-glow"></div>
+        </div>
+
+        <!-- Landing Pages -->
+        <div class="srv-card tilt-card">
+          <div class="srv-card-top">
+            <div class="srv-icon-wrap purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+          </div>
+          <h3 class="srv-title">Landing Page Design</h3>
+          <p class="srv-desc">
+            Conversion-optimized landing pages for marketing campaigns, ad traffic and product launches. Built to turn visitors into buyers.
+          </p>
+          <ul class="srv-features">
+            <li><span class="feat-dot purple"></span>Product Sales Pages</li>
+            <li><span class="feat-dot purple"></span>Course & Offer Pages</li>
+            <li><span class="feat-dot purple"></span>Ad Campaign Landing Pages</li>
+            <li><span class="feat-dot purple"></span>A/B Test Ready Structure</li>
+            <li><span class="feat-dot purple"></span>High CTR Copywriting Layout</li>
+          </ul>
+          <div class="srv-footer">
+            <a href="service-landing.html" class="srv-learn-btn purple magnetic">
+              <span>Learn More</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="contact.html" class="srv-cta-btn">Get Started →</a>
+          </div>
+          <div class="srv-glow purple-glow"></div>
+        </div>
+
+        <!-- Facebook Marketing -->
+        <div class="srv-card tilt-card">
+          <div class="srv-card-top">
+            <div class="srv-icon-wrap violet">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+          </div>
+          <h3 class="srv-title">Facebook Sales Marketing</h3>
+          <p class="srv-desc">
+            Pixel setup, server-side tracking and conversion event optimization to maximize your ad spend ROI and reach the right audience consistently.
+          </p>
+          <ul class="srv-features">
+            <li><span class="feat-dot violet"></span>Facebook Pixel Setup</li>
+            <li><span class="feat-dot violet"></span>Server-Side Event Tracking</li>
+            <li><span class="feat-dot violet"></span>Conversion API Integration</li>
+            <li><span class="feat-dot violet"></span>Ad Account Audit & Fixing</li>
+            <li><span class="feat-dot violet"></span>Retargeting Audience Setup</li>
+          </ul>
+          <div class="srv-footer">
+            <a href="service-marketing.html" class="srv-learn-btn violet magnetic">
+              <span>Learn More</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="contact.html" class="srv-cta-btn">Get Started →</a>
+          </div>
+          <div class="srv-glow violet-glow"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- WHY US STRIP -->
+  <section class="why-us reveal">
+    <div class="why-inner">
+      <div class="why-tag">// Why ZYNTRA VERSE</div>
+      <div class="why-grid">
+        <div class="why-item">
+          <div class="why-icon">⚡</div>
+          <div class="why-text">Fast Delivery</div>
+          <p>Most projects ship within 3–7 days depending on scope.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🤖</div>
+          <div class="why-text">AI-First Approach</div>
+          <p>Every solution is enhanced with intelligent automation where possible.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">📊</div>
+          <div class="why-text">Data-Driven</div>
+          <p>Decisions backed by tracking, analytics and conversion data.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🔒</div>
+          <div class="why-text">Secure & Reliable</div>
+          <p>Systems built with security and uptime as first-class priorities.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section reveal">
+    <div class="cta-grid-bg"></div>
+    <div class="cta-inner">
+      <div class="cta-tag">// Ready to start?</div>
+      <h2 class="cta-title">Tell Us About<br><span class="accent-text">Your Project</span></h2>
+      <p class="cta-sub">We respond within 24 hours. Let's build something remarkable together.</p>
+      <a href="contact.html" class="btn-glow large magnetic">
+        <span>Start a Conversation →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <span class="logo-bracket">[</span>ZYNTRA<span class="logo-accent">VERSE</span><span class="logo-bracket">]</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="showcase.html">Showcase</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-copy">© 2026 ZYNTRA VERSE — Dhaka, Bangladesh.</div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script src="zyntra-ai-widget.js"></script>
+</body>
+</html>

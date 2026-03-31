@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You | ZYNTRA VERSE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .ty-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ty-card {
+      max-width: 560px;
+      width: 100%;
+      text-align: center;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid var(--bdr);
+      border-radius: 28px;
+      padding: 64px 48px;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.5), 0 0 60px rgba(0,232,255,0.06);
+      animation: tyCardIn 0.9s cubic-bezier(0.16,1,0.3,1) both;
+    }
+
+    @keyframes tyCardIn {
+      from { opacity: 0; transform: translateY(48px) scale(0.96); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .ty-check {
+      width: 90px; height: 90px;
+      margin: 0 auto 32px;
+      background: linear-gradient(135deg, var(--cyan-dim), var(--violet-dim));
+      border: 1px solid var(--bdr-cyan);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: checkPop 0.6s cubic-bezier(0.16,1,0.3,1) 0.4s both;
+    }
+
+    @keyframes checkPop {
+      from { transform: scale(0); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    .ty-check svg {
+      width: 38px; height: 38px;
+      color: var(--cyan);
+      stroke-dasharray: 60;
+      stroke-dashoffset: 60;
+      animation: checkDraw 0.7s ease 0.7s forwards;
+    }
+
+    @keyframes checkDraw { to { stroke-dashoffset: 0; } }
+
+    .ty-tag {
+      font-family: var(--f-mono);
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 18px;
+      opacity: 0;
+      animation: fadeUp 0.6s var(--ease) 0.9s forwards;
+    }
+
+    .ty-title {
+      font-family: var(--f-display);
+      font-size: clamp(30px, 6vw, 48px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 18px;
+      opacity: 0;
+      animation: fadeUp 0.6s var(--ease) 1.05s forwards;
+    }
+
+    .ty-desc {
+      font-size: 16px;
+      color: var(--dim);
+      line-height: 1.75;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.6s var(--ease) 1.2s forwards;
+    }
+
+    .ty-name-display {
+      display: inline-block;
+      font-family: var(--f-display);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--lime);
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.6s var(--ease) 1.35s forwards;
+    }
+
+    .ty-next-step {
+      font-family: var(--f-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--cyan);
+      background: var(--cyan-dim);
+      border: 1px solid var(--bdr-cyan);
+      padding: 10px 22px;
+      border-radius: 99px;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.6s var(--ease) 1.3s forwards;
+    }
+
+    .ty-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 44px;
+      text-align: left;
+      opacity: 0;
+      animation: fadeUp 0.6s var(--ease) 1.45s forwards;
+    }
+
+    .ty-step {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--bdr);
+      border-radius: 12px;
+    }
+
+    .ty-step-num {
+      font-family: var(--f-mono);
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: var(--cyan);
+      background: var(--cyan-dim);
+      border: 1px solid var(--bdr-cyan);
+      border-radius: 6px;
+      padding: 4px 9px;
+      flex-shrink: 0;
+    }
+
+    .ty-step-text {
+      font-size: 14px;
+      color: var(--dim);
+    }
+
+    .ty-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s var(--ease) 1.6s forwards;
+    }
+
+    .ty-countdown {
+      font-family: var(--f-mono);
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+      margin-top: 24px;
+      opacity: 0;
+      animation: fadeUp 0.6s var(--ease) 1.8s forwards;
+    }
+
+    .ty-countdown span {
+      color: var(--cyan);
+      font-weight: 500;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* Confetti */
+    .confetti-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      overflow: hidden;
+    }
+
+    .confetti-dot {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      top: -10px;
+      animation: confettiFall var(--dur) ease-in var(--delay) both;
+    }
+
+    @keyframes confettiFall {
+      0%   { top: -10px; opacity: 1; transform: translateX(0) rotate(0); }
+      100% { top: 110vh; opacity: 0; transform: translateX(var(--dx)) rotate(720deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- Confetti -->
+  <div class="confetti-container" id="confetti"></div>
+
+  <!-- Navbar minimal -->
+  <header id="navbar">
+    <div class="nav-wrap">
+      <a href="index.html" class="nav-logo">
+        <span class="nl-bracket">[</span><span class="nl-z">ZV</span><span class="nl-bracket">]</span>
+        <span class="nl-full">ZYNTRA VERSE</span>
+      </a>
+      <nav class="nav-center">
+        <a href="index.html"    class="n-link" data-label="01">Home</a>
+        <a href="services.html" class="n-link" data-label="02">Services</a>
+        <a href="showcase.html" class="n-link" data-label="03">Showcase</a>
+        <a href="contact.html"  class="n-link" data-label="04">Contact</a>
+      </nav>
+      <div class="nav-right">
+        <div class="nav-status">
+          <span class="ns-dot"></span>
+          <span class="ns-text">Open for Projects</span>
+        </div>
+        <a href="contact.html" class="nav-btn magnetic">
+          Start Project
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <button id="menuBtn" class="hbg" aria-label="Menu"><span></span><span></span></button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="mob-nav">
+      <a href="index.html"    class="mob-n-link"><span class="mn-num">01</span>Home</a>
+      <a href="services.html" class="mob-n-link"><span class="mn-num">02</span>Services</a>
+      <a href="showcase.html" class="mob-n-link"><span class="mn-num">03</span>Showcase</a>
+      <a href="contact.html"  class="mob-n-link"><span class="mn-num">04</span>Contact</a>
+      <a href="contact.html" class="mob-cta">Start a Project →</a>
+    </div>
+  </header>
+
+  <!-- THANK YOU -->
+  <section class="ty-section">
+    <div class="ty-card">
+      <div class="ty-check">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+
+      <div class="ty-tag">// Message Received</div>
+      <h1 class="ty-title">Thank You<br><span class="accent-text">We'll Be In Touch</span></h1>
+      <p class="ty-desc">Your message has been sent to our team and your details have been saved securely. We'll review your project and get back to you shortly.</p>
+
+      <div class="ty-name-display" id="tyName">Loading…</div>
+
+      <div class="ty-steps">
+        <div class="ty-step">
+          <span class="ty-step-num">01</span>
+          <span class="ty-step-text">✅ Your message has been received and saved to our system</span>
+        </div>
+        <div class="ty-step">
+          <span class="ty-step-num">02</span>
+          <span class="ty-step-text">📋 Our team will review your project details within 2–6 hours</span>
+        </div>
+        <div class="ty-step">
+          <span class="ty-step-num">03</span>
+          <span class="ty-step-text">📞 We'll contact you via WhatsApp or email with next steps</span>
+        </div>
+      </div>
+
+      <div class="ty-actions">
+        <a href="index.html" class="btn-glow magnetic">
+          <span>Back to Home →</span>
+        </a>
+        <a href="showcase.html" class="btn-ghost">
+          <span>View Our Work</span>
+        </a>
+      </div>
+
+      <div class="ty-countdown">
+        Redirecting to home in <span id="countdown">10</span> seconds
+      </div>
+    </div>
+  </section>
+
+  <script src="app.js"></script>
+  <script>
+    // ── Show name from URL params ──
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get('name') || 'Valued Client';
+    document.getElementById('tyName').textContent = `Hey ${name} 👋`;
+
+    // ── Countdown + redirect ──
+    let count = 10;
+    const el = document.getElementById('countdown');
+    const timer = setInterval(() => {
+      count--;
+      if (el) el.textContent = count;
+      if (count <= 0) {
+        clearInterval(timer);
+        window.location.href = 'index.html';
+      }
+    }, 1000);
+
+    // ── Confetti ──
+    (function spawnConfetti() {
+      const container = document.getElementById('confetti');
+      const colors = ['#22d3ee','#818cf8','#a855f7','#22c55e','#f59e0b','#ec4899'];
+      for (let i = 0; i < 80; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'confetti-dot';
+        dot.style.setProperty('--dur', (1.8 + Math.random() * 1.8) + 's');
+        dot.style.setProperty('--delay', (Math.random() * 1.2) + 's');
+        dot.style.setProperty('--dx', (Math.random() * 300 - 150) + 'px');
+        dot.style.left = Math.random() * 100 + 'vw';
+        dot.style.background = colors[Math.floor(Math.random() * colors.length)];
+        dot.style.width  = (6 + Math.random() * 7) + 'px';
+        dot.style.height = (6 + Math.random() * 7) + 'px';
+        container.appendChild(dot);
+      }
+      setTimeout(() => container.remove(), 5000);
+    })();
+  </script>
+  <script src="zyntra-ai-widget.js"></script>
+</body>
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page Design | ZYNTRA VERSE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800&family=Cormorant:ital,wght@1,400;1,500&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="service-detail.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    :root { --rose: #ff3b6b; }
+
+    /* Funnel */
+    .funnel-wrap { display:flex;flex-direction:column;align-items:center;gap:4px; }
+    .funnel-step {
+      position:relative;display:flex;align-items:center;justify-content:space-between;
+      padding:14px 24px;border-radius:8px;
+      border:1px solid var(--bdr);
+      transition:border-color .35s,transform .3s var(--ease);
+    }
+    .funnel-step:hover{border-color:var(--bdr-lime);transform:scaleX(1.01);}
+    .fs-left { display:flex;align-items:center;gap:12px; }
+    .fs-icon { font-size:18px; }
+    .fs-label { font-family:var(--f-display);font-size:15px;font-weight:700; }
+    .fs-sub   { font-family:var(--f-mono);font-size:9px;letter-spacing:1px;color:var(--dim); }
+    .fs-val   { font-family:var(--f-display);font-size:22px;font-weight:900; }
+    .fs-drop  { font-family:var(--f-mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--rose); }
+    .fs1{width:100%;background:rgba(184,255,46,0.06);}
+    .fs2{width:88%;}
+    .fs3{width:74%;}
+    .fs4{width:58%;}
+    .fs5{width:42%;background:rgba(184,255,46,0.08);border-color:rgba(184,255,46,0.2);}
+    .funnel-arrow{display:flex;justify-content:center;align-items:center;color:var(--muted);padding:2px 0;}
+
+    /* A/B Comparison */
+    .ab-wrap { display:grid;grid-template-columns:1fr 1fr;gap:20px;position:relative; }
+    .ab-wrap::before { content:'VS';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;font-family:var(--f-display);font-size:28px;font-weight:900;color:var(--muted);background:var(--bg3);padding:8px 14px;border-radius:8px;border:1px solid var(--bdr2); }
+    .ab-panel { border-radius:16px;overflow:hidden;border:1px solid var(--bdr); }
+    .ab-panel.winner { border-color:var(--bdr-lime);box-shadow:0 0 30px rgba(184,255,46,0.08); }
+    .abp-header { padding:12px 18px;display:flex;align-items:center;justify-content:space-between; }
+    .ab-panel.winner .abp-header { background:rgba(184,255,46,0.05); }
+    .abp-label { font-family:var(--f-mono);font-size:9px;letter-spacing:2px;text-transform:uppercase; }
+    .ab-panel:not(.winner) .abp-label { color:var(--muted); }
+    .ab-panel.winner .abp-label { color:var(--lime); }
+    .abp-badge { font-family:var(--f-mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:4px; }
+    .ab-panel.winner .abp-badge { color:var(--lime);background:var(--lime-dim);border:1px solid var(--bdr-lime); }
+    .ab-panel:not(.winner) .abp-badge { color:var(--rose);background:rgba(255,59,107,0.07);border:1px solid rgba(255,59,107,0.15); }
+    .abp-body { padding:16px 18px;display:flex;flex-direction:column;gap:10px; }
+    .ab-el { display:flex;align-items:center;gap:10px;font-size:13px;color:var(--dim);padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid var(--bdr); }
+    .ab-el.good { border-color:rgba(184,255,46,0.15);background:rgba(184,255,46,0.03); }
+    .ab-el.bad  { border-color:rgba(255,59,107,0.12);background:rgba(255,59,107,0.03); }
+    .ab-el-icon { font-size:15px;flex-shrink:0; }
+    .abp-result { padding:12px 18px;text-align:center;border-top:1px solid var(--bdr);font-family:var(--f-display); }
+    .ab-panel.winner .abp-result { color:var(--lime); }
+    .ab-panel:not(.winner) .abp-result { color:var(--rose); }
+
+    /* Elements checklist */
+    .elements-grid { display:grid;grid-template-columns:1fr 1fr;gap:12px; }
+    .el-item {
+      display:flex;align-items:flex-start;gap:14px;padding:16px 20px;
+      background:rgba(255,255,255,0.022);border:1px solid var(--bdr);border-radius:12px;
+      cursor:pointer;transition:border-color .35s,background .35s;user-select:none;
+    }
+    .el-item.checked { border-color:var(--bdr-lime);background:rgba(184,255,46,0.04); }
+    .el-check {
+      width:22px;height:22px;border-radius:6px;border:1.5px solid var(--bdr2);flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;transition:all .3s;
+      margin-top:2px;
+    }
+    .el-item.checked .el-check { background:var(--lime);border-color:var(--lime); }
+    .el-check svg { color:#000;opacity:0;transform:scale(.6);transition:all .3s; }
+    .el-item.checked .el-check svg { opacity:1;transform:scale(1); }
+    .el-title { font-family:var(--f-display);font-size:15px;font-weight:700;margin-bottom:4px; }
+    .el-sub   { font-size:12px;color:var(--dim);line-height:1.6; }
+    .el-impact { font-family:var(--f-mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--lime);margin-top:6px; }
+
+    /* Conversion meter */
+    .conv-meter { text-align:center;position:relative; }
+    .conv-meter-arc { width:200px;height:110px;margin:0 auto 16px;position:relative; }
+    .conv-arc-bg   { stroke:rgba(255,255,255,0.06); }
+    .conv-arc-fill { stroke:var(--lime);stroke-linecap:round;stroke-dasharray:283;stroke-dashoffset:283;transition:stroke-dashoffset 2s cubic-bezier(0.16,1,0.3,1) .5s; }
+    .conv-arc-fill.animated { stroke-dashoffset: 85; }
+    .conv-val { position:absolute;bottom:4px;left:50%;transform:translateX(-50%);font-family:var(--f-display);font-size:36px;font-weight:900;color:var(--lime); }
+    .conv-val span { font-size:18px; }
+
+    /* Page anatomy */
+    .anatomy-wrap { display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start; }
+    .anatomy-phone {
+      background:rgba(7,9,18,0.98);border:1px solid var(--bdr2);border-radius:28px;
+      padding:16px;box-shadow:0 24px 60px rgba(0,0,0,.6),0 0 30px rgba(184,255,46,0.05);
+      position:sticky;top:100px;
+    }
+    .ap-notch { width:60px;height:5px;background:var(--bdr2);border-radius:99px;margin:0 auto 12px; }
+    .ap-section {
+      border-radius:8px;margin-bottom:6px;padding:10px 10px;
+      border:1px solid transparent;cursor:pointer;
+      transition:border-color .3s,background .3s;
+    }
+    .ap-section.active,.ap-section:hover { border-color:var(--bdr-lime);background:rgba(184,255,46,0.05); }
+    .ap-name { font-family:var(--f-mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:6px; }
+    .ap-bar  { height:6px;border-radius:4px;background:rgba(255,255,255,0.07); }
+    .ap-bar.lime{background:rgba(184,255,46,0.3);}
+    .ap-bars { display:flex;flex-direction:column;gap:4px; }
+    .anatomy-list { display:flex;flex-direction:column;gap:14px; }
+    .anat-item {
+      padding:20px 24px;background:rgba(255,255,255,0.022);border:1px solid var(--bdr);border-radius:14px;
+      cursor:pointer;transition:border-color .35s,transform .3s var(--ease);
+    }
+    .anat-item:hover,.anat-item.active{border-color:var(--bdr-lime);transform:translateX(6px);}
+    .anat-head{display:flex;align-items:center;gap:14px;margin-bottom:6px;}
+    .anat-num{font-family:var(--f-mono);font-size:10px;letter-spacing:2px;color:var(--lime);background:var(--lime-dim);border:1px solid var(--bdr-lime);padding:3px 9px;border-radius:4px;}
+    .anat-title{font-family:var(--f-display);font-size:16px;font-weight:800;}
+    .anat-body{font-size:13.5px;color:var(--dim);line-height:1.7;}
+    .anat-impact{font-family:var(--f-mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--lime);margin-top:8px;}
+
+    @media(max-width:1024px){.anatomy-wrap{grid-template-columns:1fr;}.anatomy-phone{position:static;max-width:260px;margin:0 auto;}.ab-wrap::before{display:none;}.ab-wrap{grid-template-columns:1fr;}.elements-grid{grid-template-columns:1fr;}}
+    @media(max-width:768px){.funnel-step{padding:10px 14px;}.fs1,.fs2,.fs3,.fs4,.fs5{width:100%;}}
+  </style>
+</head>
+<body>
+  <div id="cur"></div><div id="cur-ring"></div>
+  <canvas id="bgCanvas"></canvas>
+
+  <header id="navbar">
+    <div class="nav-wrap">
+      <a href="index.html" class="nav-logo"><span class="nl-bracket">[</span><span class="nl-z">ZV</span><span class="nl-bracket">]</span><span class="nl-full">ZYNTRA VERSE</span></a>
+      <nav class="nav-center">
+        <a href="index.html" class="n-link">Home</a>
+        <a href="services.html" class="n-link active">Services</a>
+        <a href="showcase.html" class="n-link">Showcase</a>
+        <a href="contact.html" class="n-link">Contact</a>
+      </nav>
+      <div class="nav-right">
+        <div class="nav-status"><span class="ns-dot"></span><span class="ns-text">Open for Projects</span></div>
+        <a href="contact.html" class="nav-btn magnetic">Start Project <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <button id="menuBtn" class="hbg"><span></span><span></span></button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="mob-nav">
+      <a href="index.html" class="mob-n-link"><span class="mn-num">01</span>Home</a>
+      <a href="services.html" class="mob-n-link"><span class="mn-num">02</span>Services</a>
+      <a href="showcase.html" class="mob-n-link"><span class="mn-num">03</span>Showcase</a>
+      <a href="contact.html" class="mob-n-link"><span class="mn-num">04</span>Contact</a>
+      <a href="contact.html" class="mob-cta">Start a Project →</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="sd-hero">
+    <div class="sd-hero-grid"></div>
+    <div class="sd-hero-inner">
+      <div>
+        <div class="sd-breadcrumb"><a href="services.html">Services</a><span class="sd-breadcrumb-sep">→</span><span>Landing Pages</span></div>
+        <div class="sd-hero-tag" style="background:rgba(255,59,107,0.08);border-color:rgba(255,59,107,0.2);color:var(--rose)"><span class="sd-hero-tag-dot" style="background:var(--rose);box-shadow:0 0 8px var(--rose)"></span>Service 03 of 05</div>
+        <h1 class="sd-hero-title">Landing Page<br><em style="color:var(--rose);font-family:var(--f-serif);font-style:italic;">Design</em></h1>
+        <p class="sd-hero-desc">Conversion-optimised landing pages for marketing campaigns, ad traffic and product launches. Built with psychological persuasion principles to turn every click into a customer.</p>
+        <div class="sd-hero-actions">
+          <a href="contact.html" class="btn-lime magnetic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Get Started</a>
+          <a href="services.html" class="btn-ghost-outline magnetic">← All Services</a>
+        </div>
+        <div class="sd-hero-stats">
+          <div class="sd-hs-item"><div class="sd-hs-val" style="color:var(--rose)"><span class="counter" data-target="42">0</span>%</div><div class="sd-hs-lbl">Avg. Conv. Lift</div></div>
+          <div class="sd-hs-item"><div class="sd-hs-val" style="color:var(--rose)"><span class="counter" data-target="3" data-suffix="d">0</span></div><div class="sd-hs-lbl">Delivery Time</div></div>
+          <div class="sd-hs-item"><div class="sd-hs-val" style="color:var(--rose)"><span class="counter" data-target="50">0</span>+</div><div class="sd-hs-lbl">Pages Delivered</div></div>
+        </div>
+      </div>
+
+      <!-- Conversion Funnel Infographic -->
+      <div class="reveal" data-delay="200">
+        <div style="margin-bottom:16px;">
+          <div class="sd-sec-tag" style="justify-content:flex-start;margin-bottom:12px;color:var(--rose)">Conversion Funnel</div>
+          <p style="font-family:var(--f-mono);font-size:10px;letter-spacing:.5px;color:var(--muted)">// Typical landing page we build</p>
+        </div>
+        <div class="funnel-wrap">
+          <div class="funnel-step fs1">
+            <div class="fs-left"><span class="fs-icon">👁️</span><div><div class="fs-label">Ad Impression</div><div class="fs-sub">Facebook / Google Traffic</div></div></div>
+            <div><div class="fs-val" style="color:var(--lime)">10,000</div><div class="fs-drop"></div></div>
+          </div>
+          <div class="funnel-arrow"><svg width="12" height="16" viewBox="0 0 12 16"><polygon points="6,16 0,4 12,4" fill="rgba(184,255,46,0.3)"/></svg></div>
+          <div class="funnel-step fs2">
+            <div class="fs-left"><span class="fs-icon">🖱️</span><div><div class="fs-label">Page Visits</div><div class="fs-sub">Clicked the ad</div></div></div>
+            <div><div class="fs-val" style="color:var(--lime)">2,800</div><div class="fs-drop">28% CTR</div></div>
+          </div>
+          <div class="funnel-arrow"><svg width="12" height="16" viewBox="0 0 12 16"><polygon points="6,16 0,4 12,4" fill="rgba(184,255,46,0.25)"/></svg></div>
+          <div class="funnel-step fs3">
+            <div class="fs-left"><span class="fs-icon">📖</span><div><div class="fs-label">Engaged Readers</div><div class="fs-sub">Scrolled 50%+ of page</div></div></div>
+            <div><div class="fs-val" style="color:var(--lime)">1,680</div><div class="fs-drop">60% engaged</div></div>
+          </div>
+          <div class="funnel-arrow"><svg width="12" height="16" viewBox="0 0 12 16"><polygon points="6,16 0,4 12,4" fill="rgba(184,255,46,0.2)"/></svg></div>
+          <div class="funnel-step fs4">
+            <div class="fs-left"><span class="fs-icon">🛒</span><div><div class="fs-label">Add to Cart / Intent</div><div class="fs-sub">Showed purchase intent</div></div></div>
+            <div><div class="fs-val" style="color:var(--lime)">756</div><div class="fs-drop">45% intent</div></div>
+          </div>
+          <div class="funnel-arrow"><svg width="12" height="16" viewBox="0 0 12 16"><polygon points="6,16 0,4 12,4" fill="rgba(184,255,46,0.15)"/></svg></div>
+          <div class="funnel-step fs5">
+            <div class="fs-left"><span class="fs-icon">✅</span><div><div class="fs-label">Conversions</div><div class="fs-sub">Ordered / Lead submitted</div></div></div>
+            <div><div class="fs-val" style="color:var(--lime)">302</div><div style="font-family:var(--f-mono);font-size:10px;letter-spacing:1px;color:var(--lime);font-weight:600">10.8% CVR</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE ANATOMY — INTERACTIVE -->
+  <section class="sd-section-full" style="border-top:1px solid var(--bdr);">
+    <div class="sd-inner">
+      <div class="sd-sec-head reveal">
+        <div class="sd-sec-tag" style="color:var(--rose)">Page Anatomy</div>
+        <h2 class="sd-sec-title">What Goes Into a<br><em style="color:var(--rose);font-family:var(--f-serif);font-style:italic;">High-Converting Page</em></h2>
+        <p class="sd-sec-sub">Click each section to learn why it matters and how we engineer it.</p>
+      </div>
+      <div class="anatomy-wrap reveal">
+        <div class="anatomy-phone">
+          <div class="ap-notch"></div>
+          <div class="ap-section active" data-section="0">
+            <div class="ap-name">Hero Section</div>
+            <div class="ap-bar lime" style="width:80%"></div>
+            <div class="ap-bars"><div class="ap-bar" style="width:60%"></div><div class="ap-bar" style="width:75%"></div></div>
+          </div>
+          <div class="ap-section" data-section="1">
+            <div class="ap-name">Social Proof</div>
+            <div class="ap-bars"><div class="ap-bar" style="width:40%"></div><div class="ap-bar" style="width:40%"></div><div class="ap-bar" style="width:40%"></div></div>
+          </div>
+          <div class="ap-section" data-section="2">
+            <div class="ap-name">Product/Offer</div>
+            <div class="ap-bar" style="width:100%;height:36px;border-radius:4px;background:rgba(255,255,255,0.06);"></div>
+          </div>
+          <div class="ap-section" data-section="3">
+            <div class="ap-name">Benefits</div>
+            <div class="ap-bars"><div class="ap-bar" style="width:90%"></div><div class="ap-bar" style="width:90%"></div><div class="ap-bar" style="width:90%"></div></div>
+          </div>
+          <div class="ap-section" data-section="4">
+            <div class="ap-name">Urgency/Scarcity</div>
+            <div class="ap-bar" style="width:70%;background:rgba(255,59,107,0.3);"></div>
+          </div>
+          <div class="ap-section" data-section="5">
+            <div class="ap-name">CTA / Order Form</div>
+            <div class="ap-bar lime" style="width:100%;height:22px;border-radius:4px;"></div>
+          </div>
+        </div>
+        <div class="anatomy-list" id="anatomyList">
+          <div class="anat-item active" data-section="0">
+            <div class="anat-head"><span class="anat-num">01</span><span class="anat-title">Hero Section</span></div>
+            <div class="anat-body">The most critical 3 seconds — a powerful headline that speaks directly to the customer's pain, a supporting subheadline and one crystal-clear CTA. We A/B test headline variants before finalising.</div>
+            <div class="anat-impact">+28% impact on bounce rate</div>
+          </div>
+          <div class="anat-item" data-section="1">
+            <div class="anat-head"><span class="anat-num">02</span><span class="anat-title">Social Proof</span></div>
+            <div class="anat-body">Real customer reviews, order counts and trust badges placed strategically above the fold. Social proof removes the biggest barrier to purchase — uncertainty.</div>
+            <div class="anat-impact">+35% trust signals increase CVR</div>
+          </div>
+          <div class="anat-item" data-section="2">
+            <div class="anat-head"><span class="anat-num">03</span><span class="anat-title">Product / Offer Block</span></div>
+            <div class="anat-body">High-quality product presentation with benefit-first copywriting. We highlight what the customer gains, not just what the product is. Images, pricing and value proposition in one tight block.</div>
+            <div class="anat-impact">Clarity = 40% higher intent</div>
+          </div>
+          <div class="anat-item" data-section="3">
+            <div class="anat-head"><span class="anat-num">04</span><span class="anat-title">Benefit Bullets</span></div>
+            <div class="anat-body">3–6 benefit points written in "you" language. Not features — benefits. We use the FAB (Feature → Advantage → Benefit) framework to make every bullet count.</div>
+            <div class="anat-impact">Scannable content reduces exits</div>
+          </div>
+          <div class="anat-item" data-section="4">
+            <div class="anat-head"><span class="anat-num">05</span><span class="anat-title">Urgency & Scarcity</span></div>
+            <div class="anat-body">Ethical urgency — limited stock counters, countdown timers or limited-time pricing. When used correctly this is one of the highest-impact conversion elements on a landing page.</div>
+            <div class="anat-impact">+22% increase in same-day orders</div>
+          </div>
+          <div class="anat-item" data-section="5">
+            <div class="anat-head"><span class="anat-num">06</span><span class="anat-title">CTA / Order Form</span></div>
+            <div class="anat-body">The form is simple — minimum fields, maximum clarity. One action, zero distractions. Button copy is action-oriented ("Order Now" not "Submit"). Form is connected to your WhatsApp or database automatically.</div>
+            <div class="anat-impact">Simple forms convert 3x better</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS + CHARTS -->
+  <section class="sd-section">
+    <div class="sd-sec-head reveal">
+      <div class="sd-sec-tag" style="color:var(--rose)">Real Results</div>
+      <h2 class="sd-sec-title">Pages That <em style="color:var(--rose);font-family:var(--f-serif);font-style:italic;">Perform</em></h2>
+    </div>
+
+    <div class="sd-results-grid reveal" style="margin-bottom:48px;">
+      <div class="sd-result-card tilt-card"><div class="sd-result-val" style="color:var(--rose)"><span class="counter" data-target="42">0</span>%</div><div class="sd-result-lbl">Avg. CVR Lift</div><div class="sd-result-sub">vs. client's previous page</div><div class="sd-result-bg-num">1</div></div>
+      <div class="sd-result-card tilt-card"><div class="sd-result-val"><span class="counter" data-target="10" data-suffix=".8%">0</span></div><div class="sd-result-lbl">Best CVR Achieved</div><div class="sd-result-sub">Industry average is 2.5%</div><div class="sd-result-bg-num">2</div></div>
+      <div class="sd-result-card tilt-card"><div class="sd-result-val" style="color:var(--rose)"><span class="counter" data-target="3">0</span>d</div><div class="sd-result-lbl">Delivery Time</div><div class="sd-result-sub">From brief to live</div><div class="sd-result-bg-num">3</div></div>
+      <div class="sd-result-card tilt-card"><div class="sd-result-val"><span class="counter" data-target="50">0</span>+</div><div class="sd-result-lbl">Pages Shipped</div><div class="sd-result-sub">Across multiple industries</div><div class="sd-result-bg-num">4</div></div>
+    </div>
+
+    <div class="sd-infograph-grid">
+      <div class="sd-chart-panel">
+        <div class="sd-chart-title">CVR Before vs After</div>
+        <div class="sd-chart-sub">// Conversion rate comparison across clients (%)</div>
+        <canvas id="cvrChart" height="190"></canvas>
+      </div>
+      <div class="sd-chart-panel">
+        <div class="sd-chart-title" style="margin-bottom:6px;">Avg. Conversion Rate</div>
+        <div class="sd-chart-sub" style="margin-bottom:20px;">// Our landing pages vs industry benchmark</div>
+        <div class="conv-meter" id="convMeter">
+          <div class="conv-meter-arc">
+            <svg viewBox="0 0 200 110" width="200" height="110" style="overflow:visible">
+              <path d="M 20,100 A 80,80 0 0 1 180,100" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="12" stroke-linecap="round"/>
+              <path d="M 20,100 A 80,80 0 0 1 180,100" fill="none" stroke="#ff3b6b" stroke-width="12" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="251" id="convArc"/>
+            </svg>
+            <div class="conv-val"><span class="counter" data-target="10" data-suffix=".8">0</span><span>%</span></div>
+          </div>
+          <div style="font-family:var(--f-mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)">Our average CVR</div>
+          <div style="display:flex;gap:28px;justify-content:center;margin-top:18px;">
+            <div style="text-align:center"><div style="font-family:var(--f-display);font-size:18px;font-weight:900;color:var(--muted)">2.5%</div><div style="font-family:var(--f-mono);font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)">Industry Avg</div></div>
+            <div style="text-align:center"><div style="font-family:var(--f-display);font-size:18px;font-weight:900;color:var(--rose)">10.8%</div><div style="font-family:var(--f-mono);font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)">ZYNTRA Pages</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:28px;">
+      <div class="sd-chart-panel">
+        <div class="sd-chart-title">ROAS by Page Type</div>
+        <div class="sd-chart-sub">// Return on ad spend (x)</div>
+        <canvas id="roasChart" height="190"></canvas>
+      </div>
+      <div class="sd-chart-panel">
+        <div class="sd-chart-title">What Impacts CVR Most</div>
+        <div class="sd-chart-sub">// Relative impact on conversion rate</div>
+        <div class="sd-metric-list" style="margin-top:8px;">
+          <div class="sd-metric-item" style="--target:92%"><div class="sd-metric-head"><span class="sd-metric-lbl">Hero Headline Clarity</span><span class="sd-metric-val" style="color:var(--rose)">92%</span></div><div class="sd-metric-bar"><div class="sd-metric-fill rose" style="--target:92%"></div></div></div>
+          <div class="sd-metric-item" style="--target:78%"><div class="sd-metric-head"><span class="sd-metric-lbl">Page Load Speed</span><span class="sd-metric-val">78%</span></div><div class="sd-metric-bar"><div class="sd-metric-fill" style="--target:78%"></div></div></div>
+          <div class="sd-metric-item" style="--target:71%"><div class="sd-metric-head"><span class="sd-metric-lbl">Social Proof / Reviews</span><span class="sd-metric-val" style="color:var(--rose)">71%</span></div><div class="sd-metric-bar"><div class="sd-metric-fill rose" style="--target:71%"></div></div></div>
+          <div class="sd-metric-item" style="--target:64%"><div class="sd-metric-head"><span class="sd-metric-lbl">CTA Button Copy</span><span class="sd-metric-val">64%</span></div><div class="sd-metric-bar"><div class="sd-metric-fill" style="--target:64%"></div></div></div>
+          <div class="sd-metric-item" style="--target:55%"><div class="sd-metric-head"><span class="sd-metric-lbl">Urgency Elements</span><span class="sd-metric-val" style="color:var(--rose)">55%</span></div><div class="sd-metric-bar"><div class="sd-metric-fill rose" style="--target:55%"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- A/B COMPARISON -->
+  <section class="sd-section-full" style="border-top:1px solid var(--bdr);background:rgba(255,59,107,0.012);">
+    <div class="sd-inner">
+      <div class="sd-sec-head reveal">
+        <div class="sd-sec-tag" style="color:var(--rose)">A/B Testing</div>
+        <h2 class="sd-sec-title">Good Page vs<br><em style="color:var(--rose);font-family:var(--f-serif);font-style:italic;">ZYNTRA Page</em></h2>
+      </div>
+      <div class="ab-wrap reveal">
+        <div class="ab-panel">
+          <div class="abp-header"><span class="abp-label">Typical Landing Page</span><span class="abp-badge">2.4% CVR</span></div>
+          <div class="abp-body">
+            <div class="ab-el bad"><span class="ab-el-icon">❌</span>Generic headline with no clear benefit</div>
+            <div class="ab-el bad"><span class="ab-el-icon">❌</span>Stock photos that look fake</div>
+            <div class="ab-el bad"><span class="ab-el-icon">❌</span>Long paragraph text, no scannable content</div>
+            <div class="ab-el bad"><span class="ab-el-icon">❌</span>CTA button says just "Submit"</div>
+            <div class="ab-el bad"><span class="ab-el-icon">❌</span>No social proof above the fold</div>
+            <div class="ab-el bad"><span class="ab-el-icon">❌</span>5+ second load time on mobile</div>
+            <div class="ab-el bad"><span class="ab-el-icon">❌</span>No urgency or scarcity triggers</div>
+          </div>
+          <div class="abp-result">Low intent → Low conversion</div>
+        </div>
+        <div class="ab-panel winner">
+          <div class="abp-header"><span class="abp-label">ZYNTRA Landing Page ✦</span><span class="abp-badge">10.8% CVR</span></div>
+          <div class="abp-body">
+            <div class="ab-el good"><span class="ab-el-icon">✅</span>Pain-focused headline that speaks to the customer</div>
+            <div class="ab-el good"><span class="ab-el-icon">✅</span>Real product photography, optimised for web</div>
+            <div class="ab-el good"><span class="ab-el-icon">✅</span>Scannable bullets with benefit-first copy</div>
+            <div class="ab-el good"><span class="ab-el-icon">✅</span>Action CTA: "Order Now — Free Delivery"</div>
+            <div class="ab-el good"><span class="ab-el-icon">✅</span>Reviews & order count above fold</div>
+            <div class="ab-el good"><span class="ab-el-icon">✅</span>Sub-1.5s load on all devices</div>
+            <div class="ab-el good"><span class="ab-el-icon">✅</span>Stock countdown + limited offer urgency</div>
+          </div>
+          <div class="abp-result">4.5x higher conversion rate</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONVERSION CHECKLIST -->
+  <section class="sd-section">
+    <div class="sd-sec-head reveal">
+      <div class="sd-sec-tag" style="color:var(--rose)">Our Checklist</div>
+      <h2 class="sd-sec-title">Every Element We<br><em style="color:var(--rose);font-family:var(--f-serif);font-style:italic;">Check Before Launch</em></h2>
+      <p class="sd-sec-sub">Click each item to mark it — this is our actual pre-launch QA checklist for every landing page.</p>
+    </div>
+    <div class="elements-grid reveal" id="checkGrid">
+      <div class="el-item checked"><div class="el-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="el-title">Hero Headline Tested</div><div class="el-sub">3 headline variants tested internally</div><div class="el-impact">↑ Highest-impact element</div></div></div>
+      <div class="el-item"><div class="el-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="el-title">Page Speed < 2s</div><div class="el-sub">Verified on slow 3G connection</div><div class="el-impact">↑ 53% abandon after 3s</div></div></div>
+      <div class="el-item"><div class="el-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="el-title">Social Proof Above Fold</div><div class="el-sub">Reviews or order count visible immediately</div><div class="el-impact">↑ +35% trust increase</div></div></div>
+      <div class="el-item"><div class="el-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="el-title">Mobile Display Perfect</div><div class="el-sub">Tested on 6 real device sizes</div><div class="el-impact">↑ 65% traffic is mobile</div></div></div>
+      <div class="el-item"><div class="el-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="el-title">CTA Button Optimised</div><div class="el-sub">Action-oriented copy + high-contrast colour</div><div class="el-impact">↑ Button text affects CVR 30%</div></div></div>
+      <div class="el-item"><div class="el-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="el-title">Pixel Events Firing</div><div class="el-sub">ViewContent, AddToCart, Purchase verified</div><div class="el-impact">↑ Accurate ad attribution</div></div></div>
+      <div class="el-item"><div class="el-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="el-title">Form Connected</div><div class="el-sub">Orders go to WhatsApp + Google Sheets</div><div class="el-impact">↑ Zero missed orders</div></div></div>
+      <div class="el-item"><div class="el-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="el-title">Urgency Element Live</div><div class="el-sub">Countdown or stock counter active</div><div class="el-impact">↑ +22% same-day orders</div></div></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="sd-section-full" style="border-top:1px solid var(--bdr);">
+    <div class="sd-inner">
+      <div class="sd-sec-head reveal">
+        <div class="sd-sec-tag" style="color:var(--rose)">FAQ</div>
+        <h2 class="sd-sec-title">Common <em style="color:var(--rose);font-family:var(--f-serif);font-style:italic;">Questions</em></h2>
+      </div>
+      <div class="sd-faq-list" style="max-width:800px;margin:0 auto;">
+        <div class="sd-faq-item reveal"><div class="sd-faq-q"><span class="sd-faq-q-text">What's the difference between a landing page and a website?</span><div class="sd-faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="sd-faq-a"><div class="sd-faq-a-inner">A landing page has one single goal — convert a visitor into a buyer or lead. It has no navigation menu or external links to distract the visitor. A website has many goals and many pages. Landing pages always outperform full websites when you're running paid ads.</div></div></div>
+        <div class="sd-faq-item reveal"><div class="sd-faq-q"><span class="sd-faq-q-text">How do I receive orders from the landing page?</span><div class="sd-faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="sd-faq-a"><div class="sd-faq-a-inner">We connect your order form to Google Sheets (for organised tracking), send you a WhatsApp notification for each new order, and optionally trigger an automated confirmation message to the customer. You always know the moment someone orders.</div></div></div>
+        <div class="sd-faq-item reveal"><div class="sd-faq-q"><span class="sd-faq-q-text">Do you write the copy (text) for the page?</span><div class="sd-faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="sd-faq-a"><div class="sd-faq-a-inner">Yes. We write all copy using conversion copywriting principles — benefit-focused headlines, FAB framework bullets and action CTAs. We just need a product brief from you. If you prefer to write your own copy, we can work with that too.</div></div></div>
+        <div class="sd-faq-item reveal"><div class="sd-faq-q"><span class="sd-faq-q-text">Can I use the same landing page for multiple ad sets?</span><div class="sd-faq-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="sd-faq-a"><div class="sd-faq-a-inner">Absolutely. One landing page can serve multiple ad sets — in fact we recommend this to keep your message consistent. For significantly different audiences we recommend creating 2 variants, which we can build for a discounted rate.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="sd-cta-strip">
+    <div class="cta-grid-bg"></div>
+    <div class="sd-cta-inner reveal">
+      <div class="sd-sec-tag" style="color:var(--rose)">Ready to Convert?</div>
+      <h2 class="sd-cta-title">Your Landing Page,<br><em style="color:var(--rose);font-family:var(--f-serif);font-style:italic;">Live in 3 Days</em></h2>
+      <p class="sd-cta-sub">Conversion-optimised, pixel-connected, mobile-perfect. Everything your ad campaign needs to deliver maximum ROI.</p>
+      <div class="sd-cta-btns">
+        <a href="contact.html" class="btn-lime magnetic">Start Building →</a>
+        <a href="showcase.html" class="btn-ghost-outline magnetic">See Live Examples</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="ft-col ft-brand"><div class="ft-logo"><span class="fl-b">[</span>ZYNTRA<span class="fl-lime">VERSE</span><span class="fl-b">]</span></div><p class="ft-tag">AI Automation Studio<br>Dhaka, Bangladesh</p><div class="ft-online"><span class="rb-dot"></span>Open for new projects</div></div>
+      <div class="ft-col"><div class="ft-col-h">Services</div><a href="service-ai.html">AI Automation</a><a href="service-web.html">Web Development</a><a href="service-landing.html">Landing Pages</a><a href="service-marketing.html">FB Marketing</a></div>
+      <div class="ft-col"><div class="ft-col-h">Company</div><a href="index.html">Home</a><a href="showcase.html">Showcase</a><a href="contact.html">Contact</a></div>
+      <div class="ft-col"><div class="ft-col-h">Contact</div><a href="https://wa.me/8801XXXXXXXXX" target="_blank">WhatsApp</a><a href="mailto:hello@zyntraverse.com">Email</a><div class="ft-time" id="bdTime">--:-- BDT</div></div>
+    </div>
+    <div class="footer-bot"><span>© 2026 ZYNTRA VERSE. All rights reserved.</span><span>Dhaka, Bangladesh</span></div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script src="service-detail.js"></script>
+  <script>
+  /* ── Anatomy interactive ── */
+  (function() {
+    const sections = document.querySelectorAll('.ap-section');
+    const items    = document.querySelectorAll('.anat-item');
+    function setActive(idx) {
+      sections.forEach((s,i) => s.classList.toggle('active', i===idx));
+      items.forEach((it,i) => it.classList.toggle('active', i===idx));
+    }
+    sections.forEach((s,i) => s.addEventListener('click', () => setActive(i)));
+    items.forEach((it,i) => it.addEventListener('click', () => setActive(i)));
+  })();
+
+  /* ── Checklist ── */
+  document.querySelectorAll('.el-item').forEach(item => {
+    item.addEventListener('click', () => item.classList.toggle('checked'));
+  });
+
+  /* ── Conv Arc ── */
+  const arcEl = document.getElementById('convArc');
+  const meterEl = document.getElementById('convMeter');
+  if (arcEl && meterEl) {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        arcEl.style.transition = 'stroke-dashoffset 2s cubic-bezier(0.16,1,0.3,1) .5s';
+        arcEl.style.strokeDashoffset = '85';
+        obs.unobserve(meterEl);
+      });
+    }, { threshold: 0.5 });
+    obs.observe(meterEl);
+  }
+
+  /* ── Charts ── */
+  // Chart defaults
+  const chartDefaults = {
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: 'rgba(7,9,18,0.95)',
+        borderColor: 'rgba(184,255,46,0.25)',
+        borderWidth: 1,
+        titleFont: { family: "'JetBrains Mono'", size: 10 },
+        bodyFont:  { family: "'JetBrains Mono'", size: 12 },
+        titleColor: '#7b7f98',
+        bodyColor: '#b8ff2e',
+        padding: 12,
+        cornerRadius: 8,
+      }
+    },
+    scales: {
+      x: {
+        grid:  { color: 'rgba(255,255,255,0.04)', borderColor: 'transparent' },
+        ticks: { color: '#3a3d52', font: { family: "'JetBrains Mono'", size: 9 } },
+      },
+      y: {
+        grid:  { color: 'rgba(255,255,255,0.04)', borderColor: 'transparent' },
+        ticks: { color: '#3a3d52', font: { family: "'JetBrains Mono'", size: 9 } },
+        beginAtZero: true,
+      }
+    },
+    animation: { duration: 1600, easing: 'easeOutQuart' },
+    responsive: true,
+    maintainAspectRatio: true,
+  };
+
+  // CVR Chart
+  const cvrCanvas = document.getElementById('cvrChart');
+  if (cvrCanvas) {
+    new Chart(cvrCanvas, {
+      type: 'bar',
+      data: {
+        labels: ['Client A','Client B','Client C','Client D','Client E','Client F'],
+        datasets: [
+          { label: 'Before', data: [2.1,1.8,3.2,2.5,1.6,2.9], backgroundColor:'rgba(255,59,107,0.45)', borderRadius:5, borderSkipped:false },
+          { label: 'After ZYNTRA', data: [8.4,7.6,11.2,9.8,6.4,10.1], backgroundColor:'rgba(184,255,46,0.7)', borderRadius:5, borderSkipped:false }
+        ]
+      },
+      options: { ...chartDefaults, plugins: { ...chartDefaults.plugins, legend: { display:true, labels:{ color:'#7b7f98', font:{ family:"'JetBrains Mono'", size:9 }, boxWidth:10, padding:16 } } } }
+    });
+  }
+
+  // ROAS Chart
+  const roasCanvas = document.getElementById('roasChart');
+  if (roasCanvas) {
+    new Chart(roasCanvas, {
+      type: 'bar',
+      data: {
+        labels: ['Product\nPage','Course\nPage','Service\nPage','Promo\nPage'],
+        datasets: [{
+          label: 'ROAS (x)',
+          data: [4.8, 6.2, 3.9, 5.5],
+          backgroundColor: ['rgba(184,255,46,0.7)','rgba(0,232,255,0.6)','rgba(255,59,107,0.5)','rgba(184,255,46,0.55)'],
+          borderRadius: 6, borderSkipped: false
+        }]
+      },
+      options: chartDefaults
+    });
+  }
+  </script>
+  <script src="zyntra-ai-widget.js"></script>
+</body>
+</html>
