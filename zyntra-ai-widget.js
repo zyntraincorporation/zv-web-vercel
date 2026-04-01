@@ -2,7 +2,7 @@
    ZYNTRA VERSE — AI Assistant Widget v1.0
    Self-contained. No dependencies. Paste ONE script tag.
 
-   SETUP: Requests are now routed via the shared Netlify Function.
+   SETUP: Requests are now routed via the shared Vercel API.
 ═══════════════════════════════════════════════════════════ */
 (function () {
   'use strict';

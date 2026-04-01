@@ -662,7 +662,7 @@ if (window.matchMedia('(prefers-reduced-motion:reduce)').matches) {
 /* ════════════════════════════════════════════════════════════
    ZYNTRA AI TERMINAL CHAT
    ─────────────────────────────────────────────────────────
-   CONFIG: Requests are now routed via Netlify Functions
+   CONFIG: Requests are now routed via the shared Vercel API
 ════════════════════════════════════════════════════════════ */
 (function initAITerminal() {
 
