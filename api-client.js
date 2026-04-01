@@ -1,7 +1,7 @@
 (function (global) {
   'use strict';
 
- const FUNCTION_URL = 'api/api-handler';
+ const FUNCTION_URL = '/api/api-handler';
 
   async function request(type, payload = {}) {
     const response = await fetch(FUNCTION_URL, {
