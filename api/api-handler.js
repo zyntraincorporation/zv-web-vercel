@@ -29,7 +29,7 @@ async function readResponse(response) {
   }
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   Object.entries(CORS_HEADERS).forEach(([key, value]) => res.setHeader(key, value));
 
   if (req.method === 'OPTIONS') {
@@ -149,4 +149,4 @@ export default async function handler(req, res) {
       error: error instanceof Error ? error.message : 'Internal server error.',
     });
   }
-}
+};
