@@ -675,7 +675,7 @@ Rules: SHORT replies (1-3 sentences). Warm and empathetic. Match language (Bangl
   const mobileBtn = document.getElementById('ecMobileVisit');
   if (!loadBtn && !mobileBtn) return;
 
-  const EC_URL = 'https://puspaloygiftzone.shop/';
+  const EC_URL = 'https://puspaloygadget-fan.netlify.app/';
 
   function isMobile() { return window.innerWidth < 860; }
 
