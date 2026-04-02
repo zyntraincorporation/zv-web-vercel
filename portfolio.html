@@ -1,41 +1,31 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Saiful Islam — CEO & Developer | ZYNTRA VERSE</title>
   <meta name="description" content="Saiful Islam — CEO of ZYNTRA VERSE. AI Engineer, Web Developer, IoT Builder and Marketing Expert from Chandpur, Bangladesh.">
-
-  <!-- Fonts — same as site system -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700;1,800&family=Cormorant:ital,wght@0,400;0,500;1,300;1,400;1,500;1,600&family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="portfolio.css">
+  <link rel="stylesheet" href="portfolio-enhanced.css">
 </head>
 <body>
 
-  <!-- ═══ CURSOR ═══ -->
   <div id="cur"></div>
   <div id="cur-ring"></div>
-
-  <!-- ═══ CANVAS BG ═══ -->
   <canvas id="bgCanvas"></canvas>
 
-  <!-- ═══ SIDE LABELS ═══ -->
   <div class="side-label left-label">
-    <span>SAIFUL ISLAM</span>
-    <span class="sl-dot"></span>
-    <span>CEO · DEVELOPER</span>
+    <span>SAIFUL ISLAM</span><span class="sl-dot"></span><span>CEO · DEVELOPER</span>
   </div>
   <div class="side-label right-label">
-    <span id="scrollPct">00%</span>
-    <span class="sl-dot"></span>
-    <span>SCROLL</span>
+    <span id="scrollPct">00%</span><span class="sl-dot"></span><span>SCROLL</span>
   </div>
 
-  <!-- ═══ NAVBAR ═══ -->
+  <!-- ══ NAVBAR ══ -->
   <header id="navbar">
     <div class="nav-wrap">
       <a href="index.html" class="nav-logo">
@@ -43,17 +33,14 @@
         <span class="nl-full">ZYNTRA VERSE</span>
       </a>
       <nav class="nav-center">
-        <a href="index.html"      class="n-link"        data-label="01">Home</a>
-        <a href="services.html"   class="n-link"        data-label="02">Services</a>
-        <a href="showcase.html"   class="n-link"        data-label="03">Showcase</a>
-        <a href="portfolio.html"  class="n-link active" data-label="04">Portfolio</a>
-        <a href="contact.html"    class="n-link"        data-label="05">Contact</a>
+        <a href="index.html"     class="n-link" data-label="01">Home</a>
+        <a href="services.html"  class="n-link" data-label="02">Services</a>
+        <a href="showcase.html"  class="n-link" data-label="03">Showcase</a>
+        <a href="portfolio.html" class="n-link active" data-label="04">Portfolio</a>
+        <a href="contact.html"   class="n-link" data-label="05">Contact</a>
       </nav>
       <div class="nav-right">
-        <div class="nav-status">
-          <span class="ns-dot"></span>
-          <span class="ns-text">Open to Collaborate</span>
-        </div>
+        <div class="nav-status"><span class="ns-dot"></span><span class="ns-text">Open to Collaborate</span></div>
         <a href="contact.html" class="nav-btn magnetic">
           Hire Me
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -71,69 +58,45 @@
     </div>
   </header>
 
-  <!-- ═══════════════════════════════════════════
-       SECTION 01 — HERO / INTRO
-  ═══════════════════════════════════════════ -->
+  <!-- ══════════════════════════════════════════════════════════
+       HERO
+  ══════════════════════════════════════════════════════════ -->
   <section class="pf-hero" id="top">
     <div class="pf-hero-grid-bg"></div>
-
     <div class="pf-hero-inner">
-      <!-- LEFT: Identity -->
+      <!-- LEFT -->
       <div class="pf-hero-left">
-        <!-- Breadcrumb -->
         <div class="pf-breadcrumb stagger-1">
-          <a href="index.html">ZYNTRA VERSE</a>
-          <span>→</span>
-          <span>Founder</span>
+          <a href="index.html">ZYNTRA VERSE</a><span>→</span><span>Founder</span>
         </div>
-
-        <!-- Status badges -->
         <div class="pf-badges stagger-1">
-          <span class="pf-badge lime">
-            <span class="badge-dot"></span>
-            Available for Projects
-          </span>
+          <span class="pf-badge lime"><span class="badge-dot"></span>Available for Projects</span>
           <span class="pf-badge cyan">CEO · Founder</span>
           <span class="pf-badge dim">Est. 2023</span>
         </div>
-
-        <!-- Name -->
-        <h1 class="pf-name stagger-2">
-          Saiful<br>
-          <em class="em-lime">Islam</em>
-        </h1>
-
-        <!-- Title typewriter -->
+        <h1 class="pf-name stagger-2">Saiful<br><em class="em-lime">Islam</em></h1>
         <div class="pf-title-row stagger-3">
           <span class="pf-title-slash">/</span>
           <span class="pf-title-text" id="pfTitleText">AI Engineer</span>
           <span class="pf-title-cursor">|</span>
         </div>
-
-        <!-- Bio -->
         <p class="pf-bio stagger-4">
           Founder &amp; CEO of <strong>ZYNTRA VERSE</strong> — AI Automation Studio based in Dhaka, Bangladesh.
           Passionate about building intelligent systems, writing clean code and engineering solutions
           that make businesses unstoppable. Currently studying at
           <strong>Chandpur Government University and College</strong>.
         </p>
-
-        <!-- CTA row -->
         <div class="pf-hero-actions stagger-5">
-          <a href="#projects" class="btn-lime magnetic pf-cta-main">
+          <a href="#zyntra-ai" class="btn-lime magnetic pf-cta-main">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-            View Projects
+            Try ZYNTRA AI
           </a>
-          <a href="contact.html" class="btn-ghost-outline magnetic">
-            Hire Me →
-          </a>
+          <a href="contact.html" class="btn-ghost-outline magnetic">Hire Me →</a>
           <a href="cv.html" target="_blank" class="pf-cv-btn magnetic" id="downloadCV">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Download CV
           </a>
         </div>
-
-        <!-- Quick stats -->
         <div class="pf-quick-stats stagger-5">
           <div class="pf-qs-item">
             <div class="pf-qs-val"><span class="counter" data-target="120">0</span>+</div>
@@ -141,7 +104,7 @@
           </div>
           <div class="pf-qs-div"></div>
           <div class="pf-qs-item">
-            <div class="pf-qs-val"><span class="counter" data-target="5">0</span>yr</div>
+            <div class="pf-qs-val"><span class="counter" data-target="4">0</span>yr</div>
             <div class="pf-qs-lbl">Experience</div>
           </div>
           <div class="pf-qs-div"></div>
@@ -157,177 +120,268 @@
         </div>
       </div>
 
-      <!-- RIGHT: Identity card -->
+      <!-- RIGHT: ID Card -->
       <div class="pf-hero-right stagger-3">
         <div class="id-card tilt-card" id="idCard">
-          <!-- Card header -->
           <div class="id-card-header">
-            <div class="id-card-dots">
-              <span class="icd r"></span>
-              <span class="icd y"></span>
-              <span class="icd g"></span>
-            </div>
+            <div class="id-card-dots"><span class="icd r"></span><span class="icd y"></span><span class="icd g"></span></div>
             <span class="id-card-label">
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
               saiful_islam.profile
             </span>
-            <span class="id-card-status">
-              <span class="icd-live"></span>ACTIVE
-            </span>
+            <span class="id-card-status"><span class="icd-live"></span>ACTIVE</span>
           </div>
-         <!-- Right: fun stats & interests -->
-<div class="about-right">
-
-          <!-- Info block -->
           <div class="id-info">
             <div class="id-avatar" id="idAvatar">
-  <img src="assets/images/saiful.png" alt="Saiful Islam" 
-       style="width:100%;height:100%;object-fit:cover;
-              object-position:center 10%;border-radius:50%;">
-  <div class="id-avatar-ring"></div>
-  <div class="id-avatar-ring ring2"></div>
-</div>
+              <img src="assets/images/saifulceo.jpg" alt="Saiful Islam"
+                   style="width:100%;height:100%;object-fit:cover;object-position:center 10%;border-radius:50%;">
+              <div class="id-avatar-ring"></div>
+              <div class="id-avatar-ring ring2"></div>
+            </div>
             <div class="id-name">Saiful Islam</div>
             <div class="id-role">CEO &amp; Founder</div>
             <div class="id-company">ZYNTRA VERSE</div>
           </div>
-
-          <!-- ID fields -->
           <div class="id-fields">
-            <div class="id-field">
-              <span class="id-field-key">Location</span>
-              <span class="id-field-val">Chandpur, Bangladesh 🇧🇩</span>
-            </div>
-            <div class="id-field">
-              <span class="id-field-key">Education</span>
-              <span class="id-field-val">Chandpur Govt. University & College</span>
-            </div>
-            <div class="id-field">
-              <span class="id-field-key">Focus</span>
-              <span class="id-field-val">AI · IoT · Web · Marketing</span>
-            </div>
-            <div class="id-field">
-              <span class="id-field-key">Status</span>
+            <div class="id-field"><span class="id-field-key">Location</span><span class="id-field-val">Chandpur, Bangladesh 🇧🇩</span></div>
+            <div class="id-field"><span class="id-field-key">Education</span><span class="id-field-val">Chandpur Govt. University & College</span></div>
+            <div class="id-field"><span class="id-field-key">Focus</span><span class="id-field-val">AI · IoT · Web · Marketing</span></div>
+            <div class="id-field"><span class="id-field-key">Status</span>
               <span class="id-field-val id-field-available">
-                <span class="id-avail-dot"></span>
-                Open to Projects
+                <span class="id-avail-dot"></span>Open to Projects
               </span>
             </div>
           </div>
-
-          <!-- Skill pills on card -->
           <div class="id-pill-row">
-            <span class="id-pill">Python</span>
-            <span class="id-pill">JavaScript</span>
-            <span class="id-pill">AI</span>
-            <span class="id-pill">IoT</span>
-            <span class="id-pill">n8n</span>
+            <span class="id-pill">Python</span><span class="id-pill">JavaScript</span>
+            <span class="id-pill">AI</span><span class="id-pill">IoT</span><span class="id-pill">n8n</span>
           </div>
-
-          <!-- Card footer bar -->
           <div class="id-footer-bar">
             <div class="id-footer-stat"><span>120+</span> Projects</div>
             <div class="id-footer-stat"><span>4yr</span> Exp</div>
             <div class="id-footer-stat"><span>50+</span> Clients</div>
           </div>
         </div>
-
-        <!-- Floating skill badges -->
         <div class="pf-float-badge fb-tl magnetic">
-          <span>🤖</span>
-          <div>
-            <div class="fb-val">AI Agent</div>
-            <div class="fb-lbl">Builder</div>
-          </div>
+          <span>🤖</span><div><div class="fb-val">AI Agent</div><div class="fb-lbl">Builder</div></div>
         </div>
         <div class="pf-float-badge fb-br magnetic">
-          <span>⚡</span>
-          <div>
-            <div class="fb-val">IoT</div>
-            <div class="fb-lbl">Builder</div>
-          </div>
+          <span>⚡</span><div><div class="fb-val">IoT</div><div class="fb-lbl">Builder</div></div>
         </div>
       </div>
     </div>
-
-    <!-- Scroll hint -->
-    <div class="hero-scroll">
-      <div class="hs-mouse"><div class="hs-wheel"></div></div>
-      <span>Scroll</span>
-    </div>
+    <div class="hero-scroll"><div class="hs-mouse"><div class="hs-wheel"></div></div><span>Scroll</span></div>
   </section>
 
-  <!-- ═══════════════════════════════════════════
-       MARQUEE — Roles & Skills
-  ═══════════════════════════════════════════ -->
+  <!-- ══ MARQUEE ══ -->
   <div class="marquee-outer">
     <div class="marquee-strip dark-strip">
       <div class="mq-inner fwd">
-        <span>AI Engineering</span><i>✦</i>
-        <span>Web Development</span><i>✦</i>
-        <span>IoT Projects</span><i>✦</i>
-        <span>AI Automation</span><i>✦</i>
-        <span>Marketing Expert</span><i>✦</i>
-        <span>Python</span><i>✦</i>
-        <span>JavaScript</span><i>✦</i>
-        <span>AI Agents</span><i>✦</i>
-        <span>n8n Automation</span><i>✦</i>
-        <span>Facebook CAPI</span><i>✦</i>
-        <span>AI Engineering</span><i>✦</i>
-        <span>Web Development</span><i>✦</i>
-        <span>IoT Projects</span><i>✦</i>
-        <span>AI Automation</span><i>✦</i>
-        <span>Marketing Expert</span><i>✦</i>
-        <span>Python</span><i>✦</i>
-        <span>JavaScript</span><i>✦</i>
-        <span>AI Agents</span><i>✦</i>
-        <span>n8n Automation</span><i>✦</i>
-        <span>Facebook CAPI</span><i>✦</i>
+        <span>AI Engineering</span><i>✦</i><span>Web Development</span><i>✦</i>
+        <span>IoT Projects</span><i>✦</i><span>AI Automation</span><i>✦</i>
+        <span>Marketing Expert</span><i>✦</i><span>Python</span><i>✦</i>
+        <span>JavaScript</span><i>✦</i><span>AI Agents</span><i>✦</i>
+        <span>n8n Automation</span><i>✦</i><span>Facebook CAPI</span><i>✦</i>
+        <span>AI Engineering</span><i>✦</i><span>Web Development</span><i>✦</i>
+        <span>IoT Projects</span><i>✦</i><span>AI Automation</span><i>✦</i>
+        <span>Marketing Expert</span><i>✦</i><span>Python</span><i>✦</i>
       </div>
     </div>
     <div class="marquee-strip lime-strip">
       <div class="mq-inner rev">
-        <span>CEO · ZYNTRA VERSE</span><i>★</i>
-        <span>Chandpur, Bangladesh</span><i>★</i>
-        <span>4 Years Coding</span><i>★</i>
-        <span>120+ Projects</span><i>★</i>
-        <span>50+ Happy Clients</span><i>★</i>
-        <span>Gas Leakage Detector</span><i>★</i>
-        <span>AI Order Systems</span><i>★</i>
-        <span>Real-Time IoT</span><i>★</i>
-        <span>CEO · ZYNTRA VERSE</span><i>★</i>
-        <span>Chandpur, Bangladesh</span><i>★</i>
-        <span>4 Years Coding</span><i>★</i>
-        <span>50+ Projects</span><i>★</i>
-        <span>50+ Happy Clients</span><i>★</i>
-        <span>Gas Leakage Detector</span><i>★</i>
-        <span>AI Order Systems</span><i>★</i>
-        <span>Real-Time IoT</span><i>★</i>
+        <span>CEO · ZYNTRA VERSE</span><i>★</i><span>Chandpur, Bangladesh</span><i>★</i>
+        <span>4 Years Coding</span><i>★</i><span>120+ Projects</span><i>★</i>
+        <span>50+ Happy Clients</span><i>★</i><span>Gas Leakage Detector</span><i>★</i>
+        <span>AI Order Systems</span><i>★</i><span>Real-Time IoT</span><i>★</i>
+        <span>CEO · ZYNTRA VERSE</span><i>★</i><span>Chandpur, Bangladesh</span><i>★</i>
+        <span>4 Years Coding</span><i>★</i><span>120+ Projects</span><i>★</i>
       </div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════
-       SECTION 02 — SKILLS & EXPERTISE
-  ═══════════════════════════════════════════ -->
-  <section class="pf-section" id="skills">
-    <div class="pf-section-inner">
+  <!-- ══════════════════════════════════════════════════════════
+       ★ SIGNATURE PROJECT — ZYNTRA AI CORE
+  ══════════════════════════════════════════════════════════ -->
+  <section class="pf-section sig-ai-section" id="zyntra-ai">
+    <div class="sig-ai-glow sig-ai-glow-1"></div>
+    <div class="sig-ai-glow sig-ai-glow-2"></div>
 
+    <div class="pf-section-inner" style="position:relative;z-index:1;">
       <div class="pf-sec-head reveal">
         <div class="sec-eyebrow">
-          <span class="se-num">01</span>
+          <span class="se-num">★</span>
           <span class="se-line"></span>
-          <span class="se-txt">Expertise</span>
+          <span class="se-txt">Signature Project</span>
         </div>
         <div class="pf-sec-title-row">
-          <h2 class="sec-title">Skills &amp;<br><em class="em-lime">Tech Stack</em></h2>
+          <h2 class="sec-title">ZYNTRA <em class="em-lime">AI Core</em></h2>
           <p class="sec-sub">
-            From writing Python IoT systems to building AI automation pipelines — a full-stack builder across multiple domains.
+            Four-mode autonomous AI engine powering 247+ daily orders across Bangladesh.
+            Talk to it directly — it's fully live.
           </p>
         </div>
       </div>
 
-      <!-- Skill domain tabs -->
+      <div class="sig-ai-layout">
+        <!-- Info panel -->
+        <div class="sig-ai-info reveal">
+          <div class="sig-project-badge">
+            <span class="badge-dot"></span>
+            LIVE AI SYSTEM · 2025
+          </div>
+
+          <p class="sig-ai-body">
+            ZYNTRA AI Core is a multi-modal autonomous engine built for Bangladeshi e-commerce businesses.
+            It handles order collection, customer support, business intelligence, and sales automation —
+            simultaneously, 24/7, with zero downtime. Built with OpenAI API, n8n, ManyChat, and custom integrations.
+          </p>
+
+          <div class="sig-feature-list">
+            <div class="sig-feat">
+              <div class="sig-feat-icon">⚡</div>
+              <div>
+                <div class="sig-feat-name">Multi-Mode Intelligence</div>
+                <div class="sig-feat-sub">Agent · Order Engine · Support · Academy</div>
+              </div>
+            </div>
+            <div class="sig-feat">
+              <div class="sig-feat-icon" style="color:var(--cyan)">🌐</div>
+              <div>
+                <div class="sig-feat-name">Bilingual AI</div>
+                <div class="sig-feat-sub">Bangla + English + Banglish — auto-detected</div>
+              </div>
+            </div>
+            <div class="sig-feat">
+              <div class="sig-feat-icon">📊</div>
+              <div>
+                <div class="sig-feat-name">Auto-Logging Pipeline</div>
+                <div class="sig-feat-sub">Google Sheets + WhatsApp + Email alerts</div>
+              </div>
+            </div>
+            <div class="sig-feat">
+              <div class="sig-feat-icon" style="color:var(--cyan)">🔒</div>
+              <div>
+                <div class="sig-feat-name">99.9% Uptime SLA</div>
+                <div class="sig-feat-sub">Redundant pipelines, zero single failures</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sig-stats-grid">
+            <div class="sig-stat-item">
+              <div class="sig-stat-val lime-t">247+</div>
+              <div class="sig-stat-lbl">Daily Orders</div>
+            </div>
+            <div class="sig-stat-item">
+              <div class="sig-stat-val cyan-t">94%</div>
+              <div class="sig-stat-lbl">AI Resolved</div>
+            </div>
+            <div class="sig-stat-item">
+              <div class="sig-stat-val lime-t">1.3ms</div>
+              <div class="sig-stat-lbl">Response</div>
+            </div>
+            <div class="sig-stat-item">
+              <div class="sig-stat-val cyan-t">4</div>
+              <div class="sig-stat-lbl">AI Modes</div>
+            </div>
+          </div>
+
+          <div class="sig-tech-row">
+            <span class="pt">OpenAI API</span>
+            <span class="pt">n8n</span>
+            <span class="pt">ManyChat</span>
+            <span class="pt">Google Sheets</span>
+            <span class="pt">WhatsApp API</span>
+            <span class="pt">Python</span>
+          </div>
+
+          <div class="sig-actions">
+            <a href="contact.html" class="btn-lime magnetic">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              Get This System
+            </a>
+            <a href="service-ai.html" class="btn-ghost-outline magnetic">View AI Services</a>
+          </div>
+        </div>
+
+        <!-- Terminal -->
+        <div class="sig-terminal-wrap reveal" data-delay="100">
+          <div class="sig-terminal" id="sigTerminal">
+            <div class="sig-term-header">
+              <div class="sig-term-dots"><span class="std r"></span><span class="std y"></span><span class="std g"></span></div>
+              <div class="sig-term-title">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                zyntra_ai_core v3.8.1 — portfolio.zyntraverse.online
+              </div>
+              <div class="sig-term-live"><span class="ts-ring"></span>LIVE</div>
+            </div>
+
+            <div class="sig-stats-strip">
+              <span>Orders: <span class="lime-t" id="sigOrders">247</span></span>
+              <span>Resp: <span class="cyan-t">1.3ms</span></span>
+              <span>Uptime: <span class="lime-t">99.9%</span></span>
+              <div class="sig-status-badge"><span class="badge-dot"></span>ALL SYSTEMS NOMINAL</div>
+            </div>
+
+            <div class="sig-term-modes" id="sigTermModes">
+              <button class="sig-tab active" data-mode="agent">🤖 AI Agent</button>
+              <button class="sig-tab" data-mode="order">📦 Order Engine</button>
+              <button class="sig-tab" data-mode="support">💬 Support</button>
+              <button class="sig-tab" data-mode="academy">📚 Academy</button>
+            </div>
+
+            <div class="sig-term-chat" id="sigAiChat"></div>
+
+            <div class="sig-term-chips" id="sigChips">
+              <button class="sig-chip" data-msg="What can ZYNTRA AI do for my business?">⚡ capabilities</button>
+              <button class="sig-chip" data-msg="How does AI order automation work?">📦 orders</button>
+              <button class="sig-chip" data-msg="How does AI customer support work?">💬 support</button>
+              <button class="sig-chip" data-msg="What is your pricing?">💰 pricing</button>
+              <button class="sig-chip" data-msg="I want to book a free demo">📅 book demo</button>
+            </div>
+
+            <div class="sig-term-input-row">
+              <span class="sig-prompt">$</span>
+              <input type="text" id="sigAiInput" class="sig-ai-input" placeholder="execute command or ask anything..." autocomplete="off">
+              <button id="sigAiSend" class="sig-ai-send">EXEC</button>
+            </div>
+
+            <div class="sig-term-footer">
+              <span>PID: 4921</span>
+              <span>CPU: <span id="sigCpu" class="lime-t">11%</span></span>
+              <span>MEM: <span class="cyan-t">244MB</span></span>
+              <span style="margin-left:auto;color:#22c55e;">● ALL SYSTEMS NOMINAL</span>
+            </div>
+          </div>
+
+          <div class="sig-fb sig-fb-tl magnetic">
+            <span>🤖</span>
+            <div><div class="fb-val">AI Agent</div><div class="fb-lbl">Builder</div></div>
+          </div>
+          <div class="sig-fb sig-fb-br magnetic">
+            <span>⚡</span>
+            <div><div class="fb-val">300+</div><div class="fb-lbl">Automations</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       SKILLS SECTION (unchanged)
+  ══════════════════════════════════════════════════════════ -->
+  <section class="pf-section" id="skills">
+    <div class="pf-section-inner">
+      <div class="pf-sec-head reveal">
+        <div class="sec-eyebrow">
+          <span class="se-num">01</span><span class="se-line"></span><span class="se-txt">Expertise</span>
+        </div>
+        <div class="pf-sec-title-row">
+          <h2 class="sec-title">Skills &amp;<br><em class="em-lime">Tech Stack</em></h2>
+          <p class="sec-sub">From writing Python IoT systems to building AI automation pipelines — a full-stack builder across multiple domains.</p>
+        </div>
+      </div>
+
       <div class="skill-tabs reveal" id="skillTabs">
         <button class="sk-tab active" data-tab="ai">AI &amp; Automation</button>
         <button class="sk-tab" data-tab="web">Web Dev</button>
@@ -336,255 +390,82 @@
         <button class="sk-tab" data-tab="tools">Tools</button>
       </div>
 
-      <!-- AI & Automation skills -->
       <div class="skill-panel active reveal" id="tab-ai">
         <div class="skill-grid">
           <div class="skill-item tilt-card">
             <div class="sk-icon" style="background:rgba(184,255,46,0.1);border-color:rgba(184,255,46,0.2);color:var(--lime)">🤖</div>
-            <div class="sk-info">
-              <div class="sk-name">AI Agent Building</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:92%"></div></div>
-              <div class="sk-meta">Expert · OpenAI, LangChain, LlamaIndex</div>
-            </div>
+            <div class="sk-info"><div class="sk-name">AI Agent Building</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:92%"></div></div><div class="sk-meta">Expert · OpenAI, LangChain, LlamaIndex</div></div>
             <div class="sk-pct">92%</div>
           </div>
           <div class="skill-item tilt-card">
             <div class="sk-icon" style="background:rgba(0,232,255,0.1);border-color:rgba(0,232,255,0.2);color:var(--cyan)">⚙️</div>
-            <div class="sk-info">
-              <div class="sk-name">n8n Workflow Automation</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:90%;background:linear-gradient(90deg,var(--cyan),var(--lime))"></div></div>
-              <div class="sk-meta">Expert · Complex multi-step pipelines</div>
-            </div>
+            <div class="sk-info"><div class="sk-name">n8n Workflow Automation</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:90%;background:linear-gradient(90deg,var(--cyan),var(--lime))"></div></div><div class="sk-meta">Expert · Complex multi-step pipelines</div></div>
             <div class="sk-pct" style="color:var(--cyan)">90%</div>
           </div>
           <div class="skill-item tilt-card">
             <div class="sk-icon" style="background:rgba(184,255,46,0.1);border-color:rgba(184,255,46,0.2);color:var(--lime)">🔀</div>
-            <div class="sk-info">
-              <div class="sk-name">Make.com Automation</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:88%"></div></div>
-              <div class="sk-meta">Advanced · E-commerce & marketing flows</div>
-            </div>
+            <div class="sk-info"><div class="sk-name">Make.com Automation</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:88%"></div></div><div class="sk-meta">Advanced · E-commerce & marketing flows</div></div>
             <div class="sk-pct">88%</div>
           </div>
           <div class="skill-item tilt-card">
             <div class="sk-icon" style="background:rgba(168,85,247,0.1);border-color:rgba(168,85,247,0.2);color:#a855f7">🧠</div>
-            <div class="sk-info">
-              <div class="sk-name">AI Engineering (LLMs)</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:85%;background:linear-gradient(90deg,#a855f7,var(--cyan))"></div></div>
-              <div class="sk-meta">GPT-4, Claude, Gemini · Fine-tuning, RAG</div>
-            </div>
+            <div class="sk-info"><div class="sk-name">AI Engineering (LLMs)</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:85%;background:linear-gradient(90deg,#a855f7,var(--cyan))"></div></div><div class="sk-meta">GPT-4, Claude, Gemini · Fine-tuning, RAG</div></div>
             <div class="sk-pct" style="color:#a855f7">85%</div>
           </div>
           <div class="skill-item tilt-card">
             <div class="sk-icon" style="background:rgba(184,255,46,0.1);border-color:rgba(184,255,46,0.2);color:var(--lime)">📱</div>
-            <div class="sk-info">
-              <div class="sk-name">ManyChat / Messenger Bots</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:93%"></div></div>
-              <div class="sk-meta">Expert · AI order taking, support bots</div>
-            </div>
+            <div class="sk-info"><div class="sk-name">ManyChat / Messenger Bots</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:93%"></div></div><div class="sk-meta">Expert · AI order taking, support bots</div></div>
             <div class="sk-pct">93%</div>
           </div>
           <div class="skill-item tilt-card">
             <div class="sk-icon" style="background:rgba(0,232,255,0.1);border-color:rgba(0,232,255,0.2);color:var(--cyan)">🗃️</div>
-            <div class="sk-info">
-              <div class="sk-name">Google Apps Script</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:86%;background:linear-gradient(90deg,var(--cyan),var(--lime))"></div></div>
-              <div class="sk-meta">Advanced · Sheets automation & APIs</div>
-            </div>
+            <div class="sk-info"><div class="sk-name">Google Apps Script</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:86%;background:linear-gradient(90deg,var(--cyan),var(--lime))"></div></div><div class="sk-meta">Advanced · Sheets automation & APIs</div></div>
             <div class="sk-pct" style="color:var(--cyan)">86%</div>
           </div>
         </div>
       </div>
 
-      <!-- Web Dev skills -->
       <div class="skill-panel" id="tab-web">
         <div class="skill-grid">
-          <div class="skill-item tilt-card">
-            <div class="sk-icon" style="background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.2);color:#f59e0b">🌐</div>
-            <div class="sk-info">
-              <div class="sk-name">HTML5 / CSS3</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:95%;background:linear-gradient(90deg,#f59e0b,var(--lime))"></div></div>
-              <div class="sk-meta">Expert · Semantic, accessible, responsive</div>
-            </div>
-            <div class="sk-pct" style="color:#f59e0b">95%</div>
-          </div>
-          <div class="skill-item tilt-card">
-            <div class="sk-icon" style="background:rgba(184,255,46,0.1);border-color:rgba(184,255,46,0.2);color:var(--lime)">⚡</div>
-            <div class="sk-info">
-              <div class="sk-name">JavaScript (ES2024)</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:90%"></div></div>
-              <div class="sk-meta">Advanced · Vanilla, DOM, async/await</div>
-            </div>
-            <div class="sk-pct">90%</div>
-          </div>
-          <div class="skill-item tilt-card">
-            <div class="sk-icon" style="background:rgba(0,232,255,0.1);border-color:rgba(0,232,255,0.2);color:var(--cyan)">🐍</div>
-            <div class="sk-info">
-              <div class="sk-name">Python</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:88%;background:linear-gradient(90deg,var(--cyan),var(--lime))"></div></div>
-              <div class="sk-meta">Advanced · Flask, automation, IoT, AI</div>
-            </div>
-            <div class="sk-pct" style="color:var(--cyan)">88%</div>
-          </div>
-          <div class="skill-item tilt-card">
-            <div class="sk-icon" style="background:rgba(184,255,46,0.1);border-color:rgba(184,255,46,0.2);color:var(--lime)">💨</div>
-            <div class="sk-info">
-              <div class="sk-name">Tailwind CSS</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:87%"></div></div>
-              <div class="sk-meta">Advanced · Utility-first, responsive design</div>
-            </div>
-            <div class="sk-pct">87%</div>
-          </div>
-          <div class="skill-item tilt-card">
-            <div class="sk-icon" style="background:rgba(0,232,255,0.1);border-color:rgba(0,232,255,0.2);color:var(--cyan)">⚛️</div>
-            <div class="sk-info">
-              <div class="sk-name">React / Next.js</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:75%;background:linear-gradient(90deg,var(--cyan),var(--lime))"></div></div>
-              <div class="sk-meta">Intermediate · Components, hooks, SSR</div>
-            </div>
-            <div class="sk-pct" style="color:var(--cyan)">75%</div>
-          </div>
-          <div class="skill-item tilt-card">
-            <div class="sk-icon" style="background:rgba(184,255,46,0.1);border-color:rgba(184,255,46,0.2);color:var(--lime)">🔥</div>
-            <div class="sk-info">
-              <div class="sk-name">Firebase / Supabase</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:78%"></div></div>
-              <div class="sk-meta">Intermediate · Auth, Firestore, real-time DB</div>
-            </div>
-            <div class="sk-pct">78%</div>
-          </div>
+          <div class="skill-item tilt-card"><div class="sk-icon" style="background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.2);color:#f59e0b">🌐</div><div class="sk-info"><div class="sk-name">HTML5 / CSS3</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:95%;background:linear-gradient(90deg,#f59e0b,var(--lime))"></div></div><div class="sk-meta">Expert · Semantic, accessible, responsive</div></div><div class="sk-pct" style="color:#f59e0b">95%</div></div>
+          <div class="skill-item tilt-card"><div class="sk-icon" style="background:rgba(184,255,46,0.1);border-color:rgba(184,255,46,0.2);color:var(--lime)">⚡</div><div class="sk-info"><div class="sk-name">JavaScript (ES2024)</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:90%"></div></div><div class="sk-meta">Advanced · Vanilla, DOM, async/await</div></div><div class="sk-pct">90%</div></div>
+          <div class="skill-item tilt-card"><div class="sk-icon" style="background:rgba(0,232,255,0.1);border-color:rgba(0,232,255,0.2);color:var(--cyan)">🐍</div><div class="sk-info"><div class="sk-name">Python</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:88%;background:linear-gradient(90deg,var(--cyan),var(--lime))"></div></div><div class="sk-meta">Advanced · Flask, automation, IoT, AI</div></div><div class="sk-pct" style="color:var(--cyan)">88%</div></div>
+          <div class="skill-item tilt-card"><div class="sk-icon" style="background:rgba(184,255,46,0.1);border-color:rgba(184,255,46,0.2);color:var(--lime)">💨</div><div class="sk-info"><div class="sk-name">Tailwind CSS</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:87%"></div></div><div class="sk-meta">Advanced · Utility-first, responsive design</div></div><div class="sk-pct">87%</div></div>
+          <div class="skill-item tilt-card"><div class="sk-icon" style="background:rgba(0,232,255,0.1);border-color:rgba(0,232,255,0.2);color:var(--cyan)">⚛️</div><div class="sk-info"><div class="sk-name">React / Next.js</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:75%;background:linear-gradient(90deg,var(--cyan),var(--lime))"></div></div><div class="sk-meta">Intermediate · Components, hooks, SSR</div></div><div class="sk-pct" style="color:var(--cyan)">75%</div></div>
+          <div class="skill-item tilt-card"><div class="sk-icon" style="background:rgba(184,255,46,0.1);border-color:rgba(184,255,46,0.2);color:var(--lime)">🔥</div><div class="sk-info"><div class="sk-name">Firebase / Supabase</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:78%"></div></div><div class="sk-meta">Intermediate · Auth, Firestore, real-time DB</div></div><div class="sk-pct">78%</div></div>
         </div>
       </div>
 
-      <!-- IoT & Hardware skills -->
       <div class="skill-panel" id="tab-iot">
         <div class="skill-grid">
-          <div class="skill-item tilt-card">
-            <div class="sk-icon" style="background:rgba(0,232,255,0.1);border-color:rgba(0,232,255,0.2);color:var(--cyan)">🔧</div>
-            <div class="sk-info">
-              <div class="sk-name">Arduino / ESP32 / ESP8266</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:88%;background:linear-gradient(90deg,var(--cyan),var(--lime))"></div></div>
-              <div class="sk-meta">Advanced · Microcontroller programming</div>
-            </div>
-            <div class="sk-pct" style="color:var(--cyan)">88%</div>
-          </div>
-          <div class="skill-item tilt-card">
-            <div class="sk-icon" style="background:rgba(184,255,46,0.1);border-color:rgba(184,255,46,0.2);color:var(--lime)">🌡️</div>
-            <div class="sk-info">
-              <div class="sk-name">Sensor Integration</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:90%"></div></div>
-              <div class="sk-meta">MQ-2/MQ-135 Gas, DHT22, LCD, OLED</div>
-            </div>
-            <div class="sk-pct">90%</div>
-          </div>
-          <div class="skill-item tilt-card">
-            <div class="sk-icon" style="background:rgba(0,232,255,0.1);border-color:rgba(0,232,255,0.2);color:var(--cyan)">📡</div>
-            <div class="sk-info">
-              <div class="sk-name">IoT Communication</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:82%;background:linear-gradient(90deg,var(--cyan),var(--lime))"></div></div>
-              <div class="sk-meta">WiFi, MQTT, HTTP API, WebSocket</div>
-            </div>
-            <div class="sk-pct" style="color:var(--cyan)">82%</div>
-          </div>
-          <div class="skill-item tilt-card">
-            <div class="sk-icon" style="background:rgba(184,255,46,0.1);border-color:rgba(184,255,46,0.2);color:var(--lime)">📊</div>
-            <div class="sk-info">
-              <div class="sk-name">Real-Time Display Systems</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:85%"></div></div>
-              <div class="sk-meta">LCD 16x2, OLED, TFT — live data rendering</div>
-            </div>
-            <div class="sk-pct">85%</div>
-          </div>
-          <div class="skill-item tilt-card">
-            <div class="sk-icon" style="background:rgba(0,232,255,0.1);border-color:rgba(0,232,255,0.2);color:var(--cyan)">🔔</div>
-            <div class="sk-info">
-              <div class="sk-name">Alert Systems (Email / SMS)</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:87%;background:linear-gradient(90deg,var(--cyan),var(--lime))"></div></div>
-              <div class="sk-meta">SMTP, Twilio, IFTTT integration</div>
-            </div>
-            <div class="sk-pct" style="color:var(--cyan)">87%</div>
-          </div>
-          <div class="skill-item tilt-card">
-            <div class="sk-icon" style="background:rgba(184,255,46,0.1);border-color:rgba(184,255,46,0.2);color:var(--lime)">🐍</div>
-            <div class="sk-info">
-              <div class="sk-name">Python IoT Scripting</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:84%"></div></div>
-              <div class="sk-meta">RPi, data logging, sensor reading loops</div>
-            </div>
-            <div class="sk-pct">84%</div>
-          </div>
+          <div class="skill-item tilt-card"><div class="sk-icon" style="background:rgba(0,232,255,0.1);border-color:rgba(0,232,255,0.2);color:var(--cyan)">🔧</div><div class="sk-info"><div class="sk-name">Arduino / ESP32 / ESP8266</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:88%;background:linear-gradient(90deg,var(--cyan),var(--lime))"></div></div><div class="sk-meta">Advanced · Microcontroller programming</div></div><div class="sk-pct" style="color:var(--cyan)">88%</div></div>
+          <div class="skill-item tilt-card"><div class="sk-icon" style="background:rgba(184,255,46,0.1);border-color:rgba(184,255,46,0.2);color:var(--lime)">🌡️</div><div class="sk-info"><div class="sk-name">Sensor Integration</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:90%"></div></div><div class="sk-meta">MQ-2/MQ-135 Gas, DHT22, LCD, OLED</div></div><div class="sk-pct">90%</div></div>
+          <div class="skill-item tilt-card"><div class="sk-icon" style="background:rgba(0,232,255,0.1);border-color:rgba(0,232,255,0.2);color:var(--cyan)">📡</div><div class="sk-info"><div class="sk-name">IoT Communication</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:82%;background:linear-gradient(90deg,var(--cyan),var(--lime))"></div></div><div class="sk-meta">WiFi, MQTT, HTTP API, WebSocket</div></div><div class="sk-pct" style="color:var(--cyan)">82%</div></div>
+          <div class="skill-item tilt-card"><div class="sk-icon" style="background:rgba(184,255,46,0.1);border-color:rgba(184,255,46,0.2);color:var(--lime)">📊</div><div class="sk-info"><div class="sk-name">Real-Time Display Systems</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:85%"></div></div><div class="sk-meta">LCD 16x2, OLED, TFT — live data rendering</div></div><div class="sk-pct">85%</div></div>
+          <div class="skill-item tilt-card"><div class="sk-icon" style="background:rgba(0,232,255,0.1);border-color:rgba(0,232,255,0.2);color:var(--cyan)">🔔</div><div class="sk-info"><div class="sk-name">Alert Systems (Email / SMS)</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:87%;background:linear-gradient(90deg,var(--cyan),var(--lime))"></div></div><div class="sk-meta">SMTP, Twilio, IFTTT integration</div></div><div class="sk-pct" style="color:var(--cyan)">87%</div></div>
+          <div class="skill-item tilt-card"><div class="sk-icon" style="background:rgba(184,255,46,0.1);border-color:rgba(184,255,46,0.2);color:var(--lime)">🐍</div><div class="sk-info"><div class="sk-name">Python IoT Scripting</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:84%"></div></div><div class="sk-meta">RPi, data logging, sensor reading loops</div></div><div class="sk-pct">84%</div></div>
         </div>
       </div>
 
-      <!-- Marketing skills -->
       <div class="skill-panel" id="tab-marketing">
         <div class="skill-grid">
-          <div class="skill-item tilt-card">
-            <div class="sk-icon" style="background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.2);color:#f59e0b">📘</div>
-            <div class="sk-info">
-              <div class="sk-name">Facebook Ads & Pixel</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:93%;background:linear-gradient(90deg,#f59e0b,var(--lime))"></div></div>
-              <div class="sk-meta">Expert · Pixel, CAPI, retargeting, audiences</div>
-            </div>
-            <div class="sk-pct" style="color:#f59e0b">93%</div>
-          </div>
-          <div class="skill-item tilt-card">
-            <div class="sk-icon" style="background:rgba(184,255,46,0.1);border-color:rgba(184,255,46,0.2);color:var(--lime)">🎯</div>
-            <div class="sk-info">
-              <div class="sk-name">Conversion Optimisation</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:88%"></div></div>
-              <div class="sk-meta">Landing page CRO, A/B testing, funnels</div>
-            </div>
-            <div class="sk-pct">88%</div>
-          </div>
-          <div class="skill-item tilt-card">
-            <div class="sk-icon" style="background:rgba(0,232,255,0.1);border-color:rgba(0,232,255,0.2);color:var(--cyan)">📡</div>
-            <div class="sk-info">
-              <div class="sk-name">Server-Side Tracking (CAPI)</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:90%;background:linear-gradient(90deg,var(--cyan),var(--lime))"></div></div>
-              <div class="sk-meta">Expert · iOS-proof event attribution</div>
-            </div>
-            <div class="sk-pct" style="color:var(--cyan)">90%</div>
-          </div>
-          <div class="skill-item tilt-card">
-            <div class="sk-icon" style="background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.2);color:#f59e0b">✍️</div>
-            <div class="sk-info">
-              <div class="sk-name">Copywriting & Sales Pages</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:84%;background:linear-gradient(90deg,#f59e0b,var(--lime))"></div></div>
-              <div class="sk-meta">FAB framework, persuasion triggers</div>
-            </div>
-            <div class="sk-pct" style="color:#f59e0b">84%</div>
-          </div>
-          <div class="skill-item tilt-card">
-            <div class="sk-icon" style="background:rgba(184,255,46,0.1);border-color:rgba(184,255,46,0.2);color:var(--lime)">📊</div>
-            <div class="sk-info">
-              <div class="sk-name">Analytics & Reporting</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:85%"></div></div>
-              <div class="sk-meta">GA4, GTM, Events Manager, Ads Manager</div>
-            </div>
-            <div class="sk-pct">85%</div>
-          </div>
-          <div class="skill-item tilt-card">
-            <div class="sk-icon" style="background:rgba(0,232,255,0.1);border-color:rgba(0,232,255,0.2);color:var(--cyan)">🔄</div>
-            <div class="sk-info">
-              <div class="sk-name">Marketing Automation</div>
-              <div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:88%;background:linear-gradient(90deg,var(--cyan),var(--lime))"></div></div>
-              <div class="sk-meta">Email sequences, chatbot funnels, retargeting</div>
-            </div>
-            <div class="sk-pct" style="color:var(--cyan)">88%</div>
-          </div>
+          <div class="skill-item tilt-card"><div class="sk-icon" style="background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.2);color:#f59e0b">📘</div><div class="sk-info"><div class="sk-name">Facebook Ads & Pixel</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:93%;background:linear-gradient(90deg,#f59e0b,var(--lime))"></div></div><div class="sk-meta">Expert · Pixel, CAPI, retargeting, audiences</div></div><div class="sk-pct" style="color:#f59e0b">93%</div></div>
+          <div class="skill-item tilt-card"><div class="sk-icon" style="background:rgba(184,255,46,0.1);border-color:rgba(184,255,46,0.2);color:var(--lime)">🎯</div><div class="sk-info"><div class="sk-name">Conversion Optimisation</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:88%"></div></div><div class="sk-meta">Landing page CRO, A/B testing, funnels</div></div><div class="sk-pct">88%</div></div>
+          <div class="skill-item tilt-card"><div class="sk-icon" style="background:rgba(0,232,255,0.1);border-color:rgba(0,232,255,0.2);color:var(--cyan)">📡</div><div class="sk-info"><div class="sk-name">Server-Side Tracking (CAPI)</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:90%;background:linear-gradient(90deg,var(--cyan),var(--lime))"></div></div><div class="sk-meta">Expert · iOS-proof event attribution</div></div><div class="sk-pct" style="color:var(--cyan)">90%</div></div>
+          <div class="skill-item tilt-card"><div class="sk-icon" style="background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.2);color:#f59e0b">✍️</div><div class="sk-info"><div class="sk-name">Copywriting & Sales Pages</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:84%;background:linear-gradient(90deg,#f59e0b,var(--lime))"></div></div><div class="sk-meta">FAB framework, persuasion triggers</div></div><div class="sk-pct" style="color:#f59e0b">84%</div></div>
+          <div class="skill-item tilt-card"><div class="sk-icon" style="background:rgba(184,255,46,0.1);border-color:rgba(184,255,46,0.2);color:var(--lime)">📊</div><div class="sk-info"><div class="sk-name">Analytics & Reporting</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:85%"></div></div><div class="sk-meta">GA4, GTM, Events Manager, Ads Manager</div></div><div class="sk-pct">85%</div></div>
+          <div class="skill-item tilt-card"><div class="sk-icon" style="background:rgba(0,232,255,0.1);border-color:rgba(0,232,255,0.2);color:var(--cyan)">🔄</div><div class="sk-info"><div class="sk-name">Marketing Automation</div><div class="sk-bar-wrap"><div class="sk-bar-fill" style="--pct:88%;background:linear-gradient(90deg,var(--cyan),var(--lime))"></div></div><div class="sk-meta">Email sequences, chatbot funnels, retargeting</div></div><div class="sk-pct" style="color:var(--cyan)">88%</div></div>
         </div>
       </div>
 
-      <!-- Tools skills -->
       <div class="skill-panel" id="tab-tools">
         <div class="tools-grid reveal">
           <div class="tool-pill tilt-card"><span class="tp-icon">🐍</span><span class="tp-name">Python</span></div>
           <div class="tool-pill tilt-card"><span class="tp-icon">⚡</span><span class="tp-name">JavaScript</span></div>
           <div class="tool-pill tilt-card"><span class="tp-icon">🔀</span><span class="tp-name">n8n</span></div>
           <div class="tool-pill tilt-card"><span class="tp-icon">⚙️</span><span class="tp-name">Make.com</span></div>
-          <div class="tool-pill tilt-card"><span class="tp-icon">🤖</span><span class="tp-name">OpenAI API</span></div>
-          <div class="tool-pill tilt-card"><span class="tp-icon">📘</span><span class="tp-name">FB Ads</span></div>
+          <div class="tool-pill tilt-card"><span class="tp-icon">🤖</span><span class="tp-name">Zyntra AI</span></div>
+          <div class="tool-pill tilt-card"><span class="tp-icon">📘</span><span class="tp-name">Meta Ads</span></div>
           <div class="tool-pill tilt-card"><span class="tp-icon">📊</span><span class="tp-name">Google Sheets</span></div>
           <div class="tool-pill tilt-card"><span class="tp-icon">🔧</span><span class="tp-name">Arduino</span></div>
           <div class="tool-pill tilt-card"><span class="tp-icon">📡</span><span class="tp-name">ESP32</span></div>
@@ -594,323 +475,469 @@
           <div class="tool-pill tilt-card"><span class="tp-icon">☁️</span><span class="tp-name">Cloudflare</span></div>
           <div class="tool-pill tilt-card"><span class="tp-icon">🔥</span><span class="tp-name">Firebase</span></div>
           <div class="tool-pill tilt-card"><span class="tp-icon">🐙</span><span class="tp-name">GitHub</span></div>
-          <div class="tool-pill tilt-card"><span class="tp-icon">📱</span><span class="tp-name">WhatsApp API</span></div>
+          <div class="tool-pill tilt-card"><span class="tp-icon">📱</span><span class="tp-name">Netlify</span></div>
           <div class="tool-pill tilt-card"><span class="tp-icon">🏷️</span><span class="tp-name">GTM</span></div>
           <div class="tool-pill tilt-card"><span class="tp-icon">⚛️</span><span class="tp-name">React</span></div>
           <div class="tool-pill tilt-card"><span class="tp-icon">💨</span><span class="tp-name">Tailwind CSS</span></div>
           <div class="tool-pill tilt-card"><span class="tp-icon">🔌</span><span class="tp-name">REST APIs</span></div>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════
-       SECTION 03 — FEATURED PROJECTS
-  ═══════════════════════════════════════════ -->
+  <!-- ══════════════════════════════════════════════════════════
+       AI PROJECTS — Order Bot + Support Agent
+  ══════════════════════════════════════════════════════════ -->
   <section class="pf-section pf-section-dark" id="projects">
     <div class="pf-section-inner">
 
       <div class="pf-sec-head reveal">
         <div class="sec-eyebrow">
-          <span class="se-num">02</span>
-          <span class="se-line"></span>
-          <span class="se-txt">Projects</span>
+          <span class="se-num">02</span><span class="se-line"></span><span class="se-txt">AI Projects</span>
         </div>
-        <h2 class="sec-title">Featured<br><em class="em-lime">Work</em></h2>
+        <div class="pf-sec-title-row">
+          <h2 class="sec-title">Featured<br><em class="em-lime">AI Work</em></h2>
+          <p class="sec-sub">Fully interactive demos — these are real, live AI systems. Try them below.</p>
+        </div>
       </div>
 
-      <div class="projects-list">
-
-        <!-- ── PROJECT 1: Gas Leakage Detector ── -->
-        <div class="project-card featured-project reveal" data-delay="0">
-          <div class="proj-left">
-            <div class="proj-meta-row">
-              <span class="proj-badge iot">IoT · Hardware</span>
-              <span class="proj-yr">2024</span>
-              <span class="proj-tag">🏆 Signature Project</span>
-            </div>
-            <h3 class="proj-title">Gas Leakage<br>Detector System</h3>
-            <p class="proj-desc">
-              A real-time kitchen safety device that continuously monitors gas concentrations using MQ-2/MQ-135 sensors. When dangerous levels are detected, the system triggers a loud alarm, sends an instant alert email and displays live AQI and gas values on an LCD/OLED display. Built using Arduino/ESP32 with WiFi connectivity.
-            </p>
-            <div class="proj-features">
-              <div class="proj-feat">
-                <span class="pf-bullet"></span>
-                <span>Real-time gas concentration monitoring (MQ-2/MQ-135)</span>
-              </div>
-              <div class="proj-feat">
-                <span class="pf-bullet"></span>
-                <span>Audible alarm triggers when threshold exceeded</span>
-              </div>
-              <div class="proj-feat">
-                <span class="pf-bullet"></span>
-                <span>Instant mobile alert via email notification</span>
-              </div>
-              <div class="proj-feat">
-                <span class="pf-bullet"></span>
-                <span>Live digital display — AQI index &amp; PPM values</span>
-              </div>
-              <div class="proj-feat">
-                <span class="pf-bullet"></span>
-                <span>WiFi-connected via ESP8266/ESP32 module</span>
-              </div>
-              <div class="proj-feat">
-                <span class="pf-bullet"></span>
-                <span>Continuous 24/7 monitoring — no manual checks</span>
-              </div>
-            </div>
-            <div class="proj-tech-row">
-              <span class="pt">Arduino / ESP32</span>
-              <span class="pt">MQ-2 Sensor</span>
-              <span class="pt">LCD Display</span>
-              <span class="pt">SMTP Email</span>
-              <span class="pt">C++ / Python</span>
-              <span class="pt">WiFi IoT</span>
-            </div>
-          </div>
-          <div class="proj-right">
-            <!-- Interactive IoT visualization -->
-            <div class="iot-demo-card tilt-card">
-              <div class="iot-demo-header">
-                <div class="iot-demo-dots"><span></span><span></span><span></span></div>
-                <span class="iot-demo-title">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  gas_detector.ino — LIVE
-                </span>
-                <span class="iot-demo-status">
-                  <span class="iot-status-dot safe" id="gasStatusDot"></span>
-                  <span id="gasStatusText">SAFE</span>
-                </span>
-              </div>
-
-              <!-- Gauge -->
-              <div class="gas-gauge-wrap">
-                <svg class="gas-gauge" viewBox="0 0 200 120" width="200" height="120">
-                  <!-- Background arc -->
-                  <path d="M 20,110 A 80,80 0 0 1 180,110"
-                    fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="14" stroke-linecap="round"/>
-                  <!-- Safe zone (green) -->
-                  <path d="M 20,110 A 80,80 0 0 1 90,34"
-                    fill="none" stroke="rgba(34,197,94,0.4)" stroke-width="14" stroke-linecap="round"/>
-                  <!-- Warning zone (amber) -->
-                  <path d="M 90,34 A 80,80 0 0 1 140,24"
-                    fill="none" stroke="rgba(245,158,11,0.4)" stroke-width="14" stroke-linecap="round"/>
-                  <!-- Danger zone (red) -->
-                  <path d="M 140,24 A 80,80 0 0 1 180,110"
-                    fill="none" stroke="rgba(255,59,107,0.35)" stroke-width="14" stroke-linecap="round"/>
-                  <!-- Needle fill -->
-                  <path d="M 20,110 A 80,80 0 0 1 180,110"
-                    fill="none" stroke="#22c55e" stroke-width="14" stroke-linecap="round"
-                    stroke-dasharray="251" id="gaugeFill" class="gauge-fill-anim"/>
-                  <!-- Center value -->
-                  <text x="100" y="100" text-anchor="middle"
-                    style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;fill:#22c55e;"
-                    id="gaugeVal">142</text>
-                  <text x="100" y="115" text-anchor="middle"
-                    style="font-family:'JetBrains Mono',monospace;font-size:9px;fill:#3a3d52;">PPM</text>
-                </svg>
-              </div>
-
-              <!-- Sensor readings -->
-              <div class="iot-readings">
-                <div class="iot-reading">
-                  <div class="ir-label">GAS LEVEL</div>
-                  <div class="ir-val safe" id="gasVal">142 PPM</div>
-                  <div class="ir-bar"><div class="ir-fill safe-fill" id="gasBar" style="width:18%"></div></div>
-                </div>
-                <div class="iot-reading">
-                  <div class="ir-label">AQI INDEX</div>
-                  <div class="ir-val cyan-t" id="aqiVal">28</div>
-                  <div class="ir-bar"><div class="ir-fill cyan-fill" id="aqiBar" style="width:22%"></div></div>
-                </div>
-                <div class="iot-reading">
-                  <div class="ir-label">TEMPERATURE</div>
-                  <div class="ir-val lime-t" id="tempVal">27.4°C</div>
-                  <div class="ir-bar"><div class="ir-fill lime-fill" id="tempBar" style="width:55%"></div></div>
-                </div>
-              </div>
-
-              <!-- Alert row -->
-              <div class="iot-alert-row">
-                <div class="iot-alert-item safe-alert">
-                  <span>🔔 Alarm</span>
-                  <span id="alarmState" class="ial safe-ial">OFF</span>
-                </div>
-                <div class="iot-alert-item">
-                  <span>📧 Email Alert</span>
-                  <span class="ial standby-ial">STANDBY</span>
-                </div>
-                <div class="iot-alert-item">
-                  <span>📡 WiFi</span>
-                  <span class="ial connected-ial">CONNECTED</span>
-                </div>
-              </div>
-
-              <!-- Simulate button -->
-              <button class="iot-sim-btn magnetic" id="simGasBtn">
-                ⚠️ Simulate Gas Leak
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- ── PROJECT 2: AI Order Bot ── -->
-        <div class="project-card reveal" data-delay="100">
-          <div class="proj-left">
+      <!-- ── ORDER BOT CARD ── -->
+      <div class="ai-project-card reveal">
+        <div class="ai-card-inner">
+          <div class="ai-card-left">
             <div class="proj-meta-row">
               <span class="proj-badge ai-badge">AI · Automation</span>
               <span class="proj-yr">2024</span>
+              <span class="proj-tag" style="background:rgba(34,197,94,0.1);color:#22c55e;border:1px solid rgba(34,197,94,0.2);font-size:9px;padding:3px 10px;border-radius:99px;font-family:var(--f-mono);">● LIVE AI</span>
             </div>
             <h3 class="proj-title">Facebook AI<br>Order Bot System</h3>
-            <p class="proj-desc">
-              Built a complete AI-powered Messenger bot for e-commerce businesses across Bangladesh. The system collects orders in Bangla/English, confirms delivery addresses, auto-logs to Google Sheets and sends WhatsApp notifications to the admin — handling 247+ daily orders with zero human input.
-            </p>
+            <p class="proj-desc">AI-powered Messenger bot for e-commerce across Bangladesh. Collects orders in Bangla/English, confirms delivery addresses, auto-logs to Google Sheets and sends WhatsApp notifications — handling 247+ daily orders with zero human input.</p>
             <div class="proj-features">
               <div class="proj-feat"><span class="pf-bullet"></span><span>Bilingual AI (Bangla + English + Banglish)</span></div>
-              <div class="proj-feat"><span class="pf-bullet"></span><span>Automatic Google Sheets database logging</span></div>
-              <div class="proj-feat"><span class="pf-bullet"></span><span>Admin WhatsApp alerts per order</span></div>
+              <div class="proj-feat"><span class="pf-bullet"></span><span>Auto Google Sheets logging per order</span></div>
+              <div class="proj-feat"><span class="pf-bullet"></span><span>Admin WhatsApp alert per confirmed order</span></div>
               <div class="proj-feat"><span class="pf-bullet"></span><span>Customer confirmation messages auto-sent</span></div>
             </div>
             <div class="proj-tech-row">
-              <span class="pt">ManyChat</span>
-              <span class="pt">OpenAI API</span>
-              <span class="pt">n8n</span>
-              <span class="pt">Google Sheets</span>
-              <span class="pt">WhatsApp API</span>
+              <span class="pt">ManyChat</span><span class="pt">OpenAI API</span>
+              <span class="pt">n8n</span><span class="pt">Google Sheets</span><span class="pt">WhatsApp API</span>
             </div>
             <div class="proj-result-row">
               <div class="pr-stat"><div class="pr-val">247+</div><div class="pr-lbl">Daily Orders</div></div>
               <div class="pr-stat"><div class="pr-val">0</div><div class="pr-lbl">Human Input</div></div>
               <div class="pr-stat"><div class="pr-val">99.9%</div><div class="pr-lbl">Uptime</div></div>
             </div>
+            <div style="display:flex;gap:10px;margin-top:20px;">
+              <a href="service-ai.html" class="srv-learn-btn magnetic" style="font-family:var(--f-mono);font-size:11px;padding:9px 18px;border:1px solid var(--bdr);color:var(--text);border-radius:7px;text-decoration:none;transition:all .2s;display:flex;align-items:center;gap:6px;">View AI Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+              <a href="contact.html" class="btn-lime" style="font-size:12px;padding:9px 18px;">Get This →</a>
+            </div>
           </div>
-          <div class="proj-right proj-right-sm">
-            <div class="proj-visual-box tilt-card" style="border-color:rgba(184,255,46,0.15);">
-              <div class="pvb-header" style="border-color:rgba(184,255,46,0.1);">
-                <span class="pvb-dot" style="background:var(--lime)"></span>
-                <span style="font-family:var(--f-mono);font-size:9px;color:var(--muted);">AI Order Engine — Active</span>
-                <span style="font-family:var(--f-mono);font-size:8px;color:#22c55e;margin-left:auto;">● LIVE</span>
+
+          <div class="ai-card-right">
+            <div class="ai-chat-wrap">
+              <div class="ai-chat-header">
+                <div class="ai-chat-dots">
+                  <span class="ai-chat-dot" style="background:#ef4444"></span>
+                  <span class="ai-chat-dot" style="background:#f59e0b"></span>
+                  <span class="ai-chat-dot" style="background:#22c55e"></span>
+                </div>
+                <div class="ai-chat-title">
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                  zyntra_order_bot.ai — Live Session
+                </div>
+                <div class="ai-live-badge-sm"><span style="width:5px;height:5px;border-radius:50%;background:#22c55e;box-shadow:0 0 5px #22c55e;display:block;"></span>ZYNTRA AI</div>
               </div>
-              <div class="pvb-body">
-                <div class="pvb-line dim">$ ./order_bot.py --prod</div>
-                <div class="pvb-line cyan">[ OK ] Messenger webhook... active</div>
-                <div class="pvb-line cyan">[ OK ] GPT-4 engine........ ready</div>
-                <div class="pvb-line cyan">[ OK ] Sheets API.......... linked</div>
-                <div class="pvb-line dim">─────────────────────────────</div>
-                <div class="pvb-line lime">$ orders today: <span id="pvbOrders">247</span></div>
-                <div class="pvb-line lime">$ avg response: 1.3ms</div>
-                <div class="pvb-line dim">$ <span id="pvbCursor" class="term-cursor">█</span></div>
+              <div class="ai-msgs" id="pfOrderMsgs"></div>
+              <div class="ai-input-row">
+                <span class="ai-prompt-sym">$</span>
+                <input type="text" class="ai-input-field" id="pfOrderInput" placeholder="অর্ডার করুন বা কিছু জিজ্ঞেস করুন…" autocomplete="off">
+                <button class="ai-send-btn" id="pfOrderSend">SEND</button>
+              </div>
+              <div class="ai-footer-stats">
+                <div>Orders Today: <span id="pfOrderCount">247</span></div>
+                <div>Avg Reply: <span>1.2s</span></div>
+                <div>Uptime: <span>99.9%</span></div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- ── PROJECT 3: ZYNTRA VERSE Website ── -->
-        <div class="project-card reveal" data-delay="200">
-          <div class="proj-left">
+      <!-- ── SUPPORT AGENT CARD ── -->
+      <div class="ai-project-card reveal" data-delay="80">
+        <div class="ai-card-inner">
+          <div class="ai-card-left">
             <div class="proj-meta-row">
-              <span class="proj-badge web-badge">Web · Design</span>
-              <span class="proj-yr">2025</span>
-            </div>
-            <h3 class="proj-title">ZYNTRA VERSE<br>Studio Website</h3>
-            <p class="proj-desc">
-              Designed and built the complete ZYNTRA VERSE company website from scratch — 10+ pages including service detail pages, showcase, contact with Google Sheets integration, thank-you flow and premium design system. Achieved 98/100 Lighthouse performance score.
-            </p>
-            <div class="proj-features">
-              <div class="proj-feat"><span class="pf-bullet"></span><span>10+ page website with consistent design system</span></div>
-              <div class="proj-feat"><span class="pf-bullet"></span><span>Custom cursor, particle canvas, 3D tilt cards</span></div>
-              <div class="proj-feat"><span class="pf-bullet"></span><span>Interactive service pages with Chart.js infographics</span></div>
-              <div class="proj-feat"><span class="pf-bullet"></span><span>Google Apps Script form → Sheets → Email pipeline</span></div>
-            </div>
-            <div class="proj-tech-row">
-              <span class="pt">HTML5</span>
-              <span class="pt">CSS3</span>
-              <span class="pt">Vanilla JS</span>
-              <span class="pt">Chart.js</span>
-              <span class="pt">Apps Script</span>
-            </div>
-            <div class="proj-result-row">
-              <div class="pr-stat"><div class="pr-val">98</div><div class="pr-lbl">Lighthouse Score</div></div>
-              <div class="pr-stat"><div class="pr-val">10+</div><div class="pr-lbl">Pages Built</div></div>
-              <div class="pr-stat"><div class="pr-val">< 1.5s</div><div class="pr-lbl">Load Time</div></div>
-            </div>
-          </div>
-          <div class="proj-right proj-right-sm">
-            <div class="proj-visual-box tilt-card" style="border-color:rgba(0,232,255,0.15);">
-              <div class="pvb-header" style="border-color:rgba(0,232,255,0.1);">
-                <span class="pvb-dot" style="background:var(--cyan)"></span>
-                <span style="font-family:var(--f-mono);font-size:9px;color:var(--muted);">zyntraverse.online</span>
-                <span style="font-family:var(--f-mono);font-size:8px;color:#22c55e;margin-left:auto;">● Live</span>
-              </div>
-              <div class="pvb-body" style="display:grid;gap:6px;">
-                <div style="height:32px;background:rgba(184,255,46,0.06);border:1px solid rgba(184,255,46,0.12);border-radius:6px;display:flex;align-items:center;padding:0 10px;">
-                  <div style="width:8px;height:8px;border-radius:50%;background:var(--lime);margin-right:8px;"></div>
-                  <div style="font-family:var(--f-mono);font-size:9px;color:var(--lime);">HERO SECTION</div>
-                </div>
-                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;">
-                  <div style="height:40px;background:rgba(255,255,255,0.02);border:1px solid var(--bdr);border-radius:5px;"></div>
-                  <div style="height:40px;background:rgba(255,255,255,0.02);border:1px solid var(--bdr);border-radius:5px;"></div>
-                  <div style="height:40px;background:rgba(255,255,255,0.02);border:1px solid var(--bdr);border-radius:5px;"></div>
-                </div>
-                <div style="height:24px;background:rgba(0,232,255,0.04);border:1px solid rgba(0,232,255,0.1);border-radius:5px;"></div>
-                <div style="display:flex;align-items:center;gap:6px;">
-                  <div style="font-family:var(--f-mono);font-size:9px;color:var(--muted);">Performance</div>
-                  <div style="flex:1;height:4px;background:var(--bdr);border-radius:99px;overflow:hidden;">
-                    <div style="width:98%;height:100%;background:var(--lime);border-radius:99px;"></div>
-                  </div>
-                  <div style="font-family:var(--f-display);font-size:13px;font-weight:900;color:var(--lime);">98</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ── PROJECT 4: Landing Page (Quran Combo) ── -->
-        <div class="project-card reveal" data-delay="300">
-          <div class="proj-left">
-            <div class="proj-meta-row">
-              <span class="proj-badge marketing-badge">Marketing · Web</span>
+              <span class="proj-badge ai-badge">AI · Support</span>
               <span class="proj-yr">2024</span>
+              <span class="proj-tag" style="background:rgba(34,197,94,0.1);color:#22c55e;border:1px solid rgba(34,197,94,0.2);font-size:9px;padding:3px 10px;border-radius:99px;font-family:var(--f-mono);">● LIVE AI</span>
             </div>
-            <h3 class="proj-title">Quran Combo Gift Store<br>Landing Page</h3>
-            <p class="proj-desc">
-              Designed and deployed a high-converting product landing page for a Quran combo gift set brand. Integrated Facebook Pixel + server-side CAPI, achieving a 10.8% conversion rate — more than 4× the industry average — and an Event Match Quality score of 9.2.
-            </p>
+            <h3 class="proj-title">AI Customer<br>Support Agent</h3>
+            <p class="proj-desc">Intelligent support agent that answers product questions, handles complaints, tracks orders and routes complex issues to humans — reducing response time from hours to milliseconds. 94% resolution rate, 24/7 active.</p>
             <div class="proj-features">
-              <div class="proj-feat"><span class="pf-bullet"></span><span>Facebook Pixel + CAPI dual-signal tracking</span></div>
-              <div class="proj-feat"><span class="pf-bullet"></span><span>10.8% CVR — industry average is 2.5%</span></div>
-              <div class="proj-feat"><span class="pf-bullet"></span><span>Order form → WhatsApp + Google Sheets</span></div>
+              <div class="proj-feat"><span class="pf-bullet"></span><span>Order status tracking and updates</span></div>
+              <div class="proj-feat"><span class="pf-bullet"></span><span>Product FAQs and policy information</span></div>
+              <div class="proj-feat"><span class="pf-bullet"></span><span>Smart human escalation for complex issues</span></div>
+              <div class="proj-feat"><span class="pf-bullet"></span><span>WhatsApp & Messenger integration</span></div>
             </div>
             <div class="proj-tech-row">
-              <span class="pt">HTML/CSS/JS</span>
-              <span class="pt">Facebook CAPI</span>
-              <span class="pt">GTM</span>
-              <span class="pt">Apps Script</span>
+              <span class="pt">OpenAI API</span><span class="pt">ManyChat</span>
+              <span class="pt">n8n</span><span class="pt">WhatsApp</span><span class="pt">Messenger</span>
             </div>
             <div class="proj-result-row">
-              <div class="pr-stat"><div class="pr-val">10.8%</div><div class="pr-lbl">Conv. Rate</div></div>
-              <div class="pr-stat"><div class="pr-val">9.2</div><div class="pr-lbl">Match Score</div></div>
-              <div class="pr-stat"><div class="pr-val">+42%</div><div class="pr-lbl">ROAS Gain</div></div>
+              <div class="pr-stat"><div class="pr-val">94%</div><div class="pr-lbl">AI Resolved</div></div>
+              <div class="pr-stat"><div class="pr-val">~800ms</div><div class="pr-lbl">Avg Reply</div></div>
+              <div class="pr-stat"><div class="pr-val">24/7</div><div class="pr-lbl">Active</div></div>
+            </div>
+            <div style="display:flex;gap:10px;margin-top:20px;">
+              <a href="service-ai.html" class="srv-learn-btn magnetic" style="font-family:var(--f-mono);font-size:11px;padding:9px 18px;border:1px solid var(--bdr);color:var(--text);border-radius:7px;text-decoration:none;transition:all .2s;display:flex;align-items:center;gap:6px;">View AI Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+              <a href="contact.html" class="btn-lime" style="font-size:12px;padding:9px 18px;">Get This →</a>
             </div>
           </div>
-          <div class="proj-right proj-right-sm">
-            <a href="https://qurancombo.puspaloygiftzone.shop/" target="_blank" rel="noopener" class="proj-live-link tilt-card">
-              <div class="pll-inner">
-                <div class="pll-icon">🔗</div>
-                <div class="pll-text">View Live Site</div>
-                <div class="pll-url">qurancombo.puspaloygiftzone.shop</div>
-                <div class="pll-arrow">→</div>
+
+          <div class="ai-card-right">
+            <div class="ai-chat-wrap">
+              <div class="ai-chat-header">
+                <div class="ai-chat-dots">
+                  <span class="ai-chat-dot" style="background:#ef4444"></span>
+                  <span class="ai-chat-dot" style="background:#f59e0b"></span>
+                  <span class="ai-chat-dot" style="background:#22c55e"></span>
+                </div>
+                <div class="ai-chat-title">
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                  zyntra_support_agent.ai — Live Session
+                </div>
+                <div class="ai-live-badge-sm"><span style="width:5px;height:5px;border-radius:50%;background:#22c55e;box-shadow:0 0 5px #22c55e;display:block;"></span>ZYNTRA AI</div>
               </div>
-            </a>
+              <div class="ai-msgs" id="pfSupportMsgs"></div>
+              <div class="ai-input-row">
+                <span class="ai-prompt-sym">$</span>
+                <input type="text" class="ai-input-field" id="pfSupportInput" placeholder="Ask a support question…" autocomplete="off">
+                <button class="ai-send-btn" id="pfSupportSend">SEND</button>
+              </div>
+              <div class="ai-footer-stats">
+                <div>Resolved by AI: <span>94%</span></div>
+                <div>Avg Reply: <span>~800ms</span></div>
+                <div>Active: <span>24/7</span></div>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-      </div><!-- /projects-list -->
+      <!-- ── IoT GAS DETECTOR ── -->
+      <div class="project-card featured-project reveal" data-delay="120">
+        <div class="proj-left">
+          <div class="proj-meta-row">
+            <span class="proj-badge iot">IoT · Hardware</span>
+            <span class="proj-yr">2024</span>
+            <span class="proj-tag">🏆 Signature Hardware Project</span>
+          </div>
+          <h3 class="proj-title">Gas Leakage<br>Detector System</h3>
+          <p class="proj-desc">A real-time kitchen safety device that continuously monitors gas concentrations using MQ-2/MQ-135 sensors. When dangerous levels are detected, the system triggers a loud alarm, sends an instant alert email and displays live AQI and gas values on an LCD/OLED display. Built using Arduino/ESP32 with WiFi connectivity.</p>
+          <div class="proj-features">
+            <div class="proj-feat"><span class="pf-bullet"></span><span>Real-time gas concentration monitoring (MQ-2/MQ-135)</span></div>
+            <div class="proj-feat"><span class="pf-bullet"></span><span>Audible alarm triggers when threshold exceeded</span></div>
+            <div class="proj-feat"><span class="pf-bullet"></span><span>Instant mobile alert via email notification</span></div>
+            <div class="proj-feat"><span class="pf-bullet"></span><span>Live digital display — AQI index &amp; PPM values</span></div>
+            <div class="proj-feat"><span class="pf-bullet"></span><span>WiFi-connected via ESP8266/ESP32 module</span></div>
+          </div>
+          <div class="proj-tech-row">
+            <span class="pt">Arduino / ESP32</span><span class="pt">MQ-2 Sensor</span>
+            <span class="pt">LCD Display</span><span class="pt">SMTP Email</span>
+            <span class="pt">C++ / Python</span><span class="pt">WiFi IoT</span>
+          </div>
+        </div>
+        <div class="proj-right">
+          <!-- IoT interactive demo (existing) -->
+          <div class="iot-demo-card tilt-card">
+            <div class="iot-demo-header">
+              <div class="iot-demo-dots"><span></span><span></span><span></span></div>
+              <span class="iot-demo-title">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                gas_detector.ino — LIVE
+              </span>
+              <span class="iot-demo-status">
+                <span class="iot-status-dot safe" id="gasStatusDot"></span>
+                <span id="gasStatusText">SAFE</span>
+              </span>
+            </div>
+            <div class="gas-gauge-wrap">
+              <svg class="gas-gauge" viewBox="0 0 200 120" width="200" height="120">
+                <path d="M 20,110 A 80,80 0 0 1 180,110" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="14" stroke-linecap="round"/>
+                <path d="M 20,110 A 80,80 0 0 1 90,34" fill="none" stroke="rgba(34,197,94,0.4)" stroke-width="14" stroke-linecap="round"/>
+                <path d="M 90,34 A 80,80 0 0 1 140,24" fill="none" stroke="rgba(245,158,11,0.4)" stroke-width="14" stroke-linecap="round"/>
+                <path d="M 140,24 A 80,80 0 0 1 180,110" fill="none" stroke="rgba(255,59,107,0.35)" stroke-width="14" stroke-linecap="round"/>
+                <path d="M 20,110 A 80,80 0 0 1 180,110" fill="none" stroke="#22c55e" stroke-width="14" stroke-linecap="round" stroke-dasharray="251" id="gaugeFill" class="gauge-fill-anim"/>
+                <text x="100" y="100" text-anchor="middle" style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;fill:#22c55e;" id="gaugeVal">142</text>
+                <text x="100" y="115" text-anchor="middle" style="font-family:'JetBrains Mono',monospace;font-size:9px;fill:#3a3d52;">PPM</text>
+              </svg>
+            </div>
+            <div class="iot-readings">
+              <div class="iot-reading"><div class="ir-label">GAS LEVEL</div><div class="ir-val safe" id="gasVal">142 PPM</div><div class="ir-bar"><div class="ir-fill safe-fill" id="gasBar" style="width:18%"></div></div></div>
+              <div class="iot-reading"><div class="ir-label">AQI INDEX</div><div class="ir-val cyan-t" id="aqiVal">28</div><div class="ir-bar"><div class="ir-fill cyan-fill" id="aqiBar" style="width:22%"></div></div></div>
+              <div class="iot-reading"><div class="ir-label">TEMPERATURE</div><div class="ir-val lime-t" id="tempVal">27.4°C</div><div class="ir-bar"><div class="ir-fill lime-fill" id="tempBar" style="width:55%"></div></div></div>
+            </div>
+            <div class="iot-alert-row">
+              <div class="iot-alert-item safe-alert"><span>🔔 Alarm</span><span id="alarmState" class="ial safe-ial">OFF</span></div>
+              <div class="iot-alert-item"><span>📧 Email Alert</span><span class="ial standby-ial">STANDBY</span></div>
+              <div class="iot-alert-item"><span>📡 WiFi</span><span class="ial connected-ial">CONNECTED</span></div>
+            </div>
+            <button class="iot-sim-btn magnetic" id="simGasBtn">⚠️ Simulate Gas Leak</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ZYNTRA VERSE WEBSITE ── -->
+      <div class="project-card reveal" data-delay="160">
+        <div class="proj-left">
+          <div class="proj-meta-row"><span class="proj-badge web-badge">Web · Design</span><span class="proj-yr">2025</span></div>
+          <h3 class="proj-title">ZYNTRA VERSE<br>Studio Website</h3>
+          <p class="proj-desc">Designed and built the complete ZYNTRA VERSE company website from scratch — 10+ pages including service detail pages, showcase, contact with Google Sheets integration, thank-you flow and premium design system. Achieved 98/100 Lighthouse performance score.</p>
+          <div class="proj-features">
+            <div class="proj-feat"><span class="pf-bullet"></span><span>10+ page website with consistent design system</span></div>
+            <div class="proj-feat"><span class="pf-bullet"></span><span>Custom cursor, particle canvas, 3D tilt cards</span></div>
+            <div class="proj-feat"><span class="pf-bullet"></span><span>Google Apps Script form → Sheets → Email pipeline</span></div>
+          </div>
+          <div class="proj-tech-row"><span class="pt">HTML5</span><span class="pt">CSS3</span><span class="pt">Vanilla JS</span><span class="pt">Chart.js</span><span class="pt">Apps Script</span></div>
+          <div class="proj-result-row">
+            <div class="pr-stat"><div class="pr-val">98</div><div class="pr-lbl">Lighthouse</div></div>
+            <div class="pr-stat"><div class="pr-val">10+</div><div class="pr-lbl">Pages</div></div>
+            <div class="pr-stat"><div class="pr-val">&lt;1.5s</div><div class="pr-lbl">Load Time</div></div>
+          </div>
+        </div>
+        <div class="proj-right proj-right-sm">
+          <div class="proj-visual-box tilt-card" style="border-color:rgba(0,232,255,0.15);">
+            <div class="pvb-header" style="border-color:rgba(0,232,255,0.1);">
+              <span class="pvb-dot" style="background:var(--cyan)"></span>
+              <span style="font-family:var(--f-mono);font-size:9px;color:var(--muted);">zyntraverse.online</span>
+              <span style="font-family:var(--f-mono);font-size:8px;color:#22c55e;margin-left:auto;">● Live</span>
+            </div>
+            <div class="pvb-body" style="display:grid;gap:6px;">
+              <div style="height:32px;background:rgba(184,255,46,0.06);border:1px solid rgba(184,255,46,0.12);border-radius:6px;display:flex;align-items:center;padding:0 10px;"><div style="width:8px;height:8px;border-radius:50%;background:var(--lime);margin-right:8px;"></div><div style="font-family:var(--f-mono);font-size:9px;color:var(--lime);">HERO SECTION</div></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;">
+                <div style="height:40px;background:rgba(255,255,255,0.02);border:1px solid var(--bdr);border-radius:5px;"></div>
+                <div style="height:40px;background:rgba(255,255,255,0.02);border:1px solid var(--bdr);border-radius:5px;"></div>
+                <div style="height:40px;background:rgba(255,255,255,0.02);border:1px solid var(--bdr);border-radius:5px;"></div>
+              </div>
+              <div style="height:24px;background:rgba(0,232,255,0.04);border:1px solid rgba(0,232,255,0.1);border-radius:5px;"></div>
+              <div style="display:flex;align-items:center;gap:6px;"><div style="font-family:var(--f-mono);font-size:9px;color:var(--muted);">Performance</div><div style="flex:1;height:4px;background:var(--bdr);border-radius:99px;overflow:hidden;"><div style="width:98%;height:100%;background:var(--lime);border-radius:99px;"></div></div><div style="font-family:var(--f-display);font-size:13px;font-weight:900;color:var(--lime);">98</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════
+  <!-- ══════════════════════════════════════════════════════════
+       LANDING PAGES SLIDER
+  ══════════════════════════════════════════════════════════ -->
+  <section class="pf-section lp-section" id="landing-pages">
+    <div class="pf-section-inner">
+
+      <div class="pf-sec-head reveal">
+        <div class="sec-eyebrow">
+          <span class="se-num">03</span><span class="se-line"></span><span class="se-txt">Landing Pages</span>
+        </div>
+        <div class="pf-sec-title-row">
+          <h2 class="sec-title">High-Converting<br><em class="em-lime">Landing Pages</em></h2>
+          <p class="sec-sub">Pages engineered for maximum conversion with Facebook CAPI and server-side tracking. Average CVR: 10.8% vs industry 2.5%.</p>
+        </div>
+      </div>
+
+      <div class="lp-slider-outer reveal">
+        <button class="lp-nav-btn lp-prev" id="lpPrev" disabled>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+
+        <div class="lp-viewport" id="lpViewport">
+          <div class="lp-track" id="lpTrack">
+
+            <!-- Card 1: Quran Combo LIVE -->
+            <div class="lp-card is-active" data-index="0" data-url="https://qurancombo.puspaloygiftzone.shop/">
+              <div class="lp-card-top">
+                <span class="lp-badge live-badge">● Live</span>
+                <span class="lp-yr">2024</span>
+              </div>
+              <div class="lp-card-emoji">📖</div>
+              <h3 class="lp-card-name">Quran Combo<br>Gift Store</h3>
+              <p class="lp-card-desc">Religious gift combo page with FB CAPI dual-signal tracking and high-converting Bangla copy.</p>
+              <div class="lp-card-metrics">
+                <div class="lp-metric"><div class="lp-mval">10.8%</div><div class="lp-mlbl">CVR</div></div>
+                <div class="lp-metric"><div class="lp-mval">9.2</div><div class="lp-mlbl">EMQ</div></div>
+                <div class="lp-metric"><div class="lp-mval">+42%</div><div class="lp-mlbl">ROAS</div></div>
+              </div>
+              <div class="lp-card-actions">
+                <button class="lp-preview-btn desktop-only" data-url="https://qurancombo.puspaloygiftzone.shop/">👁 Preview</button>
+                <a href="https://qurancombo.puspaloygiftzone.shop/" target="_blank" class="lp-visit-btn">Visit →</a>
+              </div>
+            </div>
+
+            <!-- Card 2: Puspaloy Gift Zone LIVE -->
+            <div class="lp-card" data-index="1" data-url="https://puspaloygiftzone.shop/">
+              <div class="lp-card-top">
+                <span class="lp-badge live-badge">● Live</span>
+                <span class="lp-yr">2024</span>
+              </div>
+              <div class="lp-card-emoji">🎁</div>
+              <h3 class="lp-card-name">Puspaloy<br>Gift Zone</h3>
+              <p class="lp-card-desc">Gift and gadget e-commerce store with WhatsApp ordering and Google Sheets integration.</p>
+              <div class="lp-card-metrics">
+                <div class="lp-metric"><div class="lp-mval">8.5%</div><div class="lp-mlbl">CVR</div></div>
+                <div class="lp-metric"><div class="lp-mval">9.0</div><div class="lp-mlbl">EMQ</div></div>
+                <div class="lp-metric"><div class="lp-mval">+35%</div><div class="lp-mlbl">ROAS</div></div>
+              </div>
+              <div class="lp-card-actions">
+                <button class="lp-preview-btn desktop-only" data-url="https://puspaloygiftzone.shop/">👁 Preview</button>
+                <a href="https://puspaloygiftzone.shop/" target="_blank" class="lp-visit-btn">Visit →</a>
+              </div>
+            </div>
+
+            <!-- Card 3: Third landing page LIVE -->
+            <div class="lp-card" data-index="2" data-url="">
+              <div class="lp-card-top">
+                <span class="lp-badge live-badge">● Live</span>
+                <span class="lp-yr">2024</span>
+              </div>
+              <div class="lp-card-emoji">🕌</div>
+              <h3 class="lp-card-name">Islamic Gift<br>Collection</h3>
+              <p class="lp-card-desc">Premium Islamic gift landing page with advanced funnel tracking and conversion-optimized layout.</p>
+              <div class="lp-card-metrics">
+                <div class="lp-metric"><div class="lp-mval">9.1%</div><div class="lp-mlbl">CVR</div></div>
+                <div class="lp-metric"><div class="lp-mval">8.8</div><div class="lp-mlbl">EMQ</div></div>
+                <div class="lp-metric"><div class="lp-mval">+38%</div><div class="lp-mlbl">ROAS</div></div>
+              </div>
+              <div class="lp-card-actions">
+                <a href="contact.html" class="lp-visit-btn">Request Demo →</a>
+              </div>
+            </div>
+
+            <!-- Card 4: Placeholder -->
+            <div class="lp-card lp-card-placeholder" data-index="3">
+              <div class="lp-ph-wrap">
+                <div class="lp-ph-icon">+</div>
+                <div class="lp-ph-text">Coming Soon</div>
+                <div class="lp-ph-sub">Next landing page project</div>
+                <div class="lp-badge placeholder-badge" style="margin-top:14px;">Slot Available</div>
+              </div>
+            </div>
+
+            <!-- Card 5: Placeholder -->
+            <div class="lp-card lp-card-placeholder" data-index="4">
+              <div class="lp-ph-wrap">
+                <div class="lp-ph-icon">+</div>
+                <div class="lp-ph-text">Coming Soon</div>
+                <div class="lp-ph-sub">Future project slot</div>
+                <div class="lp-badge placeholder-badge" style="margin-top:14px;">Slot Available</div>
+              </div>
+            </div>
+
+          </div><!-- /lp-track -->
+        </div><!-- /lp-viewport -->
+
+        <button class="lp-nav-btn lp-next" id="lpNext">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+
+      <!-- Dots -->
+      <div class="lp-dots-wrap" id="lpDots">
+        <span class="lp-dot active"></span>
+        <span class="lp-dot"></span>
+        <span class="lp-dot"></span>
+        <span class="lp-dot"></span>
+        <span class="lp-dot"></span>
+      </div>
+
+      <!-- Desktop preview panel -->
+      <div class="lp-preview-panel desktop-only" id="lpPreviewPanel">
+        <div class="lp-preview-topbar">
+          <div style="display:flex;gap:5px;">
+            <span class="lpd r"></span><span class="lpd y"></span><span class="lpd g"></span>
+          </div>
+          <span class="lp-preview-url-bar" id="lpPreviewUrl">Loading…</span>
+          <button class="lp-preview-close" id="lpPreviewClose">✕ Close</button>
+        </div>
+        <iframe id="lpFrame" class="lp-frame" src="" title="Landing Page Preview" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       PUSPALOY ECOMMERCE
+  ══════════════════════════════════════════════════════════ -->
+  <section class="pf-section pf-section-dark" id="ecommerce">
+    <div class="pf-section-inner">
+
+      <div class="pf-sec-head reveal">
+        <div class="sec-eyebrow">
+          <span class="se-num">04</span><span class="se-line"></span><span class="se-txt">E-Commerce</span>
+        </div>
+        <div class="pf-sec-title-row">
+          <h2 class="sec-title">E-Commerce<br><em class="em-lime">Platform</em></h2>
+          <p class="sec-sub">Full-stack gift and gadget selling platform built for the Bangladeshi market.</p>
+        </div>
+      </div>
+
+      <div class="ec-card reveal tilt-card">
+        <div class="ec-left">
+          <div class="proj-meta-row">
+            <span class="proj-badge" style="background:rgba(168,85,247,0.1);color:#a855f7;border:1px solid rgba(168,85,247,0.2);">E-commerce · Web</span>
+            <span class="proj-yr">2024</span>
+            <span class="proj-tag">🛍️ Puspaloy</span>
+          </div>
+          <h3 class="proj-title">Puspaloy<br>Gift Zone</h3>
+          <p class="proj-desc">Full-featured gift and gadget selling platform with product catalog, order management, WhatsApp checkout, and Facebook CAPI tracking. Built for high-traffic Bangladeshi e-commerce market with mobile-first design.</p>
+          <div class="proj-features">
+            <div class="proj-feat"><span class="pf-bullet"></span><span>Full product catalog with categories and filtering</span></div>
+            <div class="proj-feat"><span class="pf-bullet"></span><span>WhatsApp-powered ordering and confirmation system</span></div>
+            <div class="proj-feat"><span class="pf-bullet"></span><span>Google Sheets order database integration</span></div>
+            <div class="proj-feat"><span class="pf-bullet"></span><span>Facebook Pixel + CAPI dual-signal tracking</span></div>
+            <div class="proj-feat"><span class="pf-bullet"></span><span>Mobile-first responsive design for BD market</span></div>
+          </div>
+          <div class="proj-tech-row">
+            <span class="pt">HTML/CSS/JS</span><span class="pt">Apps Script</span>
+            <span class="pt">WhatsApp API</span><span class="pt">Facebook CAPI</span><span class="pt">Firebase</span>
+          </div>
+          <div class="proj-result-row">
+            <div class="pr-stat"><div class="pr-val">150+</div><div class="pr-lbl">Daily Visitors</div></div>
+            <div class="pr-stat"><div class="pr-val">8.5%</div><div class="pr-lbl">Conv. Rate</div></div>
+            <div class="pr-stat"><div class="pr-val">&lt;2s</div><div class="pr-lbl">Load Time</div></div>
+          </div>
+        </div>
+
+        <div class="ec-right">
+          <div class="ec-preview-card">
+            <div class="ec-preview-header">
+              <div class="ec-dots"><span></span><span></span><span></span></div>
+              <span class="ec-url-bar">puspaloygiftzone.shop</span>
+              <a href="https://puspaloygiftzone.shop/" target="_blank" class="ec-ext-link" title="Open in new tab">↗</a>
+            </div>
+            <div class="ec-preview-body" id="ecPreviewBody">
+              <div class="ec-placeholder" id="ecPlaceholder">
+                <div class="ec-ph-icon">🛍️</div>
+                <div class="ec-ph-name">Puspaloy Gift Zone</div>
+                <div class="ec-ph-sub">Gift & Gadget Store · Bangladesh</div>
+                <button class="ec-load-btn magnetic desktop-only" id="ecLoadBtn">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  Load Preview
+                </button>
+                <a href="https://puspaloygiftzone.shop/" target="_blank" class="ec-mobile-visit" id="ecMobileVisit">
+                  Visit Site →
+                </a>
+              </div>
+              <iframe id="ecIframe" class="ec-iframe" src="" title="Puspaloy Gift Zone Preview" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" style="display:none;"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+ <!-- ═══════════════════════════════════════════
        SECTION 04 — JOURNEY / TIMELINE
   ═══════════════════════════════════════════ -->
   <section class="pf-section" id="journey">
@@ -918,7 +945,7 @@
 
       <div class="pf-sec-head reveal">
         <div class="sec-eyebrow">
-          <span class="se-num">03</span>
+          <span class="se-num">05</span>
           <span class="se-line"></span>
           <span class="se-txt">Journey</span>
         </div>
@@ -1007,12 +1034,10 @@
           <div class="tl-right tilt-card" style="border-color:var(--bdr-lime);">
             <div class="tl-badge" style="color:var(--lime);background:var(--lime-dim);border-color:var(--bdr-lime)">
               <span class="badge-dot" style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--lime);box-shadow:0 0 5px var(--lime);margin-right:4px;"></span>
-              Now
+              Present
             </div>
-            <h3 class="tl-title">Founded ZYNTRA VERSE</h3>
-            <p class="tl-body">Founded ZYNTRA VERSE as a solo AI automation studio focused on building smart systems for e-commerce and small businesses. 
-      Started by working with local brands, delivering Facebook automation, AI chatbots, and workflow solutions to streamline operations and increase efficiency. 
-      Laid the foundation for a scalable technology-driven brand specializing in automation, data systems, and digital growth solutions.Currently studying at Chandpur Government University and College while simultaneously leading ZYNTRA VERSE as CEO. Balancing academic excellence with real-world technology entrepreneurship</p>
+            <h3 class="tl-title">Scaling ZYNTRA VERSE</h3>
+            <p class="tl-body">Leading ZYNTRA VERSE as an AI automation studio focused on practical business systems, conversion-first websites, and intelligent customer workflows. Alongside client work, continuing academic studies at Chandpur Government University and College while expanding the company into a stronger AI-first technology brand.</p>
             <div class="tl-tags"><span>AI Agents</span><span>ChatBot</span><span>CEO</span><span>AI Automation</span></div>
           </div>
         </div>
@@ -1029,7 +1054,7 @@
 
       <div class="pf-sec-head reveal">
         <div class="sec-eyebrow">
-          <span class="se-num">04</span>
+          <span class="se-num">06</span>
           <span class="se-line"></span>
           <span class="se-txt">About Me</span>
         </div>
@@ -1037,6 +1062,24 @@
       </div>
 
       <div class="about-grid reveal">
+        <div class="about-photo-card tilt-card">
+          <div class="apc-frame">
+            <img
+              src="assets/images/saifulceo.jpg"
+              alt="Saiful Islam"
+              class="apc-photo"
+              onerror="this.style.display='none';document.getElementById('apcFallback').style.display='flex';"
+            >
+            <div class="apc-fallback" id="apcFallback">
+              <span>SI</span>
+            </div>
+            <div class="apc-overlay">
+              <span class="apc-name">Saiful Islam</span>
+              <span class="apc-role">CEO · ZYNTRA VERSE</span>
+            </div>
+          </div>
+        </div>
+
         <!-- Left: philosophy -->
         <div class="about-left">
           <div class="about-quote">
@@ -1061,32 +1104,41 @@
             <div class="av-item"><span class="av-icon">🔬</span><span class="av-text">Always experimenting, always learning</span></div>
             <div class="av-item"><span class="av-icon">🤝</span><span class="av-text">Honesty first — no hidden charges, ever</span></div>
           </div>
+
+          <div class="about-workbench tilt-card">
+            <div class="abw-title">// How I Deliver</div>
+            <div class="abw-grid">
+              <div class="abw-item">
+                <span class="abw-step">01</span>
+                <h3>Business-First Thinking</h3>
+                <p>Every build starts from the real goal: more sales, less friction, stronger systems.</p>
+              </div>
+              <div class="abw-item">
+                <span class="abw-step">02</span>
+                <h3>Full-Stack Execution</h3>
+                <p>From interface to backend logic, automation and deployment, I keep the whole flow connected.</p>
+              </div>
+              <div class="abw-item">
+                <span class="abw-step">03</span>
+                <h3>Automation Mindset</h3>
+                <p>I look for repeatable work, then replace it with clean AI and workflow systems that scale.</p>
+              </div>
+              <div class="abw-item">
+                <span class="abw-step">04</span>
+                <h3>Founder-Level Ownership</h3>
+                <p>I stay close to delivery quality, performance, and the final result instead of handing work off blindly.</p>
+              </div>
+            </div>
+          </div>
         </div>
-<!-- About section photo -->
-<div class="about-photo-card tilt-card">
-  <div class="apc-frame">
-    <img
-      src="assets/images/saifulceo.jpg"
-      alt="Saiful Islam"
-      class="apc-photo"
-      onerror="this.style.display='none';document.getElementById('apcFallback').style.display='flex';"
-    >
-    <div class="apc-fallback" id="apcFallback">
-      <span>SI</span>
-    </div>
-    <div class="apc-overlay">
-      <span class="apc-name">Saiful Islam</span>
-      <span class="apc-role">CEO · ZYNTRA VERSE</span>
-    </div>
-  </div>
-</div>
+
         <!-- Right: fun stats & interests -->
         <div class="about-right">
           <div class="about-stat-card tilt-card">
             <div class="asc-title">// By the Numbers</div>
             <div class="asc-grid">
               <div class="asc-item"><div class="asc-val lime-t"><span class="counter" data-target="120">0</span>+</div><div class="asc-lbl">Projects Delivered</div></div>
-              <div class="asc-item"><div class="asc-val cyan-t"><span class="counter" data-target="5">0</span>yr</div><div class="asc-lbl">Coding Experience</div></div>
+              <div class="asc-item"><div class="asc-val cyan-t"><span class="counter" data-target="4">0</span>yr</div><div class="asc-lbl">Coding Experience</div></div>
               <div class="asc-item"><div class="asc-val lime-t"><span class="counter" data-target="8">0</span></div><div class="asc-lbl">Tech Domains</div></div>
               <div class="asc-item"><div class="asc-val cyan-t"><span class="counter" data-target="300">0</span>+</div><div class="asc-lbl">Automations Built</div></div>
             </div>
@@ -1128,7 +1180,7 @@
     <div class="cta-grid"></div>
     <div class="cta-inner">
       <div class="sec-eyebrow" style="justify-content:center">
-        <span class="se-num">05</span><span class="se-line"></span><span class="se-txt">Get In Touch</span>
+        <span class="se-num">07</span><span class="se-line"></span><span class="se-txt">Get In Touch</span>
       </div>
       <h2 class="cta-big">
         Let's Build<br>
@@ -1153,7 +1205,7 @@
     <div class="footer-top">
       <div class="ft-col ft-brand">
         <div class="ft-logo"><span class="fl-b">[</span>ZYNTRA<span class="fl-lime">VERSE</span><span class="fl-b">]</span></div>
-        <p class="ft-tag">AI Automation Studio<br>Dhaka, Bangladesh · Est. 2020</p>
+        <p class="ft-tag">AI Automation Studio<br>Dhaka, Bangladesh · Est. 2023</p>
         <div class="ft-online"><span class="rb-dot"></span>Open for new projects</div>
       </div>
       <div class="ft-col">
@@ -1187,7 +1239,12 @@
   </footer>
 
   <script src="app.js"></script>
-  <script src="portfolio.js"></script>
+  <script src="api-client.js"></script>
   <script src="zyntra-ai-widget.js"></script>
+  <script src="portfolio.js"></script>
 </body>
 </html>
+
+
+
+

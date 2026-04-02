@@ -1,523 +1,804 @@
 /* ══════════════════════════════════════════════════════════════
-   PORTFOLIO PAGE — portfolio.js
-   Interactive layer: typewriter · IoT sim · skill tabs · counters · tilt
+   PORTFOLIO ENHANCED — portfolio-enhanced.js
+   ZYNTRA AI Terminal · Landing Slider · Live Preview · AI Cards
 ══════════════════════════════════════════════════════════════ */
 'use strict';
 
-/* ────────────────────────────────────────
-   HERO STAGGER — reveals on load
-──────────────────────────────────────── */
-(function staggerHero() {
-  [1,2,3,4,5].forEach(n => {
-    const el = document.querySelector(`.stagger-${n}`);
-    if (!el) return;
-    el.style.opacity    = '1';
-    el.style.transform  = 'none';
-    setTimeout(() => {
-      el.style.transition = 'opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1)';
-      // Already visible
-    }, 200 + n * 150);
-  });
-})();
+function getPortfolioApi() {
+  return window.ZVApi || null;
+}
 
-/* ────────────────────────────────────────
-   TITLE TYPEWRITER
-──────────────────────────────────────── */
-(function initTitleTypewriter() {
-  const el = document.getElementById('pfTitleText');
-  if (!el) return;
+function hasBanglaText(text) {
+  return /[\u0980-\u09FF]/.test(text);
+}
 
-  const roles = [
-    'AI Engineer',
-    'Web Developer',
-    'IoT Builder',
-    'AI Automation Expert',
-    'Marketing Expert',
-    'AI Agent Builder',
-    'Founder & CEO',
-    'Python Programmer',
-  ];
+function getSignatureDemoReply(mode, userMsg) {
+  const text = userMsg.toLowerCase();
+  const bangla = hasBanglaText(userMsg);
 
-  let roleIdx = 0;
-  let charIdx = 0;
-  let deleting = false;
-  let waitTimer = null;
+  if (text.includes('price') || text.includes('pricing') || text.includes('cost') || text.includes('budget')) {
+    return bangla
+      ? 'প্রাইসিং প্রজেক্টের scope অনুযায়ী কাস্টম হয়। আপনি service type আর business goal বললে আমি demo call suggest করতে পারি।'
+      : 'Pricing is tailored to scope, integrations, and support needs. Share your business type and goal, and I can suggest the right demo path.';
+  }
 
-  function type() {
-    const current = roles[roleIdx];
+  if (text.includes('demo') || text.includes('book') || text.includes('contact')) {
+    return bangla
+      ? 'ডেমো বুক করতে আপনার নাম, Gmail, আর কোন service চান সেটা লিখুন। আমি সেটা booking flow-তে পাঠিয়ে দেব।'
+      : 'To book a demo, send your name, Gmail address, and the service you want. I will route that into the booking flow.';
+  }
 
-    if (deleting) {
-      charIdx--;
-      el.textContent = current.slice(0, charIdx);
-      if (charIdx === 0) {
-        deleting = false;
-        roleIdx = (roleIdx + 1) % roles.length;
-        waitTimer = setTimeout(type, 380);
-        return;
-      }
-      waitTimer = setTimeout(type, 42);
+  if (mode === 'order') {
+    return bangla
+      ? 'এই order engine Messenger, WhatsApp, আর website chat থেকে order collect করে Google Sheets বা CRM-এ log করতে পারে। Quantity, address, phone, delivery zone, আর confirmation পুরো flow automate করা যায়।'
+      : 'This order engine captures orders from Messenger, WhatsApp, and website chat, then logs everything into Google Sheets or a CRM. Quantity, address, phone, delivery zone, and confirmations can all be automated.';
+  }
+
+  if (mode === 'support') {
+    return bangla
+      ? 'এই support AI order status, FAQs, অভিযোগ, আর escalation handle করতে পারে 24/7। Complex issue হলে human handoff trigger করা যায়।'
+      : 'This support AI handles order status, FAQs, complaints, and escalations 24/7. When an issue is complex, it can trigger a clean handoff to a human agent.';
+  }
+
+  if (mode === 'academy') {
+    return bangla
+      ? 'ZYNTRA Academy mode automation strategy, Facebook CAPI, landing page conversion, আর n8n workflow নিয়ে structured guidance দেয়। চাইলে আমি আপনার use case অনুযায়ী step-by-step outline দিতে পারি।'
+      : 'ZYNTRA Academy mode explains automation strategy, Facebook CAPI, landing page conversion, and n8n workflows in a structured way. If you want, I can turn your use case into a step-by-step outline.';
+  }
+
+  return bangla
+    ? 'ZYNTRA AI automation, support agents, order systems, landing pages, আর tracking infrastructure build করে। আপনি চাইলে business use case বলুন, আমি best-fit solution explain করি।'
+    : 'ZYNTRA AI builds automation systems, support agents, order flows, landing pages, and tracking infrastructure. Tell me your use case and I will explain the best-fit solution.';
+}
+
+function getOrderDemoReply(userMsg) {
+  const text = userMsg.toLowerCase();
+  const bangla = hasBanglaText(userMsg);
+
+  if (text.includes('quran')) {
+    return bangla
+      ? 'Quran Combo Gift Set available আছে। Quantity, delivery area, আর phone number দিলে আমি demo order complete করে দিচ্ছি।'
+      : 'Quran Combo Gift Set is available. Send the quantity, delivery area, and phone number, and I will complete the demo order.';
+  }
+
+  if (text.includes('dhaka') || text.includes('outside')) {
+    return bangla
+      ? 'Dhaka delivery ৳60, আর Dhaka-এর বাইরে ৳120। এখন product name আর phone number দিলেই confirmation generate হবে।'
+      : 'Dhaka delivery is ৳60 and outside Dhaka is ৳120. Now send the product name and phone number to generate the confirmation.';
+  }
+
+  if ((text.includes('phone') || text.includes('number') || bangla && text.includes('নাম্বার')) && /\d{5,}/.test(text)) {
+    return 'Order confirmed in demo mode. [ORDER_DONE:{"product":"Quran Combo Gift Set","total":"৳1,260","area":"Dhaka","id":"ZV-2478"}]';
+  }
+
+  return bangla
+    ? 'ডেমো order শুরু হয়েছে। Product name, quantity, delivery area, আর phone number দিন।'
+    : 'Demo order started. Send the product name, quantity, delivery area, and phone number.';
+}
+
+function getSupportDemoReply(userMsg) {
+  const text = userMsg.toLowerCase();
+  const bangla = hasBanglaText(userMsg);
+
+  if (text.includes('return') || text.includes('refund') || (bangla && text.includes('রিটার্ন'))) {
+    return bangla
+      ? 'Damaged product হলে 7 দিনের মধ্যে return request করা যায়। Order ID আর issue details দিলে support team escalate করতে পারে।'
+      : 'Damaged products can be returned within 7 days. If you share the order ID and issue details, the support team can escalate it quickly.';
+  }
+
+  if (text.includes('where') || text.includes('track') || text.includes('order') || (bangla && text.includes('অর্ডার'))) {
+    return bangla
+      ? 'Demo data অনুযায়ী `#ZV-1247` আজ delivery-তে আছে, `#ZV-1301` আগামীকাল ship করবে, আর `#ZV-1182` already delivered। চাইলে আমি specific order status format দেখাতে পারি।'
+      : 'In the demo data, `#ZV-1247` is out for delivery today, `#ZV-1301` ships tomorrow, and `#ZV-1182` has already been delivered. I can also show the exact status response format if you want.';
+  }
+
+  return bangla
+    ? 'আমি order tracking, delivery info, return policy, আর complaint routing handle করতে পারি। একটি order ID বা প্রশ্ন লিখুন।'
+    : 'I can handle order tracking, delivery info, return policy, and complaint routing. Send an order ID or a support question.';
+}
+
+/* ══════════════════════════════════════════
+   ZYNTRA AI SIGNATURE TERMINAL
+══════════════════════════════════════════ */
+(function initSigAiTerminal() {
+  const chatEl  = document.getElementById('sigAiChat');
+  const inputEl = document.getElementById('sigAiInput');
+  const sendBtn = document.getElementById('sigAiSend');
+  const modesEl = document.getElementById('sigTermModes');
+  const chipsEl = document.getElementById('sigChips');
+  const cpuEl   = document.getElementById('sigCpu');
+  const ordEl   = document.getElementById('sigOrders');
+  if (!chatEl || !inputEl || !sendBtn) return;
+
+  const MODES = {
+    agent: {
+      welcome: `<strong>ZYNTRA AI Agent</strong> initialized 🤖<br>The flagship autonomous engine for e-commerce. Ask me anything about AI automation services.`,
+      prompt: `You are ZYNTRA AI Agent — the flagship autonomous AI for ZYNTRA VERSE, an AI automation studio in Dhaka, Bangladesh. You run inside the portfolio website of Saiful Islam, CEO of ZYNTRA VERSE. Be confident, technical, and concise (2–3 sentences max).
+
+ZYNTRA VERSE services: AI Automation (order bots, support agents, 24/7 pipelines), Database & CRM, Website Development, Landing Pages, Facebook CAPI marketing.
+Key stats: 247+ orders/day, 94% AI resolution rate, 1.3ms response, 99.9% uptime, 120+ projects, 50+ clients.
+TONE: Technical but accessible. Match user language — Bangla if they write Bangla, English otherwise.
+If they want a demo: collect name + email, then output [BOOK:{"name":"X","email":"X@y.com","service":"X"}] silently at end.`
+    },
+    order: {
+      welcome: `<strong>ZYNTRA Order Engine</strong> online 📦<br>Automated fulfilment pipeline — 247+ orders daily at 1.3ms. Ask me how it works.`,
+      prompt: `You are the ZYNTRA Order Engine — the automated fulfilment system. You explain AI-powered order automation for e-commerce.
+
+Order flow: Customer message → Intent detection → Data collection → Validation → DB write → Confirmation. Works on Facebook Messenger, WhatsApp, website. Connects to Google Sheets for logging.
+Keep replies SHORT — 2 sentences. Match language. If they want this for their business, collect name + email and output [BOOK:{"name":"X","email":"X@y.com","service":"AI Order Engine"}].`
+    },
+    support: {
+      welcome: `<strong>ZYNTRA Customer Assistant</strong> active 💬<br>24/7 support layer — 94% resolution rate. Test me with a real support scenario.`,
+      prompt: `You are ZYNTRA Customer Assistant — the AI support layer. Demonstrate what a real support bot feels like.
+
+Handle: FAQ, order tracking, complaints, smart escalation. 94% resolution rate, ~800ms reply time.
+TONE: Warm, professional, efficient. Short replies. Match language. To get started, collect name + email and output [BOOK:{"name":"X","email":"X@y.com","service":"Support AI"}].`
+    },
+    academy: {
+      welcome: `<strong>ZYNTRA Academy</strong> loaded 📚<br>Business intelligence layer. Ask about AI automation, Facebook marketing, or how to scale your business.`,
+      prompt: `You are ZYNTRA Academy — the knowledge layer. Teach about AI automation, digital marketing, and business scaling.
+
+Topics: How order bots work (ManyChat/n8n/OpenAI), Facebook Pixel & CAPI, landing page CRO, e-commerce automation in Bangladesh, prompt engineering, n8n workflows.
+TONE: Educator — clear, structured, with examples. Match language. If they want ZYNTRA to build something, collect name + email and output [BOOK:{"name":"X","email":"X@y.com","service":"General Inquiry"}].`
+    }
+  };
+
+  let currentMode = 'agent';
+  let history     = [];
+  let isWaiting   = false;
+  let bookingDone = false;
+  let chipsHidden = false;
+  let orders      = 247;
+
+  /* ── Live tickers ── */
+  setInterval(() => { if (cpuEl) cpuEl.textContent = (8 + Math.floor(Math.random() * 18)) + '%'; }, 2200);
+  setInterval(() => {
+    if (Math.random() > 0.45) { orders++; if (ordEl) ordEl.textContent = orders; }
+  }, 4000);
+
+  /* ── Helpers ── */
+  function scrollChat() { chatEl.scrollTop = chatEl.scrollHeight; }
+
+  function hideChips() {
+    if (!chipsHidden && chipsEl) { chipsEl.style.display = 'none'; chipsHidden = true; }
+  }
+
+  function addMsg(text, type) {
+    const row = document.createElement('div');
+    row.className = 'sig-msg' + (type === 'user' ? ' user-msg' : '');
+
+    if (type === 'sys' || type === 'ok') {
+      const b = document.createElement('div');
+      b.className = 'sig-bubble ' + type;
+      b.innerHTML = text;
+      row.appendChild(b);
     } else {
-      charIdx++;
-      el.textContent = current.slice(0, charIdx);
-      if (charIdx === current.length) {
-        deleting = true;
-        waitTimer = setTimeout(type, 2400);
-        return;
+      const av = document.createElement('span');
+      av.className = 'sig-av';
+      av.textContent = type === 'user' ? '>' : 'AI';
+      const b = document.createElement('div');
+      b.className = 'sig-bubble ' + (type === 'user' ? 'user' : 'bot');
+      b.innerHTML = text.replace(/\n/g, '<br>');
+      if (type === 'user') { row.appendChild(b); row.appendChild(av); }
+      else                 { row.appendChild(av); row.appendChild(b); }
+    }
+    chatEl.appendChild(row);
+    scrollChat();
+  }
+
+  function showTyping() {
+    const row = document.createElement('div');
+    row.id = 'sigTyping';
+    row.className = 'sig-msg';
+    const av = document.createElement('span');
+    av.className = 'sig-av'; av.textContent = 'AI';
+    const dots = document.createElement('div');
+    dots.className = 'sig-typing';
+    dots.innerHTML = '<div class="sig-td"></div><div class="sig-td"></div><div class="sig-td"></div>';
+    row.appendChild(av); row.appendChild(dots);
+    chatEl.appendChild(row); scrollChat();
+  }
+
+  function removeTyping() { document.getElementById('sigTyping')?.remove(); }
+
+  function setLoading(on) {
+    isWaiting = on;
+    inputEl.disabled = on;
+    sendBtn.disabled = on;
+    sendBtn.textContent = on ? '···' : 'EXEC';
+  }
+
+  function parseBooking(text) {
+    const m = text.match(/\[BOOK:\s*(\{[\s\S]*?\})\s*\]/);
+    if (!m) return null;
+    try { return JSON.parse(m[1]); } catch { return null; }
+  }
+
+  function stripMarker(text) {
+    return text.replace(/\[BOOK:\s*\{[\s\S]*?\}\s*\]/g, '').trim();
+  }
+
+  /* ── AI call via ZVApi (same pattern as showcase) ── */
+  async function callAI(userMsg) {
+    const mode = MODES[currentMode];
+    const api = getPortfolioApi();
+    history.push({ role: 'user', content: userMsg });
+
+    /* Primary: ZVApi OpenRouter */
+    if (api && api.openrouter) {
+      const data = await api.openrouter({
+        model: 'openai/gpt-4o-mini',
+        messages: [{ role: 'system', content: mode.prompt }, ...history],
+        max_tokens: 480,
+        temperature: 0.72,
+        referer: window.location.origin || 'https://zyntraverse.online',
+        title: 'ZYNTRA VERSE',
+      });
+      const reply = data.choices?.[0]?.message?.content || 'Error: no response.';
+      history.push({ role: 'assistant', content: reply });
+      return reply;
+    }
+
+    /* Fallback: Anthropic API (when zyntra-ai-widget.js provides it) */
+    if (api && api.anthropic) {
+      const data = await api.anthropic({
+        model: 'claude-haiku-4-5-20251001',
+        system: mode.prompt,
+        messages: history,
+        max_tokens: 480,
+      });
+      const reply = data.content?.[0]?.text || 'Error: no response.';
+      history.push({ role: 'assistant', content: reply });
+      return reply;
+    }
+
+    const reply = getSignatureDemoReply(currentMode, userMsg);
+    history.push({ role: 'assistant', content: reply });
+    return reply;
+  }
+
+  async function sendMsg(text) {
+    if (!text || isWaiting) return;
+    hideChips();
+    addMsg(text, 'user');
+    setLoading(true);
+    showTyping();
+
+    try {
+      const reply  = await callAI(text);
+      removeTyping();
+      const booking = parseBooking(reply);
+      const clean   = booking ? stripMarker(reply) : reply;
+      if (clean) addMsg(clean, 'bot');
+      if (booking && !bookingDone) {
+        bookingDone = true;
+        setTimeout(async () => {
+          addMsg(`⏳ Sending confirmation to <strong>${booking.email}</strong>…`, 'sys');
+          const api = getPortfolioApi();
+          if (api && api.webhook) {
+            await api.webhook({
+              target: 'booking',
+              payload: { ...booking, timestamp: new Date().toISOString(), source: 'Portfolio — AI Terminal' }
+            }).catch(console.warn);
+          }
+          setTimeout(() => {
+            addMsg(`✅ Confirmed! Email sent to <strong>${booking.email}</strong>. Our team will reach out within 24h. Welcome, ${booking.name}! 🚀`, 'ok');
+          }, 1200);
+        }, 400);
       }
-      waitTimer = setTimeout(type, 72);
+    } catch (err) {
+      removeTyping();
+      addMsg(`System error: ${err.message}. Retry or contact <strong>zyntraverse@gmail.com</strong>`, 'bot');
+    } finally {
+      setLoading(false);
     }
   }
 
-  // Start after stagger delay
-  setTimeout(type, 1200);
+  function switchMode(mode) {
+    if (!MODES[mode]) return;
+    currentMode = mode;
+    history     = [];
+    bookingDone = false;
+
+    modesEl?.querySelectorAll('.sig-tab').forEach(t =>
+      t.classList.toggle('active', t.dataset.mode === mode)
+    );
+
+    chatEl.innerHTML = '';
+    if (chipsEl) { chipsEl.style.display = ''; chipsHidden = false; }
+    addMsg(MODES[mode].welcome, 'bot');
+  }
+
+  /* ── Events ── */
+  sendBtn.addEventListener('click', () => {
+    const t = inputEl.value.trim(); inputEl.value = ''; sendMsg(t);
+  });
+  inputEl.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const t = inputEl.value.trim(); inputEl.value = ''; sendMsg(t);
+    }
+  });
+
+  modesEl?.querySelectorAll('.sig-tab').forEach(tab =>
+    tab.addEventListener('click', () => switchMode(tab.dataset.mode))
+  );
+
+  chipsEl?.querySelectorAll('.sig-chip').forEach(chip =>
+    chip.addEventListener('click', () => sendMsg(chip.dataset.msg))
+  );
+
+  /* ── Init ── */
+  setTimeout(() => addMsg(MODES['agent'].welcome, 'bot'), 1200);
 })();
 
-/* ────────────────────────────────────────
-   SCROLL REVEAL
-──────────────────────────────────────── */
-const revObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    const d = parseInt(e.target.dataset.delay || 0);
-    setTimeout(() => e.target.classList.add('visible'), d);
-    revObs.unobserve(e.target);
+
+/* ══════════════════════════════════════════
+   ORDER BOT (in Projects section)
+══════════════════════════════════════════ */
+(function initOrderBot() {
+  const msgsEl  = document.getElementById('pfOrderMsgs');
+  const inputEl = document.getElementById('pfOrderInput');
+  const sendBtn = document.getElementById('pfOrderSend');
+  const countEl = document.getElementById('pfOrderCount');
+  if (!msgsEl || !inputEl || !sendBtn) return;
+
+  const PROMPT = `You are ZYNTRA Order Bot — a demo AI order system for Bangladeshi e-commerce. You collect orders, confirm addresses, and log everything.
+
+Demo products: Quran Combo Gift Set (৳1,200), Prayer Mat Premium (৳850), Attar Gift Box (৳1,500), Islamic Book Collection (৳2,000).
+Order flow: Greet → Take order → Confirm quantity → Get delivery area → Get phone → Calculate total (Delivery: ৳60 Dhaka, ৳120 outside) → Generate Order ID (format: ZV-XXXX) → Confirm.
+Rules: Keep replies SHORT (1-3 sentences). Match language (Bangla/English/Banglish). Warm and efficient tone.
+When order confirmed, output silently: [ORDER_DONE:{"product":"X","total":"৳X","area":"X","id":"ZV-XXXX"}]`;
+
+  const history = [];
+  let isWaiting = false;
+  let count = 247;
+
+  setInterval(() => {
+    if (Math.random() > 0.5) { count++; if (countEl) countEl.textContent = count; }
+  }, 5000);
+
+  function scrollMsgs() { msgsEl.scrollTop = msgsEl.scrollHeight; }
+
+  function addMsg(text, type) {
+    const wrap = document.createElement('div');
+    wrap.className = 'ai-msg' + (type === 'user' ? ' user' : '');
+
+    if (type === 'ok') {
+      const b = document.createElement('div');
+      b.className = 'ai-bubble ok'; b.innerHTML = text;
+      wrap.appendChild(b);
+    } else {
+      const av = document.createElement('span');
+      av.className = 'ai-av'; av.textContent = type === 'user' ? '>' : 'AI';
+      const b = document.createElement('div');
+      b.className = 'ai-bubble ' + (type === 'user' ? 'user' : 'bot');
+      b.innerHTML = text.replace(/\n/g, '<br>');
+      if (type === 'user') { wrap.appendChild(b); wrap.appendChild(av); }
+      else                 { wrap.appendChild(av); wrap.appendChild(b); }
+    }
+    msgsEl.appendChild(wrap); scrollMsgs();
+  }
+
+  function showTyping() {
+    const t = document.createElement('div');
+    t.id = 'obTyping'; t.className = 'ai-msg';
+    t.innerHTML = `<span class="ai-av">AI</span><div class="ai-typing"><div class="ai-td"></div><div class="ai-td"></div><div class="ai-td"></div></div>`;
+    msgsEl.appendChild(t); scrollMsgs();
+  }
+  function removeTyping() { document.getElementById('obTyping')?.remove(); }
+
+  function setLoading(on) {
+    isWaiting = on; inputEl.disabled = on; sendBtn.disabled = on;
+    sendBtn.textContent = on ? '···' : 'SEND';
+  }
+
+  async function sendMsg(text) {
+    if (!text || isWaiting) return;
+    addMsg(text, 'user');
+    setLoading(true); showTyping();
+    try {
+      const api = getPortfolioApi();
+      history.push({ role: 'user', content: text });
+      let reply = getOrderDemoReply(text);
+
+      if (api && api.openrouter) {
+        const data = await api.openrouter({
+          model: 'openai/gpt-4o-mini',
+          messages: [{ role: 'system', content: PROMPT }, ...history],
+          max_tokens: 300, temperature: 0.7,
+          referer: window.location.origin, title: 'ZYNTRA VERSE'
+        });
+        reply = data.choices?.[0]?.message?.content || reply;
+      }
+      history.push({ role: 'assistant', content: reply });
+
+      removeTyping();
+      const clean = reply.replace(/\[ORDER_DONE:[\s\S]*?\]/g, '').trim();
+      if (clean) addMsg(clean, 'bot');
+
+      const m = reply.match(/\[ORDER_DONE:\s*(\{[\s\S]*?\})\s*\]/);
+      if (m) {
+        try {
+          const o = JSON.parse(m[1]);
+          setTimeout(() => {
+            count++;
+            if (countEl) countEl.textContent = count;
+            addMsg(`✅ <strong>${o.id}</strong> confirmed! Total: <strong>${o.total}</strong>. Thank you!`, 'ok');
+          }, 600);
+        } catch {}
+      }
+    } catch (err) {
+      removeTyping();
+      addMsg('System error. Please try again.', 'bot');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  sendBtn.addEventListener('click', () => {
+    const t = inputEl.value.trim(); inputEl.value = ''; sendMsg(t);
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
-
-/* ────────────────────────────────────────
-   COUNTERS — smooth easing
-──────────────────────────────────────── */
-const cntObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    const el     = e.target;
-    const target = parseInt(el.dataset.target, 10);
-    const DUR    = 2200;
-    const start  = performance.now();
-    const ease   = t => 1 - Math.pow(1 - t, 4);
-
-    (function tick(now) {
-      const p = Math.min((now - start) / DUR, 1);
-      el.textContent = Math.round(ease(p) * target);
-      if (p < 1) requestAnimationFrame(tick);
-      else el.textContent = target;
-    })(performance.now());
-
-    cntObs.unobserve(el);
+  inputEl.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault(); const t = inputEl.value.trim(); inputEl.value = ''; sendMsg(t);
+    }
   });
-}, { threshold: 0.7 });
 
-document.querySelectorAll('.counter').forEach(c => cntObs.observe(c));
+  setTimeout(() => {
+    addMsg('স্বাগতম! 🛍️ আমি ZYNTRA Order Bot। কি অর্ডার করতে চান?<br><small style="opacity:0.5;font-size:10px;">(Write in Bangla or English)</small>', 'bot');
+  }, 2000);
+})();
 
-/* ────────────────────────────────────────
-   SKILL BAR ANIMATION
-──────────────────────────────────────── */
-const skillBarObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    e.target.classList.add('counted');
-    skillBarObs.unobserve(e.target);
+
+/* ══════════════════════════════════════════
+   SUPPORT AGENT (in Projects section)
+══════════════════════════════════════════ */
+(function initSupportAgent() {
+  const msgsEl  = document.getElementById('pfSupportMsgs');
+  const inputEl = document.getElementById('pfSupportInput');
+  const sendBtn = document.getElementById('pfSupportSend');
+  if (!msgsEl || !inputEl || !sendBtn) return;
+
+  const PROMPT = `You are ZYNTRA Customer Assistant — AI support for a Bangladeshi e-commerce store. Demo on ZYNTRA VERSE portfolio.
+
+Handle: Order tracking, FAQs, complaints, delivery info, returns. Escalate complex issues.
+Demo orders: #ZV-1247 (Quran Combo — out for delivery today), #ZV-1182 (Prayer Mat — delivered), #ZV-1301 (Attar Gift Box — ships tomorrow).
+Policies: Delivery 2-3 days Dhaka, 4-5 days outside. 7-day return if damaged.
+Rules: SHORT replies (1-3 sentences). Warm and empathetic. Match language (Bangla/English). Sound like a real support agent.`;
+
+  const history = [];
+  let isWaiting = false;
+
+  function scrollMsgs() { msgsEl.scrollTop = msgsEl.scrollHeight; }
+
+  function addMsg(text, type) {
+    const wrap = document.createElement('div');
+    wrap.className = 'ai-msg' + (type === 'user' ? ' user' : '');
+    const av = document.createElement('span');
+    av.className = 'ai-av'; av.textContent = type === 'user' ? '>' : 'AI';
+    const b = document.createElement('div');
+    b.className = 'ai-bubble ' + (type === 'user' ? 'user' : 'bot');
+    b.innerHTML = text.replace(/\n/g, '<br>');
+    if (type === 'user') { wrap.appendChild(b); wrap.appendChild(av); }
+    else                 { wrap.appendChild(av); wrap.appendChild(b); }
+    msgsEl.appendChild(wrap); scrollMsgs();
+  }
+
+  function showTyping() {
+    const t = document.createElement('div');
+    t.id = 'spTyping'; t.className = 'ai-msg';
+    t.innerHTML = `<span class="ai-av">AI</span><div class="ai-typing"><div class="ai-td"></div><div class="ai-td"></div><div class="ai-td"></div></div>`;
+    msgsEl.appendChild(t); scrollMsgs();
+  }
+  function removeTyping() { document.getElementById('spTyping')?.remove(); }
+
+  function setLoading(on) {
+    isWaiting = on; inputEl.disabled = on; sendBtn.disabled = on;
+    sendBtn.textContent = on ? '···' : 'SEND';
+  }
+
+  async function sendMsg(text) {
+    if (!text || isWaiting) return;
+    addMsg(text, 'user');
+    setLoading(true); showTyping();
+    try {
+      const api = getPortfolioApi();
+      history.push({ role: 'user', content: text });
+      let reply = getSupportDemoReply(text);
+      if (api && api.openrouter) {
+        const data = await api.openrouter({
+          model: 'openai/gpt-4o-mini',
+          messages: [{ role: 'system', content: PROMPT }, ...history],
+          max_tokens: 280, temperature: 0.65,
+          referer: window.location.origin, title: 'ZYNTRA VERSE'
+        });
+        reply = data.choices?.[0]?.message?.content || reply;
+      }
+      history.push({ role: 'assistant', content: reply });
+      removeTyping();
+      addMsg(reply, 'bot');
+    } catch {
+      removeTyping();
+      addMsg('System error. Please try again.', 'bot');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  sendBtn.addEventListener('click', () => {
+    const t = inputEl.value.trim(); inputEl.value = ''; sendMsg(t);
   });
-}, { threshold: 0.4 });
+  inputEl.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault(); const t = inputEl.value.trim(); inputEl.value = ''; sendMsg(t);
+    }
+  });
 
-document.querySelectorAll('.skill-item').forEach(el => skillBarObs.observe(el));
+  setTimeout(() => {
+    addMsg(`Hello! 👋 I'm ZYNTRA Customer Assistant. How can I help you today?<br><small style="opacity:0.5;font-size:10px;">(Try: "Where is my order?" or "What's your return policy?")</small>`, 'bot');
+  }, 2400);
+})();
 
-/* ────────────────────────────────────────
-   SKILL TABS
-──────────────────────────────────────── */
-(function initSkillTabs() {
-  const tabs   = document.querySelectorAll('.sk-tab');
-  const panels = document.querySelectorAll('.skill-panel');
-  if (!tabs.length) return;
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const target = tab.dataset.tab;
+/* ══════════════════════════════════════════
+   LANDING PAGE SLIDER
+══════════════════════════════════════════ */
+(function initLpSlider() {
+  const track       = document.getElementById('lpTrack');
+  const viewport    = document.getElementById('lpViewport');
+  const prevBtn     = document.getElementById('lpPrev');
+  const nextBtn     = document.getElementById('lpNext');
+  const dotsWrap    = document.getElementById('lpDots');
+  const previewPanel = document.getElementById('lpPreviewPanel');
+  const previewFrame = document.getElementById('lpFrame');
+  const previewUrl  = document.getElementById('lpPreviewUrl');
+  const previewClose = document.getElementById('lpPreviewClose');
+  if (!track || !viewport) return;
 
-      // Update active tab
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
+  const cards = Array.from(track.querySelectorAll('.lp-card'));
+  const dots  = dotsWrap ? Array.from(dotsWrap.querySelectorAll('.lp-dot')) : [];
+  let current = 0;
+  const isMobile = () => window.innerWidth < 860;
 
-      // Show correct panel
-      panels.forEach(p => {
-        p.classList.remove('active');
-        if (p.id === 'tab-' + target) {
-          p.classList.add('active');
+  function getCardWidth() {
+    return cards[0] ? cards[0].offsetWidth + 20 : 320; // card + gap
+  }
 
-          // Re-trigger skill bar animations for this panel
-          p.querySelectorAll('.skill-item').forEach(item => {
-            item.classList.remove('counted');
-            void item.offsetWidth; // reflow
-            setTimeout(() => item.classList.add('counted'), 80);
-          });
+  function goTo(idx) {
+    idx = Math.max(0, Math.min(cards.length - 1, idx));
+    current = idx;
 
-          // Re-observe counters inside this panel
-          p.querySelectorAll('.counter').forEach(c => {
-            c.textContent = '0';
-            cntObs.observe(c);
-          });
-        }
+    cards.forEach((c, i) => c.classList.toggle('is-active', i === idx));
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+
+    /* Center the active card */
+    const cardW = cards[0]?.offsetWidth || 300;
+    const gapW  = 20;
+    const viewW = viewport.offsetWidth;
+    const totalCardW = cardW + gapW;
+    const offset = idx * totalCardW - (viewW / 2) - (cardW / 2);
+    track.style.transform = `translateX(${-Math.max(0, offset)}px)`;
+
+    /* Update nav buttons */
+    if (prevBtn) prevBtn.disabled = idx === 0;
+    if (nextBtn) nextBtn.disabled = idx === cards.length - 1;
+
+    /* Close preview if card changes */
+    closePreview();
+  }
+
+  function openPreview(url) {
+    if (isMobile()) {
+      window.open(url, '_blank');
+      return;
+    }
+    if (!previewPanel || !previewFrame || !url) return;
+    if (previewUrl) previewUrl.textContent = url.replace(/^https?:\/\//, '');
+    previewFrame.src = '';
+    previewPanel.classList.remove('visible');
+
+    /* Show loading state */
+    previewFrame.style.display = 'none';
+    const loading = document.createElement('div');
+    loading.className = 'lp-preview-loading';
+    loading.id = 'lpLoadingState';
+    loading.innerHTML = `
+      <div style="width:32px;height:32px;border:2px solid rgba(184,255,46,0.2);border-top-color:var(--lime);border-radius:50%;animation:spin 1s linear infinite;"></div>
+      <span>Loading preview…</span>`;
+    previewPanel.appendChild(loading);
+    previewPanel.classList.add('visible');
+
+    setTimeout(() => {
+      if (previewFrame) {
+        previewFrame.src = url;
+        previewFrame.style.display = 'block';
+      }
+      document.getElementById('lpLoadingState')?.remove();
+    }, 300);
+
+    /* Smooth scroll to preview */
+    setTimeout(() => {
+      previewPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 400);
+  }
+
+  function closePreview() {
+    if (!previewPanel) return;
+    previewPanel.classList.remove('visible');
+    setTimeout(() => { if (previewFrame) previewFrame.src = ''; }, 400);
+  }
+
+  /* ── Events ── */
+  prevBtn?.addEventListener('click', () => goTo(current - 1));
+  nextBtn?.addEventListener('click', () => goTo(current + 1));
+
+  dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+
+  /* Click on card to focus it */
+  cards.forEach((card, i) => {
+    card.addEventListener('click', () => { if (current !== i) goTo(i); });
+  });
+
+  /* Preview buttons */
+  track.querySelectorAll('.lp-preview-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const url = btn.dataset.url;
+      if (url) openPreview(url);
+    });
+  });
+
+  previewClose?.addEventListener('click', closePreview);
+
+  /* Keyboard navigation */
+  document.addEventListener('keydown', e => {
+    const panel = document.getElementById('zyntra-ai') || document.getElementById('landing-pages');
+    if (!panel) return;
+    if (e.key === 'ArrowLeft') goTo(current - 1);
+    if (e.key === 'ArrowRight') goTo(current + 1);
+  });
+
+  /* Init */
+  goTo(0);
+  window.addEventListener('resize', () => goTo(current));
+})();
+
+
+/* ══════════════════════════════════════════
+   PUSPALOY / ECOMMERCE PREVIEW
+══════════════════════════════════════════ */
+(function initEcPreview() {
+  const loadBtn   = document.getElementById('ecLoadBtn');
+  const iframe    = document.getElementById('ecIframe');
+  const placehold = document.getElementById('ecPlaceholder');
+  const mobileBtn = document.getElementById('ecMobileVisit');
+  if (!loadBtn && !mobileBtn) return;
+
+  const EC_URL = 'https://puspaloygiftzone.shop/';
+
+  function isMobile() { return window.innerWidth < 860; }
+
+  function loadPreview() {
+    if (isMobile()) {
+      window.open(EC_URL, '_blank');
+      return;
+    }
+    if (!iframe || !placehold) return;
+
+    /* Loading state */
+    placehold.innerHTML = `
+      <div class="ec-loading-state">
+        <div class="ec-loading-spinner"></div>
+        <span style="font-family:var(--f-mono);font-size:12px;color:var(--muted)">Loading Puspaloy…</span>
+      </div>`;
+
+    iframe.src = EC_URL;
+    iframe.style.display = 'block';
+    iframe.addEventListener('load', () => {
+      placehold.style.display = 'none';
+    }, { once: true });
+  }
+
+  loadBtn?.addEventListener('click', loadPreview);
+  mobileBtn?.addEventListener('click', () => window.open(EC_URL, '_blank'));
+})();
+
+
+/* ══════════════════════════════════════════
+   ENHANCED REVEAL + SCROLL OBSERVER
+   (Supplement portfolio.js's existing reveal)
+══════════════════════════════════════════ */
+(function initEnhancedReveal() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const delay = parseInt(e.target.dataset.delay || 0);
+      setTimeout(() => e.target.classList.add('visible'), delay);
+      obs.unobserve(e.target);
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    if (!el.classList.contains('visible')) obs.observe(el);
+  });
+})();
+
+
+/* ══════════════════════════════════════════
+   TILT EFFECT for new cards
+══════════════════════════════════════════ */
+(function initEnhancedTilt() {
+  const selector = '.sig-terminal, .ai-project-card, .ec-card, .lp-card.is-active';
+  function applyTilt() {
+    document.querySelectorAll(selector).forEach(card => {
+      if (card._tiltBound) return;
+      card._tiltBound = true;
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left - r.width / 2) / r.width;
+        const y = (e.clientY - r.top  - r.height / 2) / r.height;
+        card.style.transform = `perspective(1000px) rotateX(${-y * 5}deg) rotateY(${x * 5}deg)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transition = 'transform .6s cubic-bezier(0.16,1,0.3,1)';
+        card.style.transform  = '';
+        setTimeout(() => { card.style.transition = ''; }, 600);
       });
     });
-  });
+  }
+  applyTilt();
+  /* Re-apply when slider cards become active */
+  const observer = new MutationObserver(applyTilt);
+  const track = document.getElementById('lpTrack');
+  if (track) observer.observe(track, { subtree: true, attributeFilter: ['class'] });
 })();
 
-/* ────────────────────────────────────────
-   IoT GAS DETECTOR SIMULATION
-──────────────────────────────────────── */
-(function initGasSim() {
-  const simBtn    = document.getElementById('simGasBtn');
-  const gaugeFill = document.getElementById('gaugeFill');
-  const gaugeVal  = document.getElementById('gaugeVal');
-  const gasVal    = document.getElementById('gasVal');
-  const aqiVal    = document.getElementById('aqiVal');
-  const tempVal   = document.getElementById('tempVal');
-  const gasBar    = document.getElementById('gasBar');
-  const aqiBar    = document.getElementById('aqiBar');
-  const tempBar   = document.getElementById('tempBar');
-  const statusDot = document.getElementById('gasStatusDot');
-  const statusTxt = document.getElementById('gasStatusText');
-  const alarmState = document.getElementById('alarmState');
 
-  if (!simBtn) return;
-
-  let isDanger = false;
-  let liveInterval = null;
-
-  // Normal fluctuation (safe state)
-  function startNormalMode() {
-    isDanger = false;
-    simBtn.textContent = '⚠️ Simulate Gas Leak';
-    simBtn.classList.remove('safe-mode');
-
-    clearInterval(liveInterval);
-    liveInterval = setInterval(() => {
-      const gas  = 100 + Math.floor(Math.random() * 80);   // 100–180 PPM safe
-      const aqi  = 20  + Math.floor(Math.random() * 20);   // 20–40 good
-      const temp = (26 + Math.random() * 3).toFixed(1);    // 26–29°C
-      const gasW = Math.round((gas / 1000) * 100) + '%';   // width
-
-      updateReadings(gas, aqi, temp, gasW, ((aqi/200)*100)+'%', '55%', 'safe', '#22c55e', 251 - (gas/1000)*251);
-      updateStatus('safe', 'SAFE', 'safe-ial', 'OFF');
-    }, 2200);
-  }
-
-  // Danger simulation
-  function startDangerMode() {
-    isDanger = true;
-    simBtn.textContent = '✅ Reset to Safe';
-    simBtn.classList.add('safe-mode');
-
-    clearInterval(liveInterval);
-    liveInterval = setInterval(() => {
-      const gas  = 600 + Math.floor(Math.random() * 300);  // 600–900 PPM danger
-      const aqi  = 80  + Math.floor(Math.random() * 40);   // 80–120 danger
-      const temp = (31 + Math.random() * 3).toFixed(1);    // 31–34°C elevated
-      const gasW = Math.round((gas / 1000) * 100) + '%';
-
-      updateReadings(gas, aqi, temp, gasW, ((aqi/200)*100)+'%', '75%', 'danger', '#ff3b6b', 251 - (gas/1000)*251);
-      updateStatus('danger', '⚠️ DANGER!', 'danger-ial', '🔔 ON');
-    }, 1000);
-  }
-
-  function updateReadings(gas, aqi, temp, gasW, aqiW, tempW, state, color, dashOffset) {
-    if (gasVal)  { gasVal.textContent = gas + ' PPM'; gasVal.className = 'ir-val ' + state; }
-    if (aqiVal)  aqiVal.textContent   = aqi;
-    if (tempVal) tempVal.textContent  = temp + '°C';
-    if (gasBar)  { gasBar.style.width = gasW; gasBar.className = 'ir-fill ' + (state === 'danger' ? 'danger-fill' : 'safe-fill'); }
-    if (aqiBar)  aqiBar.style.width   = aqiW;
-    if (tempBar) tempBar.style.width  = tempW;
-    if (gaugeVal) { gaugeVal.textContent = gas; gaugeVal.setAttribute('fill', color); }
-    if (gaugeFill) {
-      gaugeFill.style.stroke = color;
-      gaugeFill.setAttribute('stroke-dashoffset', Math.max(0, dashOffset).toString());
-    }
-  }
-
-  function updateStatus(state, text, ialClass, alarmText) {
-    if (statusDot) { statusDot.className = 'iot-status-dot ' + state; }
-    if (statusTxt) { statusTxt.textContent = text; statusTxt.style.color = state === 'danger' ? '#ff3b6b' : '#22c55e'; }
-    if (alarmState) { alarmState.textContent = alarmText; alarmState.className = 'ial ' + ialClass; }
-  }
-
-  simBtn.addEventListener('click', () => {
-    if (isDanger) {
-      startNormalMode();
-      // Update immediately
-      const gas  = 100 + Math.floor(Math.random() * 80);
-      const aqi  = 20  + Math.floor(Math.random() * 20);
-      const temp = (26 + Math.random() * 3).toFixed(1);
-      const gasW = Math.round((gas / 1000) * 100) + '%';
-      updateReadings(gas, aqi, temp, gasW, ((aqi/200)*100)+'%', '55%', 'safe', '#22c55e', 251 - (gas/1000)*251);
-      updateStatus('safe', 'SAFE', 'safe-ial', 'OFF');
-    } else {
-      startDangerMode();
-      // Update immediately
-      const gas  = 600 + Math.floor(Math.random() * 300);
-      const aqi  = 80  + Math.floor(Math.random() * 40);
-      const temp = (31 + Math.random() * 3).toFixed(1);
-      const gasW = Math.round((gas / 1000) * 100) + '%';
-      updateReadings(gas, aqi, temp, gasW, ((aqi/200)*100)+'%', '75%', 'danger', '#ff3b6b', 251 - (gas/1000)*251);
-      updateStatus('danger', '⚠️ DANGER!', 'danger-ial', '🔔 ON');
-    }
-  });
-
-  // Start in safe mode
-  startNormalMode();
-})();
-
-/* ────────────────────────────────────────
-   NAVBAR SCROLL
-──────────────────────────────────────── */
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 20);
-  // Update scroll percent for side label
-  const el = document.getElementById('scrollPct');
-  if (el) {
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = max > 0 ? Math.round((window.scrollY / max) * 100) : 0;
-    el.textContent = String(pct).padStart(2, '0') + '%';
-  }
-}, { passive: true });
-
-/* ────────────────────────────────────────
-   MOBILE MENU
-──────────────────────────────────────── */
-(function initMenu() {
-  const btn  = document.getElementById('menuBtn');
-  const menu = document.getElementById('mobileMenu');
-  if (!btn || !menu) return;
-
-  btn.addEventListener('click', () => {
-    const open = menu.classList.toggle('open');
-    btn.classList.toggle('open', open);
-  });
-  menu.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      menu.classList.remove('open');
-      btn.classList.remove('open');
-    });
-  });
-  document.addEventListener('click', e => {
-    if (!navbar?.contains(e.target)) {
-      menu.classList.remove('open');
-      btn?.classList.remove('open');
-    }
-  });
-})();
-
-/* ────────────────────────────────────────
-   CUSTOM CURSOR (uses existing cur / cur-ring from app.js)
-  If app.js is loaded first these are already active.
-  This block handles cursor hover on portfolio-specific targets.
-──────────────────────────────────────── */
-(function portfolioCursorHovers() {
-  const cur  = document.getElementById('cur');
-  const ring = document.getElementById('cur-ring');
-  if (!cur || !ring) return;
-
-  const targets = '.skill-item, .tool-pill, .project-card, .tl-right, .iot-sim-btn, .proj-live-link, .id-card, .av-item, .ai-item';
-  document.querySelectorAll(targets).forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cur.classList.add('hov');
-      ring.classList.add('hov');
-    });
-    el.addEventListener('mouseleave', () => {
-      cur.classList.remove('hov');
-      ring.classList.remove('hov');
-    });
-  });
-})();
-
-/* ────────────────────────────────────────
-   3D TILT — portfolio-specific cards
-──────────────────────────────────────── */
-(function initTilt() {
-  document.querySelectorAll('.tilt-card').forEach(card => {
-    card.addEventListener('mousemove', e => {
-      const r  = card.getBoundingClientRect();
-      const x  = e.clientX - r.left  - r.width  / 2;
-      const y  = e.clientY - r.top   - r.height / 2;
-      card.style.transform = `perspective(1000px) rotateX(${-(y / r.height) * 9}deg) rotateY(${(x / r.width) * 9}deg) translateZ(8px)`;
-    });
-    card.addEventListener('mouseleave', () => {
-      card.style.transition = 'transform .65s cubic-bezier(0.16,1,0.3,1)';
-      card.style.transform  = '';
-      setTimeout(() => { card.style.transition = ''; }, 650);
-    });
-  });
-})();
-
-/* ────────────────────────────────────────
-   MAGNETIC BUTTONS
-──────────────────────────────────────── */
-(function initMagnetic() {
+/* ══════════════════════════════════════════
+   MAGNETIC BUTTONS (new elements)
+══════════════════════════════════════════ */
+(function initEnhancedMagnetic() {
   document.querySelectorAll('.magnetic').forEach(btn => {
+    if (btn._magBound) return;
+    btn._magBound = true;
     btn.addEventListener('mousemove', e => {
       const r = btn.getBoundingClientRect();
-      const x = e.clientX - r.left - r.width  / 2;
+      const x = e.clientX - r.left - r.width / 2;
       const y = e.clientY - r.top  - r.height / 2;
-      btn.style.transform = `translate(${x * 0.17}px, ${y * 0.17}px)`;
+      btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
     });
     btn.addEventListener('mouseleave', () => {
-      btn.style.transition = 'transform .55s cubic-bezier(0.16,1,0.3,1)';
+      btn.style.transition = 'transform .5s cubic-bezier(0.16,1,0.3,1)';
       btn.style.transform  = '';
-      setTimeout(() => { btn.style.transition = ''; }, 550);
+      setTimeout(() => { btn.style.transition = ''; }, 500);
     });
   });
 })();
 
-/* ────────────────────────────────────────
-   ID CARD PARALLAX TILT
-──────────────────────────────────────── */
-(function initIdCardTilt() {
-  const wrap = document.querySelector('.pf-hero-right');
-  const card = document.getElementById('idCard');
-  if (!wrap || !card) return;
 
-  wrap.addEventListener('mousemove', e => {
-    const r = card.getBoundingClientRect();
-    const x = (e.clientX - r.left  - r.width  / 2) / r.width;
-    const y = (e.clientY - r.top   - r.height / 2) / r.height;
-    card.style.transform = `perspective(900px) rotateX(${-y * 12}deg) rotateY(${x * 12}deg)`;
-    card.style.boxShadow = `
-      0 0 0 1px rgba(184,255,46,0.06),
-      ${x * -22}px ${y * -22}px 80px rgba(0,0,0,.75),
-      0 0 60px rgba(184,255,46,${0.03 + Math.abs(x + y) * 0.06})
-    `;
-  });
-  wrap.addEventListener('mouseleave', () => {
-    card.style.transform  = '';
-    card.style.boxShadow  = '';
-  });
-})();
-
-/* ────────────────────────────────────────
-   MARQUEE PAUSE
-──────────────────────────────────────── */
-document.querySelectorAll('.marquee-strip').forEach(strip => {
-  const inner = strip.querySelector('.mq-inner');
-  if (!inner) return;
-  strip.addEventListener('mouseenter', () => inner.style.animationPlayState = 'paused');
-  strip.addEventListener('mouseleave', () => inner.style.animationPlayState = 'running');
-});
-
-/* ────────────────────────────────────────
-   LIVE PVB ORDER COUNTER (project terminal)
-──────────────────────────────────────── */
-(function initPvbCounter() {
-  const el = document.getElementById('pvbOrders');
-  if (!el) return;
-  let count = 247;
-  setInterval(() => {
-    if (Math.random() > 0.5) {
-      count++;
-      el.textContent = count;
-    }
-  }, 4500);
-})();
-
-/* ────────────────────────────────────────
-   DOWNLOAD CV BUTTON — generates a simple text file
-   (Replace with actual CV URL when ready)
-──────────────────────────────────────── */
-(function initCvDownload() {
-  const btn = document.getElementById('downloadCV');
-  if (!btn) return;
-  btn.addEventListener('click', e => {
-    e.preventDefault();
-    // cv.html নতুন tab এ খুলবে
-    // সেখানে "Download PDF" বাটন click করলে
-    // Saiful_Islam_CV_2026.pdf download হবে
-    window.open('cv.html', '_blank');
-  });
-})();
-SAIFUL ISLAM — CEO & DEVELOPER
-================================
-ZYNTRA VERSE — AI Automation Studio
-Chandpur, Bangladesh
-
-CONTACT
--------
-Email:    zyntraverse@gmail.com
-WhatsApp: +880 1577-164596
-Website:  zyntraverse.online
-
-EDUCATION
----------
-Chandpur Government University and College — Current Student
-
-EXPERIENCE
-----------
-Founder & CEO — ZYNTRA VERSE (2020–Present)
-  - Built 120+ AI automation systems, websites and IoT projects
-  - 50+ clients across Bangladesh
-  - Specialised in AI agents, Facebook CAPI, n8n automation
-
-SKILLS
-------
-AI Engineering:    OpenAI API, LangChain, AI Agents, n8n, Make.com
-Web Development:   HTML5, CSS3, JavaScript, Python, React, Firebase
-IoT & Hardware:    Arduino, ESP32, Sensors, MQTT, Real-time displays
-Marketing:         Facebook Ads, Pixel, CAPI, Conversion Optimisation
-
-FEATURED PROJECTS
------------------
-1. Gas Leakage Detector (IoT) — Real-time safety system
-2. Facebook AI Order Bot — 247+ daily automated orders
-3. ZYNTRA VERSE Website — 98/100 Lighthouse score
-4. Quran Combo Landing Page — 10.8% conversion rate
-`;
-    const blob = new Blob([cvText.trim()], { type: 'text/plain' });
-    const url  = URL.createObjectURL(blob);
-    const a    = document.createElement('a');
-    a.href     = url;
-    a.download = 'Saiful_Islam_CV.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-  });
-})();
-
-/* ────────────────────────────────────────
-   SMOOTH SCROLL for anchor links
-──────────────────────────────────────── */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const id = a.getAttribute('href').slice(1);
-    const el = document.getElementById(id);
-    if (el) {
-      e.preventDefault();
-      const top = el.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
-  });
-});
-
-/* ────────────────────────────────────────
-   BD CLOCK
-──────────────────────────────────────── */
-(function initClock() {
-  const el = document.getElementById('bdTime');
-  if (!el) return;
-  const tick = () => {
-    const t = new Date().toLocaleTimeString('en-BD', {
-      timeZone: 'Asia/Dhaka', hour: '2-digit', minute: '2-digit'
+/* ══════════════════════════════════════════
+   ANIMATED COUNTER (new counter elements)
+══════════════════════════════════════════ */
+(function initEnhancedCounters() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const target = parseInt(el.dataset.target, 10);
+      if (isNaN(target)) return;
+      const DUR  = 2000;
+      const start = performance.now();
+      const ease  = t => 1 - Math.pow(1 - t, 4);
+      (function tick(now) {
+        const p = Math.min((now - start) / DUR, 1);
+        el.textContent = Math.round(ease(p) * target);
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = target;
+      })(performance.now());
+      obs.unobserve(el);
     });
-    el.textContent = t + ' BDT';
-  };
-  tick();
-  setInterval(tick, 10000);
-})();
+  }, { threshold: 0.7 });
 
-/* ────────────────────────────────────────
-   ESC key — close menu
-──────────────────────────────────────── */
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    document.getElementById('mobileMenu')?.classList.remove('open');
-    document.getElementById('menuBtn')?.classList.remove('open');
-  }
-});
+  document.querySelectorAll('.sig-stat-val .counter, .ai-result-val .counter').forEach(c => obs.observe(c));
+})();
