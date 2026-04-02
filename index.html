@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" href="favicon.ico">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ZYNTRA VERSE — AI Automation Studio · SIN</title>
@@ -493,6 +494,65 @@
     .eco-bottom-row { grid-template-columns: repeat(2, 1fr); }
   }
   @media(max-width: 768px) {
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    #navbar {
+      left: 0;
+      right: 0;
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: clip;
+    }
+    #navbar .nav-wrap {
+      width: 100%;
+      max-width: none;
+      padding-left: calc(env(safe-area-inset-left, 0px) + 16px);
+      padding-right: calc(env(safe-area-inset-right, 0px) + 28px);
+      gap: 10px;
+    }
+    #navbar .nav-logo,
+    #navbar .nav-right {
+      flex: 0 0 auto;
+      min-width: 0;
+    }
+    #navbar .nav-right {
+      margin-left: auto;
+      padding-right: 2px;
+      transform: translateX(-8px);
+    }
+    #navbar .hbg {
+      margin-left: auto;
+      transform: translateX(-2px);
+    }
+    .hero {
+      text-align: left;
+      justify-items: stretch;
+    }
+    .hero-eyebrow {
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 10px 12px;
+    }
+    .hero-h1 .h1-row {
+      justify-content: flex-start;
+    }
+    .hero-body {
+      margin-left: 0;
+      margin-right: 0;
+      text-align: left;
+    }
+    .hero-actions {
+      justify-content: flex-start;
+      align-items: stretch;
+    }
+    .hero-metrics {
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .hero-right { justify-content: flex-start; }
     .eco-products { grid-template-columns: 1fr; }
     .ecosystem-section { padding: 80px 20px; }
     .eco-bottom-row { grid-template-columns: 1fr; }
@@ -500,6 +560,39 @@
     .term-chat { padding: 10px 12px; }
     .term-input-row { padding: 8px 12px; }
     .term-chips { padding: 6px 12px; }
+    body #zv-fab {
+      right: calc(env(safe-area-inset-right, 0px) + 28px) !important;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 18px) !important;
+    }
+    body #zv-panel {
+      right: calc(env(safe-area-inset-right, 0px) + 24px) !important;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 88px) !important;
+    }
+  }
+  @media(max-width: 480px) {
+    #navbar .nav-wrap {
+      padding-left: calc(env(safe-area-inset-left, 0px) + 12px);
+      padding-right: calc(env(safe-area-inset-right, 0px) + 24px);
+    }
+    #navbar .nav-right {
+      transform: translateX(-10px);
+    }
+    .hero-h1 .h1-row {
+      gap: 8px;
+    }
+    .hero-actions {
+      align-items: stretch;
+    }
+    body #zv-fab {
+      right: calc(env(safe-area-inset-right, 0px) + 24px) !important;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 14px) !important;
+    }
+    body #zv-panel {
+      left: calc(env(safe-area-inset-left, 0px) + 10px) !important;
+      right: calc(env(safe-area-inset-right, 0px) + 16px) !important;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 82px) !important;
+      width: auto !important;
+    }
   }
   </style>
 </head>
@@ -542,7 +635,7 @@
   <header id="navbar">
     <div class="nav-wrap">
       <a href="index.html" class="nav-logo">
-        <span class="nl-bracket">[</span><span class="nl-z">ZV</span><span class="nl-bracket">]</span>
+        <img src="zvicon.png" alt="Zyntra Verse logo" class="brand-mark brand-mark-header">
         <span class="nl-full">ZYNTRA VERSE</span>
       </a>
       <nav class="nav-center">
@@ -1352,7 +1445,7 @@
   <footer class="site-footer">
     <div class="footer-top">
       <div class="ft-col ft-brand">
-        <div class="ft-logo"><span class="fl-b">[</span>ZYNTRA<span class="fl-lime">VERSE</span><span class="fl-b">]</span></div>
+        <div class="ft-logo"><img src="zvicon.png" alt="Zyntra Verse logo" class="brand-mark brand-mark-footer"><span>ZYNTRA<span class="fl-lime">VERSE</span></span></div>
         <p class="ft-tag">AI Automation Studio<br>Bangladesh · Est. 2023</p>
         <div class="ft-online"><span class="rb-dot"></span>Open for new projects</div>
       </div>
@@ -1381,7 +1474,7 @@
     </div>
     <div class="footer-bot">
       <span>© 2026 ZYNTRA VERSE. All rights reserved.</span>
-      <span>Bangladesh · Built with precision</span>
+      <span>Bangladesh · CodeWithNirob</span>
     </div>
   </footer>
 

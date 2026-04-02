@@ -672,7 +672,7 @@ LANGUAGE & TONE
         </div>
         <div id="zv-footer-actions">
           <button class="zv-faction" id="zv-btn-form">📋 Contact Form</button>
-          <a class="zv-faction" id="zv-btn-wa" href="https://wa.me/8801XXXXXXXXX" target="_blank" rel="noopener">💬 WhatsApp</a>
+          <a class="zv-faction" id="zv-btn-wa" href="https://wa.me/8801577164596" target="_blank" rel="noopener">💬 WhatsApp</a>
           <button class="zv-faction" id="zv-btn-book">📅 Book Demo</button>
         </div>
         <div id="zv-hint">Powered by GPT-4o Mini · ZYNTRA VERSE AI</div>
